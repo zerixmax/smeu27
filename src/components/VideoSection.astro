@@ -1,0 +1,143 @@
+---
+interface Props {
+  videoId?: string;
+  lang?: 'hr' | 'en' | 'de';
+}
+
+const { videoId = "mxzdmVqcefc", lang = 'hr' } = Astro.props;
+
+const titles = {
+  hr: "Video pregled: Suha Marina Proizd u Veloj Luci",
+  en: "Video Overview: Dry Dock Proizd in Vela Luka",
+  de: "Video-Übersicht: Trockenmarina Proizd in Vela Luka"
+};
+
+const subtitles = {
+  hr: "Pogledajte zračne snimke parcele, natkrivenog hangara i osiguranog prostora za smještaj plovila.",
+  en: "Watch aerial drone footage of the storage yard, covered hangar, and secure boat dock.",
+  de: "Sehen Sie Drohnenaufnahmen des Geländes, der überdachten Halle und der gesicherten Liegeplätze."
+};
+
+const playLabels = {
+  hr: "Pokreni video suhe marine",
+  en: "Play dry marina video",
+  de: "Video der Trockenmarina abspielen"
+};
+
+const videoTitle = titles[lang] || titles.hr;
+const videoSubtitle = subtitles[lang] || subtitles.hr;
+const playLabel = playLabels[lang] || playLabels.hr;
+
+const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+---
+
+<!-- Schema.org VideoObject za Google Video Indexing & AI Rich Snippets -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": videoTitle,
+  "description": videoSubtitle,
+  "thumbnailUrl": [
+    `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
+    `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`
+  ],
+  "uploadDate": "2024-05-06T00:00:00+02:00",
+  "duration": "PT41S",
+  "contentUrl": videoUrl,
+  "embedUrl": `https://www.youtube-nocookie.com/embed/${videoId}`
+})} />
+
+<section class="py-16 bg-slate-900/40 border-b border-slate-800">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-600/10 text-red-500 border border-red-600/20 text-xs font-semibold uppercase tracking-wider mb-4">
+      <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+      4K zračni prikaz • 0:41 min
+    </div>
+
+    <h2 class="text-3xl sm:text-4xl font-black text-white">
+      {videoTitle}
+    </h2>
+
+    <p class="mt-3 text-slate-400 text-sm sm:text-base max-w-2xl mx-auto mb-10">
+      {videoSubtitle}
+    </p>
+
+    <!-- Lite Embed Container (0 ms početnog YouTube skriptnog laganja) -->
+    <div class="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-950 group mx-auto">
+      <div
+        id="video-player-trigger"
+        class="relative w-full h-full cursor-pointer flex items-center justify-center"
+        data-videoid={videoId}
+        aria-label={playLabel}
+        role="button"
+        tabindex="0"
+      >
+        <!-- Optimizirani poster direktno s YouTube CDN-a -->
+        <img
+          src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+          alt="Suha Marina Proizd Vela Luka - zračna snimka dronom"
+          class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-85"
+          loading="lazy"
+          decoding="async"
+        />
+
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-black/30"></div>
+
+        <!-- Pulse Play Gumb -->
+        <div class="relative z-10 w-20 h-20 rounded-full bg-red-600 text-white flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300">
+          <svg class="w-9 h-9 fill-current translate-x-0.5" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </div>
+
+        <div class="absolute bottom-4 left-6 right-6 z-10 flex items-center justify-between text-xs text-slate-300 font-medium">
+          <span class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            Suha Marina Proizd • Vela Luka
+          </span>
+          <span class="bg-black/75 backdrop-blur-xs px-2.5 py-1 rounded-md text-slate-200 font-mono">0:41</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4 text-xs text-slate-400">
+      Izravna poveznica: <a href={videoUrl} target="_blank" rel="noopener noreferrer" class="text-slate-300 underline hover:text-white">{videoUrl}</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- Skripta usklađena s Astro SOP-om (astro:page-load) -->
+<script>
+  function setupVideoEmbed() {
+    const trigger = document.getElementById('video-player-trigger');
+    if (!trigger) return;
+    const t = trigger;
+
+    function playVideo() {
+      const vid = t.dataset.videoid;
+      t.innerHTML = `
+        <iframe
+          class="w-full h-full"
+          src="https://www.youtube-nocookie.com/embed/${vid}?autoplay=1&rel=0&modestbranding=1"
+          title="Suha Marina Proizd Vela Luka"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      `;
+    }
+
+    trigger.addEventListener('click', playVideo, { once: true });
+    trigger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        playVideo();
+      }
+    }, { once: true });
+  }
+
+  document.addEventListener('astro:page-load', setupVideoEmbed);
+</script>

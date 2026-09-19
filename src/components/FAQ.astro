@@ -1,0 +1,120 @@
+---
+interface Props {
+  lang?: 'hr' | 'en' | 'de';
+}
+
+const { lang = 'hr' } = Astro.props;
+
+const faqData = {
+  hr: {
+    heading: "Često postavljana pitanja",
+    subheading: "Brzi odgovori za skipere u tranzitu — za hitne slučajeve nazovite direktno.",
+    items: [
+      {
+        q: "Imam zapetljan konop oko propele u Veloj Luci, možete li pomoći?",
+        a: "Da, nudimo hitne ronilačke intervencije u uvali Vela Luka i okolnim sidrištima za rezanje i oslobađanje konopa, plastike i mreža bez potrebe za vađenjem broda ako nema oštećenja osovine."
+      },
+      {
+        q: "Kolika je maksimalna težina broda za vađenje kranom?",
+        a: "Naš kamionski kran Scania F600 AXP ima kapacitet dizanja do 16 tona, a koristimo tri različite namjenske širilice koje štite gelcoat, ogradu i trup pri podizanju."
+      },
+      {
+        q: "Radite li ugradnju i servis sondera i elektronike?",
+        a: "Ovlašteno i stručno ugrađujemo Lowrance, Garmin i Minn Kota sustave, uključujući bušenje i montažu sondi kroz trup, povezivanje NMEA mreže i servis električnih sidrenih vitla."
+      },
+      {
+        q: "Nudite li postavljanje korpo morta za stalni vez?",
+        a: "Izrađujemo, transportiramo i roniocima postavljamo betonske blokove (korpo morto), odgovarajući kalibrirani lanac i vezne bove prema maritimnim uvjetima lokacije."
+      }
+    ]
+  },
+  en: {
+    heading: "Frequently Asked Questions",
+    subheading: "Quick answers for cruisers in transit — for emergencies call us directly.",
+    items: [
+      {
+        q: "I have a rope wrapped around my propeller in Vela Luka, can you help?",
+        a: "Yes, we offer emergency diving interventions in Vela Luka bay and nearby anchorages to cut and free ropes, plastic and nets without hauling the boat out, provided the shaft is not damaged."
+      },
+      {
+        q: "What is the maximum boat weight your crane can lift?",
+        a: "Our Scania F600 AXP truck crane lifts up to 16 tonnes, using three custom spreader bars that protect the gelcoat, rails and hull while lifting."
+      },
+      {
+        q: "Do you install and service fishfinders and marine electronics?",
+        a: "We professionally install Lowrance, Garmin and Minn Kota systems, including thru-hull transducer drilling and mounting, NMEA network wiring and electric anchor windlass service."
+      },
+      {
+        q: "Do you set corpo morto moorings for permanent berths?",
+        a: "We build, transport and dive-install concrete mooring blocks (corpo morto) with properly sized calibrated chain and mooring buoys to suit the location's maritime conditions."
+      }
+    ]
+  },
+  de: {
+    heading: "Häufig gestellte Fragen",
+    subheading: "Schnelle Antworten für Durchreisende — in Notfällen rufen Sie uns direkt an.",
+    items: [
+      {
+        q: "Ich habe eine Leine um meinen Propeller in Vela Luka, können Sie helfen?",
+        a: "Ja, wir bieten Notfall-Taucharbeiten in der Bucht von Vela Luka und umliegenden Ankerplätzen an, um Leinen, Plastik und Netze zu schneiden, ohne das Boot auszukranen, sofern die Welle nicht beschädigt ist."
+      },
+      {
+        q: "Welches ist das maximale Bootsgewicht, das Ihr Kran heben kann?",
+        a: "Unser LKW-Kran Scania F600 AXP hebt bis zu 16 Tonnen und verwendet drei Spezial-Hebetraversen, die Gelcoat, Reling und Rumpf beim Heben schonen."
+      },
+      {
+        q: "Installieren und servicieren Sie Echolote und Bootselektronik?",
+        a: "Wir installieren fachgerecht Lowrance-, Garmin- und Minn-Kota-Systeme, einschließlich Through-Hull-Gebermontage, NMEA-Vernetzung und Reparatur elektrischer Ankerwinden."
+      },
+      {
+        q: "Setzen Sie Corpo Morto für Dauerliegeplätze?",
+        a: "Wir bauen, transportieren und setzen Betonblöcke (Corpo Morto) mit passend kalibrierter Ankerkette und Mooringbojen entsprechend den maritimen Bedingungen vor Ort."
+      }
+    ]
+  }
+};
+
+const current = faqData[lang] || faqData.hr;
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": `https://suhamarina.eu/${lang === 'hr' ? '' : `${lang}/`}#faq`,
+  "mainEntity": current.items.map((item) => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.a
+    }
+  }))
+};
+---
+
+<!-- Sekcija: Često postavljana pitanja -->
+<section id="faq" class="py-20 bg-slate-900/50 border-b border-slate-800">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <h2 class="text-3xl sm:text-4xl font-black text-white">{current.heading}</h2>
+      <p class="mt-3 text-slate-400">{current.subheading}</p>
+    </div>
+
+    <div class="space-y-4">
+      {current.items.map((item) => (
+        <details class="group bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-slate-700 transition-colors">
+          <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer select-none text-left font-bold text-white list-none">
+            <span class="text-sm sm:text-base">{item.q}</span>
+            <svg class="w-5 h-5 text-red-500 shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </summary>
+          <div class="px-6 pb-5 -mt-1 text-sm text-slate-400 leading-relaxed">
+            {item.a}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />

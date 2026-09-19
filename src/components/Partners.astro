@@ -1,0 +1,23 @@
+---
+import { Image } from 'astro:assets';
+import logoYamaha from '../assets/logos/yamaha_marin.jpg';
+import logoSuzuki from '../assets/logos/suzuki_marine.jpg';
+import logoMercury from '../assets/logos/mercury_marine.jpg';
+import logoLowrance from '../assets/logos/lowrance.jpg';
+import logoMinnKota from '../assets/logos/mini_kota.jpg';
+import logoTZ from '../assets/logos/tz_velaluka.png';
+---
+
+<!-- Partneri i brendovi -->
+<section class="py-10 bg-slate-950 border-b border-slate-800/80">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-wrap items-center justify-center gap-8 md:gap-12 opacity-70 grayscale hover:grayscale-0 transition-all">
+      <Image src={logoYamaha} alt="Yamaha Marine" class="h-8 md:h-10 w-auto object-contain" />
+      <Image src={logoSuzuki} alt="Suzuki Marine" class="h-8 md:h-10 w-auto object-contain" />
+      <Image src={logoMercury} alt="Mercury Marine" class="h-8 md:h-10 w-auto object-contain" />
+      <Image src={logoLowrance} alt="Lowrance" class="h-8 md:h-10 w-auto object-contain" />
+      <Image src={logoMinnKota} alt="Minn Kota" class="h-8 md:h-10 w-auto object-contain" />
+      <Image src={logoTZ} alt="TZ Vela Luka" class="h-8 md:h-10 w-auto object-contain" />
+    </div>
+  </div>
+</section>

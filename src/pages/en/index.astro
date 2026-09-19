@@ -1,0 +1,36 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Hero from '../../components/Hero.astro';
+import Partners from '../../components/Partners.astro';
+import ServicesGrid from '../../components/ServicesGrid.astro';
+import Gallery from '../../components/Gallery.astro';
+import VideoSection from '../../components/VideoSection.astro';
+import PriceTable from '../../components/PriceTable.astro';
+import LocationAndReviews from '../../components/LocationAndReviews.astro';
+import FAQ from '../../components/FAQ.astro';
+import Footer from '../../components/Footer.astro';
+import QuickContactCTA from '../../components/QuickContactCTA.astro';
+
+const lang = 'en';
+---
+
+<Layout 
+  title="Dry Marina Proizd | Boat Storage & Marine Service Vela Luka" 
+  description="Dry Marina Proizd in Vela Luka, Korčula Island (500 m from the sea). Secure dry dock storage, 16-ton Scania truck crane with 3 spreader bars, engine service and hull repairs."
+  lang={lang}
+>
+  <Navbar lang={lang} />
+  <main>
+    <Hero lang={lang} />
+    <Partners />
+    <ServicesGrid lang={lang} />
+    <Gallery lang={lang} />
+    <VideoSection videoId="mxzdmVqcefc" lang={lang} />
+    <PriceTable lang={lang} />
+    <LocationAndReviews lang={lang} />
+    <FAQ lang={lang} />
+  </main>
+  <Footer lang={lang} />
+  <QuickContactCTA lang={lang} />
+</Layout>

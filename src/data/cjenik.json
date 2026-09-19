@@ -1,0 +1,87 @@
+{
+  "poslovniSubjekt": "Obrt Proizd - Suha Marina",
+  "oblik": "USL",
+  "adresa": "VELALUKA",
+  "poslovnica": "001",
+  "brojPohrane": "0001",
+  "datumObjave": "2026-10-01T07:55:00",
+  "stavke": [
+    {
+      "id": "suhi-vez",
+      "naziv": "Godišnji suhi vez po metru dužnom plovila",
+      "nazivEn": "Annual dry dock storage per meter of boat length",
+      "nazivDe": "Jährlicher Trockenliegeplatz pro Meter Bootslänge",
+      "cijena": 120.00,
+      "posebanOblik": "NE",
+      "nazivPosebnogOblika": "",
+      "sidrenaCijena": 120.00,
+      "napomena": "Smještaj na postolju, video nadzor i osiguranje"
+    },
+    {
+      "id": "vadjenje-kran",
+      "naziv": "Vađenje plovila kamionskim kranom Scania (do 16 t)",
+      "nazivEn": "Boat haul-out with Scania truck crane (up to 16 t)",
+      "nazivDe": "Bootsauskranung mit Scania LKW-Kran (bis 16 t)",
+      "cijena": 150.00,
+      "posebanOblik": "NE",
+      "nazivPosebnogOblika": "",
+      "sidrenaCijena": 150.00,
+      "napomena": "Sa širilicama za brage prema tipu plovila"
+    },
+    {
+      "id": "spustanje-kran",
+      "naziv": "Spuštanje plovila u more kranom (do 16 t)",
+      "nazivEn": "Boat launch into the sea by crane (up to 16 t)",
+      "nazivDe": "Einwassern des Bootes mit Kran (bis 16 t)",
+      "cijena": 150.00,
+      "posebanOblik": "NE",
+      "nazivPosebnogOblika": "",
+      "sidrenaCijena": 150.00,
+      "napomena": "Uključuje asistenciju i rad dizaličara"
+    },
+    {
+      "id": "pranje-trupa",
+      "naziv": "Pranje podvodnog dijela trupa pod visokim tlakom",
+      "nazivEn": "High-pressure hull underwater wash",
+      "nazivDe": "Hochdruckreinigung des Unterwasserschiffs",
+      "cijena": 50.00,
+      "posebanOblik": "NE",
+      "nazivPosebnogOblika": "",
+      "sidrenaCijena": 50.00,
+      "napomena": "Skidanje algi i školjaka odmah po vađenju"
+    },
+    {
+      "id": "konzerviranje-motora",
+      "naziv": "Konzerviranje vanbrodskog motora",
+      "nazivEn": "Outboard engine winterizing",
+      "nazivDe": "Einwinterung des Außenbordmotors",
+      "cijena": 90.00,
+      "posebanOblik": "NE",
+      "nazivPosebnogOblika": "",
+      "sidrenaCijena": 90.00,
+      "napomena": "Ispiranje slatkom vodom, konzervans, antifriz"
+    },
+    {
+      "id": "servis-sat",
+      "naziv": "Servis brodskog motora (radni sat mehanike)",
+      "nazivEn": "Marine engine service (mechanic labor per hour)",
+      "nazivDe": "Bootsservice (Mechaniker-Arbeitsstunde)",
+      "cijena": 40.00,
+      "posebanOblik": "NE",
+      "nazivPosebnogOblika": "",
+      "sidrenaCijena": 40.00,
+      "napomena": "Ulje, filteri i potrošni dijelovi obračunavaju se zasebno"
+    },
+    {
+      "id": "popravci-plastike",
+      "naziv": "Popravci stakloplastike i gelcoata (radni sat)",
+      "nazivEn": "Fiberglass and gelcoat repairs (labor per hour)",
+      "nazivDe": "GFK- und Gelcoat-Reparaturen (Arbeitsstunde)",
+      "cijena": 45.00,
+      "posebanOblik": "NE",
+      "nazivPosebnogOblika": "",
+      "sidrenaCijena": 45.00,
+      "napomena": "Sanacija oštećenja, poliranje i krpanje gumenjaka"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme {
+  --color-marine-50: #f0f7ff;
+  --color-marine-100: #e0effe;
+  --color-marine-200: #bae0fd;
+  --color-marine-300: #7cc7fb;
+  --color-marine-400: #36a9f6;
+  --color-marine-500: #0c8de5;
+  --color-marine-600: #026fc4;
+  --color-marine-700: #03589f;
+  --color-marine-800: #074a83;
+  --color-marine-900: #0b3f6d;
+  --color-marine-950: #072849;
+
+  --color-proizd: #E11D48;
+  --color-proizd-hover: #BE123C;
+  --color-proizd-dark: #881337;
+  --color-proizd-light: #FDA4AF;
+
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --shadow-glow-red: 0 0 25px -5px rgba(225, 29, 72, 0.4);
+  --shadow-glow-green: 0 0 25px -5px rgba(37, 211, 102, 0.4);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-slate-950 text-slate-100 antialiased selection:bg-rose-600 selection:text-white font-sans;
+  }
+
+  /* Prilagođeni scrollbar u tonu stranice */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #020617;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #334155;
+  }
+}
+
+@utility bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+@utility text-gradient-marine {
+  background-image: linear-gradient(to right, var(--color-red-500), var(--color-rose-400), var(--color-amber-400));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

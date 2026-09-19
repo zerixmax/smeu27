@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="404 - Stranica nije pronađena | Suha Marina Proizd" 
+  description="Tražena stranica ne postoji ili je premještena. Vratite se na naslovnu stranicu Suha Marina Proizd Vela Luka."
+  lang="hr"
+>
+  <Navbar lang="hr" />
+
+  <main class="flex-1 flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-radial from-slate-900 via-slate-950 to-slate-950">
+    <!-- Pozadinski svjetlosni efekt -->
+    <div class="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-red-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-lg w-full text-center">
+      <!-- Značka greške -->
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-600/10 text-red-500 border border-red-600/20 text-xs font-semibold uppercase tracking-wider mb-6">
+        <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+        Greška 404 • Izgubljeni na moru
+      </div>
+
+      <!-- Brojka 404 s gradijentom -->
+      <h1 class="text-7xl sm:text-9xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-200 to-slate-600 mb-4 select-none">
+        404
+      </h1>
+
+      <!-- Naslov i opis -->
+      <h2 class="text-2xl sm:text-3xl font-bold text-white mb-3">
+        Kurs nije pronađen
+      </h2>
+      
+      <p class="text-slate-400 text-sm sm:text-base leading-relaxed mb-8">
+        Stranica koju tražite ne postoji, premještena je ili je unesena neispravna adresa. Vratite se na sigurnu rutu ili nas izravno kontaktirajte.
+      </p>
+
+      <!-- Akcijski gumbi -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="/"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl shadow-glow-red transition-all text-sm group"
+        >
+          <svg class="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+          </svg>
+          <span>Povratak na naslovnu</span>
+        </a>
+
+        <a
+          href="/#cjenik"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-slate-900 hover:bg-slate-800 text-slate-200 font-bold rounded-xl border border-slate-700 shadow-sm transition-all text-sm"
+        >
+          <span>Pogledaj cjenik</span>
+        </a>
+      </div>
+
+      <!-- Višejezična pomoćna napomena -->
+      <div class="mt-12 pt-6 border-t border-slate-800/80 text-xs text-slate-400 flex items-center justify-center gap-4">
+        <span>Page not found? <a href="/en/" class="text-slate-300 hover:underline">English</a></span>
+        <span>•</span>
+        <span>Seite nicht gefunden? <a href="/de/" class="text-slate-300 hover:underline">Deutsch</a></span>
+      </div>
+    </div>
+  </main>
+
+  <Footer lang="hr" />
+</Layout>

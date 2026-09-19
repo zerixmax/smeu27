@@ -1,0 +1,171 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import QuickContactCTA from '../components/QuickContactCTA.astro';
+import cjenikData from '../data/cjenik.json';
+import { arkhivaEntries } from '../lib/arkhiva';
+import { buildCsvFileName } from '../lib/cjenik';
+
+const lang = 'hr';
+const ark = arkhivaEntries();
+
+const curKey = (() => {
+  const d = new Date(cjenikData.datumObjave);
+  const p = (n: number) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}_${p(d.getHours())}${p(d.getMinutes())}`;
+})();
+---
+
+<Layout 
+  title="Službena objava cjenika usluga (NN 101/2026) | Suha Marina Proizd" 
+  description="Službena objava digitalnog cjenika Obrta Proizd - Suha Marina Vela Luka sukladno Odluci o isticanju dodatne cijene i mjerama kontrole cijena (NN 101/2026)."
+  lang={lang}
+>
+  <Navbar lang={lang} />
+
+  <main class="py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto flex-1">
+    
+    <!-- Zaglavlje objave -->
+    <div class="mb-10">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-600/10 text-red-500 border border-red-600/20 text-xs font-semibold uppercase tracking-wider mb-4">
+        <span class="w-2 h-2 rounded-full bg-red-500"></span>
+        Zakonito isticanje cijena • NN 101/2026
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+        Službena objava cjenika usluga
+      </h1>
+      
+      <p class="mt-3 text-sm sm:text-base text-slate-300 leading-relaxed max-w-3xl">
+        Sukladno Odluci o isticanju dodatne cijene pri obavljanju usluga i prodaji robe (Narodne novine br. 101/2026), 
+        ovdje je javno objavljen važeći maloprodajni cjenik s referentnim (sidrenim) cijenama koje su bile primjenjive na dan 10. rujna 2026. godine.
+      </p>
+    </div>
+
+    <!-- Metapodaci prijave / pohrane -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5 rounded-2xl bg-slate-900/90 border border-slate-800 mb-10 text-xs">
+      <div>
+        <span class="text-slate-400 block uppercase tracking-wider text-[10px]">Poslovni subjekt</span>
+        <span class="text-white font-bold">{cjenikData.poslovniSubjekt}</span>
+      </div>
+      <div>
+        <span class="text-slate-400 block uppercase tracking-wider text-[10px]">Poslovnica / Lokacija</span>
+        <span class="text-white font-bold">{cjenikData.poslovnica} ({cjenikData.adresa})</span>
+      </div>
+      <div>
+        <span class="text-slate-400 block uppercase tracking-wider text-[10px]">Broj pohrane</span>
+        <span class="text-white font-bold font-mono">{cjenikData.brojPohrane}</span>
+      </div>
+      <div>
+        <span class="text-slate-400 block uppercase tracking-wider text-[10px]">Datum i vrijeme objave</span>
+        <span class="text-white font-bold font-mono">{new Date(cjenikData.datumObjave).toLocaleString('hr-HR')}</span>
+      </div>
+    </div>
+
+    <!-- Tablica cjenika -->
+    <div class="overflow-x-auto rounded-2xl border border-slate-800 bg-slate-950 shadow-2xl mb-10">
+      <table class="w-full text-left text-sm text-slate-300">
+        <thead class="bg-slate-900 text-xs uppercase tracking-wider text-slate-400 border-b border-slate-800">
+          <tr>
+            <th class="py-4 px-6">Naziv usluge</th>
+            <th class="py-4 px-6">Aktualna cijena</th>
+            <th class="py-4 px-6 text-slate-300 bg-slate-900/80">Sidrena cijena (10.9.2026.)</th>
+            <th class="py-4 px-6 text-xs text-slate-400">Poseban oblik</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-800/60">
+          {cjenikData.stavke.map((s) => (
+            <tr class="hover:bg-slate-900/40 transition-colors">
+              <td class="py-4 px-6 font-medium text-white">
+                {s.naziv}
+                {s.napomena && <span class="block text-xs text-slate-400 font-normal mt-0.5">{s.napomena}</span>}
+              </td>
+              <td class="py-4 px-6 font-mono font-bold text-white text-base">
+                {s.cijena.toFixed(2)} €
+              </td>
+              <td class="py-4 px-6 font-mono text-slate-300 bg-slate-900/30">
+                {s.sidrenaCijena.toFixed(2)} €
+              </td>
+              <td class="py-4 px-6 text-xs text-slate-400">
+                {s.posebanOblik}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Preuzimanje i zakonska napomena -->
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 p-6 rounded-2xl bg-slate-900/60 border border-slate-800">
+      <div>
+        <h3 class="text-sm font-bold text-white mb-1">Preuzimanje strojno čitljivog cjenika</h3>
+        <p class="text-xs text-slate-400">Datoteka je generirana sukladno službenom HOK predlošku u UTF-8 s oznakom BOM.</p>
+      </div>
+
+      <a
+        href="/cjenik-download.csv"
+        download={buildCsvFileName(cjenikData)}
+        class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-glow-green transition-all whitespace-nowrap"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        <span>Preuzmi službeni CSV</span>
+      </a>
+    </div>
+
+    <!-- Pravna klauzula o arhivi -->
+    <div class="mt-8 text-[11px] text-slate-500 text-center leading-relaxed">
+      Sukladno članku 4. Odluke (NN 101/2026), prethodne verzije cjenika i prateća dokumentacija čuvaju se u digitalnoj arhivi minimalno 30 dana od dana stupanja na snagu.
+    </div>
+
+    <!-- Digitalna arhiva verzija cjenika -->
+    <section id="arkhiva" class="mt-10 pt-8 border-t border-slate-800">
+      <h2 class="text-lg font-bold text-white mb-1">Digitalna arhiva cjenika (30+ dana)</h2>
+      <p class="text-xs text-slate-400 mb-6">
+        Svi javno objavljeni cjenici pohranjuju se automatski pri svakoj promjeni i ovdje ostaju dostupni za preuzimanje.
+      </p>
+
+      <div class="overflow-hidden rounded-2xl border border-slate-800 bg-slate-950">
+        <table class="w-full text-left text-sm text-slate-300">
+          <thead class="bg-slate-900 text-xs uppercase tracking-wider text-slate-400 border-b border-slate-800">
+            <tr>
+              <th class="py-3 px-6">Datum objave</th>
+              <th class="py-3 px-6">Broj pohrane</th>
+              <th class="py-3 px-6">Stavki usluga</th>
+              <th class="py-3 px-6 text-right">CSV preuzimanje</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800/60">
+            {ark.map((e) => (
+              <tr class="hover:bg-slate-900/40 transition-colors">
+                <td class="py-3 px-6 font-mono text-xs text-white">
+                  {new Date(e.data.datumObjave).toLocaleString('hr-HR')}
+                  {e.key === curKey && (
+                    <span class="ml-2 inline-flex px-2 py-0.5 rounded bg-emerald-600/10 text-emerald-400 text-[10px] font-semibold uppercase tracking-wider border border-emerald-600/20">
+                      Aktualni
+                    </span>
+                  )}
+                </td>
+                <td class="py-3 px-6 font-mono text-xs text-slate-300">{e.data.brojPohrane}</td>
+                <td class="py-3 px-6 text-xs text-slate-400">{e.data.stavke.length}</td>
+                <td class="py-3 px-6 text-right">
+                  <a
+                    href={`/arkhiva/${e.key}.csv`}
+                    download={buildCsvFileName(e.data)}
+                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-bold text-emerald-400 transition-all"
+                  >
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    CSV
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <Footer lang={lang} />
+  <QuickContactCTA lang={lang} />
+</Layout>

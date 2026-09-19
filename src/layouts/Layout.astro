@@ -1,0 +1,31 @@
+---
+import '../styles/global.css';
+import SEO from '../components/SEO.astro';
+import Schema from '../components/Schema.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: 'hr' | 'en' | 'de';
+}
+
+const {
+  title = "Suha Marina Proizd | Suhi Vez i Servis Brodova Vela Luka",
+  description = "Suha marina Proizd u Veloj Luci na Korčuli (500 m od mora). Čuvanje brodova, kamionski kran 16 t s 3 širilice za brage, servis motora i popravci stakloplastike.",
+  lang = 'hr'
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang} class="scroll-smooth">
+  <head>
+    <link rel="preload" href="/fonts/Inter-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Inter-normal-700-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+    <SEO title={title} description={description} lang={lang} />
+    <Schema lang={lang} />
+  </head>
+  <body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col selection:bg-red-600 selection:text-white">
+    <slot />
+  </body>
+</html>

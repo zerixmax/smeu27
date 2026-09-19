@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import Partners from '../components/Partners.astro';
+import ServicesGrid from '../components/ServicesGrid.astro';
+import Gallery from '../components/Gallery.astro';
+import VideoSection from '../components/VideoSection.astro';
+import PriceTable from '../components/PriceTable.astro';
+import LocationAndReviews from '../components/LocationAndReviews.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
+import QuickContactCTA from '../components/QuickContactCTA.astro';
+
+const lang = 'hr';
+---
+
+<Layout title="Suha Marina Proizd | Suhi Vez i Servis Brodova Vela Luka" lang={lang}>
+  <Navbar lang={lang} />
+  <main>
+    <Hero lang={lang} />
+    <Partners />
+    <ServicesGrid lang={lang} />
+    <Gallery lang={lang} />
+    <VideoSection videoId="mxzdmVqcefc" lang={lang} />
+    <PriceTable lang={lang} />
+    <LocationAndReviews lang={lang} />
+    <FAQ lang={lang} />
+  </main>
+  <Footer lang={lang} />
+  <QuickContactCTA lang={lang} />
+</Layout>

@@ -1,0 +1,213 @@
+---
+import { kw } from '../i18n/ui';
+
+interface Props {
+  lang?: 'hr' | 'en' | 'de';
+}
+
+const { lang: _lang = 'hr' } = Astro.props;
+
+// SEO ključni pojmovi (HR + EN + DE) — katalog za LocalBusiness knowsAbout
+const kwKatalog = [
+  ...kw.hr.emergency,
+  ...kw.hr.underwater,
+  ...kw.hr.electronics,
+  ...kw.en.emergency,
+  ...kw.en.underwater,
+  ...kw.en.electronics,
+  ...kw.de.emergency,
+  ...kw.de.underwater,
+  ...kw.de.electronics
+];
+
+const latitude = 42.9586505;
+
+// Recenzije koje su vidljive u sekciji #lokacija-recenzije (recenzije.autentične)
+const reviews = [
+  {
+    "@type": "Review",
+    "author": { "@type": "Person", "name": "Marko R." },
+    "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+    "datePublished": "2026-08",
+    "reviewBody": "Pukao nam je konop na ulazu u luku i zamotao se oko propele. Čovjek je došao u roku od 20 minuta, zaronio i riješio stvar bez vađenja broda."
+  },
+  {
+    "@type": "Review",
+    "author": { "@type": "Person", "name": "Stefan M." },
+    "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+    "datePublished": "2026-07",
+    "reviewBody": "Top Service in Vela Luka! Kranung mit dem Scania LKW verlief absolut professionell und vorsichtig mit Hebetraversen."
+  },
+  {
+    "@type": "Review",
+    "author": { "@type": "Person", "name": "Ante J." },
+    "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+    "datePublished": "2026-05",
+    "reviewBody": "Godinama ostavljam brod na suhom vezu kod Nikole. Miran san preko zime, konzervacija motora i priprema za sezonu uvijek odrađeni po dogovoru."
+  }
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["AutoRepair", "LocalBusiness"],
+      "@id": "https://suhamarina.eu/#business",
+      "name": "Suha Marina Proizd - Nautički Servis Vela Luka",
+      "alternateName": ["PROIZD Team Marine Service", "Obrt Proizd"],
+      "description": "Suha marina i servis plovila u Veloj Luci na Korčuli. Hitne ronilačke intervencije, vađenje i spuštanje kamionskim kranom Scania F600 AXP 16 t, ugradnja korpo morta, elektronike i servis motora.",
+      "url": "https://suhamarina.eu",
+      "logo": "https://suhamarina.eu/favicon.svg",
+      "image": "https://suhamarina.eu/og-image.jpg",
+      "hasMap": "https://maps.google.com/?cid=12781987515089309542",
+      "telephone": "+385989540388",
+      "email": "info@velalukarent.com",
+      "priceRange": "€€",
+      "currenciesAccepted": "EUR",
+      "paymentAccepted": "Cash, Bank Transfer",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Vela Luka",
+        "addressRegion": "Dubrovačko-neretvanska županija",
+        "postalCode": "20270",
+        "addressCountry": "HR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": latitude,
+        "longitude": 16.7181794
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "18",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": reviews,
+      "areaServed": [
+        {
+          "@type": "AdministrativeArea",
+          "name": "Vela Luka"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Otok Korčula"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Pelješki kanal i Lastovski kanal"
+        }
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "opens": "07:00",
+          "closes": "19:00"
+        }
+      ],
+      "knowsAbout": [
+        "Suhi vez",
+        "Vađenje i spuštanje plovila kranom",
+        "Servis i konzervacija vanbrodskih motora",
+        "Popravci stakloplastike i gelcoata",
+        "Ugradnja brodske opreme i elektronike",
+        "Pranje podvodnog dijela trupa",
+        ...kwKatalog
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Marine & Dry Dock Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Emergency Diver - Propeller Fouling Removal",
+              "description": "Hitni ronilački radovi: rezanje i uklanjanje zapetljanih konopa, najlona i mreža s propele i osovine u luci Vela Luka."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Corpo Morto & Mooring Anchor Deployment",
+              "description": "Postavljanje, kontrola i sanacija betonskih blokova (korpo morto), lanaca i bova za siguran privez."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "16t Crane Haul-Out & Launch",
+              "description": "Vađenje i spuštanje brodova kamionskim kranom Scania F600 AXP nosivosti 16 tona s 3 širilice za brage."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Marine Electronics & Sonar Setup",
+              "description": "Ugradnja sondi kroz trup, Garmin i Lowrance navigacijskih uređaja, dvostrukih akumulatorskih sustava i vinčeva."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Outboard Engine Service & Winterizing",
+              "description": "Redovno održavanje, priprema za zimu, zamjena impelera, ulja i filtera za Yamaha, Suzuki i Mercury vanbrodske motore."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Fiberglass & Gelcoat Hull Repair",
+              "description": "Sanacija oštećenja gelcoata, plastificiranje, antivegetativna zaštita i popravci gumenjaka."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "EmergencyService",
+      "@id": "https://suhamarina.eu/#emergency",
+      "parentOrganization": {
+        "@id": "https://suhamarina.eu/#business"
+      },
+      "name": "Emergency Marine Assistance Vela Luka",
+      "description": "Hitna nautička pomoć u akvatoriju Vela Luke: ronilačko odpetljavanje propele, ispumpavanje prodora vode i hitno vađenje broda kranom od 16 t.",
+      "telephone": "+385989540388",
+      "image": "https://suhamarina.eu/og-image.jpg",
+      "areaServed": [
+        { "@type": "AdministrativeArea", "name": "Vela Luka" },
+        { "@type": "AdministrativeArea", "name": "Otok Korčula" },
+        { "@type": "AdministrativeArea", "name": "Pelješki kanal i Lastovski kanal" }
+      ],
+      "availableService": [
+        {
+          "@type": "Service",
+          "name": "Propeller Fouling Emergency",
+          "description": "Ronilačko uklanjanje konopa i mreža sa osovine i propele u moru, bez vađenja ako je moguće."
+        },
+        {
+          "@type": "Service",
+          "name": "Water Ingress Emergency Response",
+          "description": "Privremeno krpanje prodora vode i hitno vađenje na kran od 16 t ako trup popusti."
+        }
+      ]
+    }
+  ]
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

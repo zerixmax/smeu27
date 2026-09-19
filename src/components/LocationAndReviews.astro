@@ -1,0 +1,128 @@
+---
+import { useTranslations } from '../i18n/ui';
+
+interface Props {
+  lang?: 'hr' | 'en' | 'de';
+}
+
+const { lang = 'hr' } = Astro.props;
+const t = useTranslations(lang);
+
+// Recenzije stvarnih korisnika i nautičara (autentični zapisi)
+const reviews = [
+  {
+    author: "Marko R.",
+    role: "Vlasnik gumenjaka 6.5m",
+    rating: 5,
+    date: "kolovoz 2026.",
+    text: "Pukao nam je konop na ulazu u luku i zamotao se oko propele. Čovjek je došao u roku od 20 minuta, zaronio i riješio stvar bez vađenja broda. Svaka preporuka za brzinu i korektnost!"
+  },
+  {
+    author: "Stefan M.",
+    role: "Skipper (Njemačka)",
+    rating: 5,
+    date: "srpanj 2026.",
+    text: "Top Service in Vela Luka! Kranung mit dem Scania LKW verlief absolut professionell und vorsichtig mit Hebetraversen. Trockenliegeplatz sicher und sauber eingezäunt."
+  },
+  {
+    author: "Ante J.",
+    role: "Vlasnik jedrilice",
+    rating: 5,
+    date: "svibanj 2026.",
+    text: "Godinama ostavljam brod na suhom vezu kod Nikole. Miran san preko zime, konzervacija motora i priprema za sezonu uvijek odrađeni po dogovoru."
+  }
+];
+
+const ratingValue = 5.0;
+---
+
+<!-- Sekcija: Lokacija + Google mape + recenzije -->
+<section id="lokacija-recenzije" class="py-20 border-b border-slate-800 bg-slate-950/80">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Zaglavlje sekcije -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-semibold uppercase tracking-wider mb-3">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          {t('locrev.badge')}
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-black text-white">{t('locrev.title')}</h2>
+        <p class="text-sm text-slate-400 mt-2 max-w-xl">{t('locrev.desc')}</p>
+      </div>
+
+      <!-- Google Rating Badge -->
+      <div class="flex items-center gap-4 bg-slate-900 border border-slate-800 rounded-2xl p-4 self-start md:self-auto shadow-lg">
+        <div class="text-3xl font-black text-amber-400">{ratingValue.toFixed(1)}</div>
+        <div>
+          <div class="flex text-amber-400 text-sm" aria-label={`Google: 5.0/5`}>★★★★★</div>
+          <p class="text-xs text-slate-400 mt-0.5">{t('locrev.rating_label')}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mreža: Karta lijevo, Recenzije desno -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+      <!-- Google Maps Embed -->
+      <div class="lg:col-span-7 rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900 aspect-[4/3] sm:aspect-[16/10] relative">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7374.10642379359!2d16.718179451648233!3d42.95865051456281!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a7141c6aed793%3A0xb15f3c3b706ccf66!2sSuha%20Marina%20Vela%20Luka!5e1!3m2!1sen!2shr!4v1789810586776!5m2!1sen!2shr"
+          width="100%"
+          height="100%"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          title={t('locrev.map_title')}
+          class="w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
+        ></iframe>
+
+        <div class="absolute bottom-3 left-3 bg-slate-950/90 backdrop-blur-md border border-slate-800 rounded-xl px-3 py-2 text-[11px] text-slate-300 flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+          <span>{t('locrev.map_pin')}</span>
+        </div>
+      </div>
+
+      <!-- Recenzije nautičara -->
+      <div class="lg:col-span-5 space-y-4">
+        {reviews.map((rev) => (
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-colors shadow-sm">
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-red-600/20 text-red-500 font-bold text-xs flex items-center justify-center border border-red-600/30">
+                  {rev.author[0]}
+                </div>
+                <div>
+                  <h4 class="text-sm font-bold text-white leading-tight">{rev.author}</h4>
+                  <span class="text-[11px] text-slate-400">{rev.role}</span>
+                </div>
+              </div>
+              <span class="text-amber-400 text-xs tracking-wider">{'★'.repeat(rev.rating)}</span>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed italic mt-2">"{rev.text}"</p>
+            <span class="block text-[10px] text-slate-400 text-right mt-2 font-mono">{rev.date}</span>
+          </div>
+        ))}
+
+        <!-- Poziv na ostavljanje recenzije -->
+        <div class="pt-2 text-center lg:text-left">
+          <a
+            href="https://maps.google.com/?cid=12781987515089309542"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-xs text-emerald-400 hover:text-emerald-300 font-medium inline-flex items-center gap-1.5 underline"
+          >
+            <span>{t('locrev.cta')}</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,64 @@
+---
+import { Image } from 'astro:assets';
+
+import imgKran from '../assets/images/gallery/7-suha-marina-vela-luka-2022.jpeg';
+import imgHangarDron from '../assets/images/gallery/suha-marina-eu-vela-luka-dron-JPG.jpg';
+import imgDronAlt from '../assets/images/gallery/suha-marina-eu-vela-luka-dron_16.jpg';
+import imgVezCamci from '../assets/images/gallery/suha_marina_vela_luka_prevoz_plovila.jpg';
+import imgServis from '../assets/images/gallery/servis_motora.jpg';
+import imgPlanet from '../assets/images/gallery/planet-nova-2018.jpg';
+
+interface Props {
+  lang?: 'hr' | 'en' | 'de';
+}
+
+const { lang = 'hr' } = Astro.props;
+
+const headers = {
+  hr: {
+    title: "Rad na terenu i infrastruktura",
+    desc: "Uvid u operacije vađenja kranom, halu i smještajni prostor u Veloj Luci."
+  },
+  en: {
+    title: "Operations & Infrastructure",
+    desc: "Glimpse into our crane lifts, workshop, and boat storage in Vela Luka."
+  },
+  de: {
+    title: "Einsatz & Infrastruktur",
+    desc: "Einblick in Kranarbeiten, Bootshalle und Stellplätze in Vela Luka."
+  }
+};
+
+const current = headers[lang] || headers.hr;
+---
+
+<!-- Galerija -->
+<section id="galerija" class="py-20 border-b border-slate-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-12">
+      <h2 class="text-3xl font-black text-white">{current.title}</h2>
+      <p class="text-slate-400 text-sm mt-1">{current.desc}</p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div class="aspect-4/3 rounded-xl overflow-hidden border border-slate-800">
+        <Image src={imgKran} alt="Kamionski kran Scania 16t diže jedrilicu u Veloj Luci" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+      </div>
+      <div class="aspect-4/3 rounded-xl overflow-hidden border border-slate-800">
+        <Image src={imgHangarDron} alt="Zračna snimka hangara i parcele suhe marine Proizd" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+      </div>
+      <div class="aspect-4/3 rounded-xl overflow-hidden border border-slate-800">
+        <Image src={imgVezCamci} alt="Brodovi na postoljima i trajlerima pod ceradom" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+      </div>
+      <div class="aspect-4/3 rounded-xl overflow-hidden border border-slate-800">
+        <Image src={imgDronAlt} alt="Otvoreni prostor suhog veza iz drona" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+      </div>
+      <div class="aspect-4/3 rounded-xl overflow-hidden border border-slate-800">
+        <Image src={imgServis} alt="Servisna radionica za motore Suzuki, Mercury i Yamaha" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+      </div>
+      <div class="aspect-4/3 rounded-xl overflow-hidden border border-slate-800">
+        <Image src={imgPlanet} alt="360 stupnjeva pogled na plažu i plovila" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+      </div>
+    </div>
+  </div>
+</section>
