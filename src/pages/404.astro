@@ -24,8 +24,10 @@ const backdrop = await getImage({
 >
   <Navbar lang="hr" />
 
-  <main class="flex-1 flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-slate-950">
-    <!-- Fotografija plaže i plovila kao pozadina, potamnjena radi čitljivosti teksta -->
+  <main class="flex-1 flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-zinc-950">
+    <!-- Fotografija plaže i plovila kao pozadina. Grayscale drži sliku bezbojnom
+         da ne plavi tekst, a neutralni (zinc, ne slate) gradijent osigurava
+         čitljivost bez plavog odnosa. -->
     <img
       src={backdrop.src}
       alt=""
@@ -33,12 +35,12 @@ const backdrop = await getImage({
       height={backdrop.attributes.height}
       loading="lazy"
       decoding="async"
-      class="absolute inset-0 w-full h-full object-cover opacity-[0.07]"
+      class="absolute inset-0 w-full h-full object-cover opacity-45 grayscale"
     />
-    <div class="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-slate-950/60 to-slate-950 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-zinc-950/85 via-zinc-950/70 to-zinc-950 pointer-events-none"></div>
 
     <!-- Pozadinski svjetlosni efekt -->
-    <div class="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none"></div>
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-red-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
     <div class="relative z-10 max-w-lg w-full text-center">
