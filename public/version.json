@@ -1,7 +1,7 @@
 {
-  "version": "1.0.11",
-  "build": "20261001.3",
+  "version": "1.0.12",
+  "build": "20261001.4",
   "stage": "production",
-  "updatedAt": "2026-10-01 10:22",
-  "changelog": "Galerija: 25 slika u masonry rasporedu s lightbox navigacijom i rotacijom, footer skraćen na vX.Y.Z"
+  "updatedAt": "2026-10-01 11:20",
+  "changelog": "Galerija: 6 nasumicnih slika na stranici (od 25), lightbox lista svih 25; 404 pozadina olaksana (opacity 0.07, bez grayscale)"
 }

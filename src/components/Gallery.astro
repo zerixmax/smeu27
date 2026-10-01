@@ -126,6 +126,10 @@ const items = sources.map((s) => ({
 // Lightbox: webp bez upscale-a, ali najviše 1600 px širine da 25 slika
 // ne zauzima nekoliko MB u dist/ (učitavaju se tek pri otvaranju).
 const LIGHTBOX_MAX = 1600;
+// Koliko slika se prikazuje u mreži. Ostatak ostaje u HTML-u (skriven preko
+// hidden) pa se ne učitava niti ne zauzima mjesto, a lightbox navigira samo
+// kroz vidljivih SHOWN. Izbor je nasumičan po sesiji → iste 6 nisu stalno.
+const SHOWN = 6;
 const lightbox = await Promise.all(
   items.map(async (item) => {
     const width = Math.min(item.src.width, LIGHTBOX_MAX);
@@ -147,6 +151,9 @@ const lightbox = await Promise.all(
     <div class="mb-12">
       <h2 class="text-3xl font-black text-white">{current.title}</h2>
       <p class="text-slate-400 text-sm mt-1">{current.desc}</p>
+      <p class="text-slate-500 text-xs mt-1">
+        {t('gallery.shown')} {SHOWN} {t('gallery.ofTotal')} {items.length}
+      </p>
     </div>
 
     <!-- Masonry (CSS columns): portretne snimke zadržavaju prirodni omjer,
@@ -208,8 +215,16 @@ const lightbox = await Promise.all(
   </figure>
 </div>
 
-<script is:inline define:vars={{ lightboxData: lightbox }}>
+<!-- Mreža ostaje nevidljiva dok skripta ne odabere koje 6 slika ide na
+     stranicu (inače bi se na sporijim uređajima bljesnulo svih 25). Prostor je
+     rezerviran (visibility, ne display) pa nema skoka izgleda. -->
+<style is:global>
+  html:not(.gallery-ready) [data-gallery-grid] { visibility: hidden; }
+</style>
+
+<script is:inline define:vars={{ lightboxData: lightbox, shownCount: SHOWN, openLabel: t('gallery.open'), ofLabel: t('gallery.of') }}>
   window.__galleryInit = window.__galleryInit || function () {
+    const SHOWN = shownCount;
     const lb = document.getElementById('gallery-lightbox');
     const grid = document.querySelector('[data-gallery-grid]');
     const data = lightboxData;
@@ -221,12 +236,14 @@ const lightbox = await Promise.all(
     const btnClose = document.getElementById('gallery-lb-close');
     const btnPrev = document.getElementById('gallery-lb-prev');
     const btnNext = document.getElementById('gallery-lb-next');
-    const items = Array.from(grid.querySelectorAll('[data-gallery-item]'));
+    const all = Array.from(grid.querySelectorAll('[data-gallery-item]'));
+    const total = data.length;
     let index = 0;
     let lastFocused = null;
 
+    // Lightbox lista SVE slike (odabrane u ovoj sesiji), ne samo vidljivih 6.
     const show = (i) => {
-      index = (i + items.length) % items.length;
+      index = (i + total) % total;
       const item = data[index];
       if (!item) return;
       img.src = item.src;
@@ -234,7 +251,7 @@ const lightbox = await Promise.all(
       img.width = item.width;
       img.height = item.height;
       caption.textContent = item.alt;
-      counter.textContent = (index + 1) + ' / ' + items.length;
+      counter.textContent = (index + 1) + ' / ' + total;
     };
 
     const open = (i) => {
@@ -267,38 +284,65 @@ const lightbox = await Promise.all(
       if (e.target === lb) close();
     });
 
-    document.addEventListener('keydown', (e) => {
-      if (lb.classList.contains('hidden')) return;
-      if (e.key === 'Escape') close();
-      else if (e.key === 'ArrowLeft') show(index - 1);
-      else if (e.key === 'ArrowRight') show(index + 1);
-      else if (e.key === 'Tab') {
-        e.preventDefault();
-        const focusable = [btnPrev, btnNext, btnClose];
-        const pos = focusable.indexOf(document.activeElement);
-        focusable[(pos + 1) % focusable.length].focus();
-      }
-    });
+    // Tipkovnica se veže na document samo jednom po sesiji (ClientRouter inače
+    // nakon svake SPA navigacije doda novi listener → dupli Escape/strelice).
+    // Handler ne drži stari closure nego čita trenutno stanje iz __galleryKey.
+    window.__galleryKey = { lb, show, close, buttons: [btnPrev, btnNext, btnClose], at: () => index };
+    if (!window.__galleryKeydownBound) {
+      window.__galleryKeydownBound = true;
+      document.addEventListener('keydown', (e) => {
+        const g = window.__galleryKey;
+        if (!g || !g.lb || g.lb.classList.contains('hidden')) return;
+        if (e.key === 'Escape') g.close();
+        else if (e.key === 'ArrowLeft') g.show(g.at() - 1);
+        else if (e.key === 'ArrowRight') g.show(g.at() + 1);
+        else if (e.key === 'Tab') {
+          e.preventDefault();
+          const pos = g.buttons.indexOf(document.activeElement);
+          g.buttons[(pos + 1) % g.buttons.length].focus();
+        }
+      });
+    }
 
-    // Rotacija redoslijeda: determinirana po sessionStorage da SPA navigacija
-    // ne promijeni redoslijed usred pregledavanja. Kod starih posjećenih sesija
-    // broj se razlikuje pa se spremnik poništi i generira novi.
+    // Rotacija: nasumičan redoslijed svih slika, ali na stranici se prikazuje
+    // samo SHOWN nasumično odabranih. Odabir se sprema u sessionStorage da
+    // SPA navigacija ne promijeni 6 slika usred pregledavanja. Kod starih
+    // posjećenih sesija duljina se razlikuje pa se spremnik poništi.
     let order = null;
     try { order = JSON.parse(sessionStorage.getItem('gallery-order') || 'null'); } catch (err) { order = null; }
-    if (!Array.isArray(order) || order.length !== items.length) {
-      order = items.map((_, i) => i);
+    if (!Array.isArray(order) || order.length !== all.length) {
+      order = all.map((_, i) => i);
       for (let i = order.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [order[i], order[j]] = [order[j], order[i]];
       }
       try { sessionStorage.setItem('gallery-order', JSON.stringify(order)); } catch (err) { /* privatni mod */ }
     }
-    // order[p] = izvorni indeks na poziciji p → pozicija elementa je indexOf.
-    order.forEach((originalIndex) => grid.appendChild(items[originalIndex]));
-    items.forEach((el) => {
-      const original = Number(el.dataset.galleryItem);
-      el.dataset.galleryItem = String(order.indexOf(original));
+
+    // order[p] = izvorni indeks na poziciji p. `data-gallery-item` nosi poziciju
+    // u rotiranom redoslijedu (0..24) pa lightbox zna koju sliku je otvoreno;
+    // elementi poslije SHOWN se premještaju na kraj mreže i skrivaju
+    // (hidden = nema ni mjesta ni učitavanja, nisu ni u a11y stablu).
+    const visible = order.slice(0, SHOWN);
+    const hidden = order.slice(SHOWN);
+    visible.concat(hidden).forEach((originalIndex, pos) => {
+      const el = all[originalIndex];
+      el.dataset.galleryItem = String(pos);
+      if (pos >= SHOWN) {
+        el.hidden = true;
+        grid.appendChild(el);
+      }
+      if (pos < SHOWN) {
+        el.setAttribute(
+          'aria-label',
+          `${openLabel} ${pos + 1} ${ofLabel} ${total}: ${el.getAttribute('alt') || ''}`
+        );
+      }
     });
+    document.documentElement.classList.add('gallery-ready');
   };
-  document.addEventListener('astro:page-load', window.__galleryInit);
+  if (!window.__galleryPageLoadBound) {
+    window.__galleryPageLoadBound = true;
+    document.addEventListener('astro:page-load', window.__galleryInit);
+  }
 </script>
