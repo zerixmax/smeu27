@@ -1,7 +1,7 @@
 {
-  "version": "1.0.10",
-  "build": "20261001.2",
+  "version": "1.0.11",
+  "build": "20261001.3",
   "stage": "production",
-  "updatedAt": "2026-10-01 09:48",
-  "changelog": "Dijagnostika i podešavanje parametara motora (HR/EN/DE), popravci drvenih brodova, Service shema s telefonom, lightbox galerija s rotacijom slika, humoristični 404"
+  "updatedAt": "2026-10-01 10:22",
+  "changelog": "Galerija: 25 slika u masonry rasporedu s lightbox navigacijom i rotacijom, footer skraćen na vX.Y.Z"
 }

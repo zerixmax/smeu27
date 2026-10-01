@@ -7,6 +7,26 @@ import imgHangarDron from '../assets/images/gallery/suha-marina-eu-vela-luka-dro
 import imgDronAlt from '../assets/images/gallery/suha-marina-eu-vela-luka-dron_16.jpg';
 import imgVezCamci from '../assets/images/gallery/suha_marina_vela_luka_prevoz_plovila.jpg';
 import imgServis from '../assets/images/gallery/servis_motora.jpg';
+import imgDron16 from '../assets/images/gallery/suha-marina-eu-vela-luka-dron_16-hires.jpg';
+import imgServisBase from '../assets/images/gallery/suha-marina-eu-servis-motora.jpg';
+import imgServis02 from '../assets/images/gallery/suha-marina-eu-servis-motora_02.jpg';
+import imgServis03 from '../assets/images/gallery/suha-marina-eu-servis-motora_03.jpg';
+import imgServis05 from '../assets/images/gallery/suha-marina-eu-servis-motora_05.jpg';
+import imgServis06 from '../assets/images/gallery/suha-marina-eu-servis-motora_06.jpg';
+import imgServis07 from '../assets/images/gallery/suha-marina-eu-servis-motora_07.jpg';
+import imgServis08 from '../assets/images/gallery/suha-marina-eu-servis-motora_08.jpg';
+import imgServis10 from '../assets/images/gallery/suha-marina-eu-servis-motora_10.jpg';
+import imgServis14 from '../assets/images/gallery/suha-marina-eu-servis-motora_14.jpg';
+import imgServis15 from '../assets/images/gallery/suha-marina-eu-servis-motora_15.jpg';
+import imgServis17 from '../assets/images/gallery/suha-marina-eu-servis-motora_17.jpg';
+import imgDron14 from '../assets/images/gallery/suha-marina-eu-vela-luka-dron_14-JPG.jpg';
+import imgDron15 from '../assets/images/gallery/suha-marina-eu-vela-luka-dron_15-JPG.jpg';
+import imgDron26 from '../assets/images/gallery/suha-marina-eu-vela-luka-dron_26-JPG.jpg';
+import imgDron27 from '../assets/images/gallery/suha-marina-eu-vela-luka-dron_27-JPG.jpg';
+import imgPluća from '../assets/images/gallery/suha-marina-vela-luka-2022.jpeg';
+import imgPluća2 from '../assets/images/gallery/suha-marina-vela-luka-2022_02.jpeg';
+import imgPluća3 from '../assets/images/gallery/suha-marina-vela-luka-2022_03.jpeg';
+import imgPlucaAlt from '../assets/images/gallery/suha-marina-vela-luka-2022_092_1.png';
 
 interface Props {
   lang?: 'hr' | 'en' | 'de';
@@ -32,33 +52,93 @@ const headers = {
 
 const current = headers[lang] || headers.hr;
 
-// Svaka stavka nosi izvornu sliku (za lightbox u punoj rezoluciji) i lokalizirani alt.
-// Nativne dimenzije čuvaju upscale-free rendiranje u thumbnailu i u lightboxu.
-const items = [
-  { id: 'kran', src: imgKran, alt: { hr: "Kamionski kran Scania 16t diže jedrilicu u Veloj Luci", en: "Scania 16t truck crane lifting a sailboat in Vela Luka", de: "Scania-LKW-Kran mit 16 t hebt eine Segelyacht in Vela Luka" } },
-  { id: 'hangar', src: imgHangarDron, alt: { hr: "Zračna snimka hangara i parcele suhe marine Proizd", en: "Aerial view of the Proizd dry dock hangar and yard", de: "Luftaufnahme der Proizd-Halle und des Lagerplatzes" } },
-  { id: 'vez', src: imgVezCamci, alt: { hr: "Brodovi na postoljima i trajlerima pod ceradom", en: "Boats on cradles and trailers under the canopy", de: "Boote auf Lagern und Anhängern unter der Plane" } },
-  { id: 'dron', src: imgDronAlt, alt: { hr: "Otvoreni prostor suhog veza iz drona", en: "Open dry-dock space seen from the air", de: "Offene Trockenliegeplatzfläche aus der Luft" } },
-  { id: 'servis', src: imgServis, alt: { hr: "Servisna radionica za motore Suzuki, Mercury i Yamaha", en: "Service workshop for Suzuki, Mercury, and Yamaha engines", de: "Servicewerkstatt für Suzuki-, Mercury- und Yamaha-Motoren" } }
+// Alt opisi po serijama snimaka. NAPOMENA: generirani su iz imena datoteka i
+// nisu ručno opisani pojedinačno — treba ih pregledati uz stvarne fotografije.
+const seriesAlt = {
+  kran: {
+    hr: "Kamionski kran Scania 16 t diže jedrilicu u Veloj Luci",
+    en: "Scania 16 t truck crane lifting a sailboat in Vela Luka",
+    de: "Scania-LKW-Kran mit 16 t hebt eine Segelyacht in Vela Luka"
+  },
+  hangar: {
+    hr: "Zračna snimka hangara i parcele suhe marine Proizd",
+    en: "Aerial view of the Proizd dry dock hangar and yard",
+    de: "Luftaufnahme der Proizd-Halle und des Lagerplatzes"
+  },
+  vez: {
+    hr: "Brodovi na postoljima i trajlerima pod ceradom",
+    en: "Boats on cradles and trailers under the canopy",
+    de: "Boote auf Lagern und Anhängern unter der Plane"
+  },
+  servis: {
+    hr: "Servisna radionica i rad na motorima brodova",
+    en: "Service workshop and boat engine work",
+    de: "Servicewerkstatt und Arbeiten an Bootmotoren"
+  },
+  dron: {
+    hr: "Zračna snimka suhe marine Proizd u Veloj Luci",
+    en: "Aerial view of the Proizd dry dock in Vela Luka",
+    de: "Luftaufnahme der Trockenmarina Proizd in Vela Luka"
+  },
+  pluca: {
+    hr: "Brodovi na plićaku i u luci Vela Luka",
+    en: "Boats on the shallows and in the Vela Luka harbour",
+    de: "Boote auf der Flachwasserzone und im Hafen von Vela Luka"
+  }
+};
+
+type Series = keyof typeof seriesAlt;
+
+const sources: { id: string; src: ImageMetadata; series: Series }[] = [
+  { id: 'kran', src: imgKran, series: 'kran' },
+  { id: 'servis-rad', src: imgServisBase, series: 'servis' },
+  { id: 'servis-02', src: imgServis02, series: 'servis' },
+  { id: 'servis-03', src: imgServis03, series: 'servis' },
+  { id: 'servis-05', src: imgServis05, series: 'servis' },
+  { id: 'servis-06', src: imgServis06, series: 'servis' },
+  { id: 'servis-07', src: imgServis07, series: 'servis' },
+  { id: 'servis-08', src: imgServis08, series: 'servis' },
+  { id: 'servis-10', src: imgServis10, series: 'servis' },
+  { id: 'servis-14', src: imgServis14, series: 'servis' },
+  { id: 'servis-15', src: imgServis15, series: 'servis' },
+  { id: 'servis-17', src: imgServis17, series: 'servis' },
+  { id: 'servis-stari', src: imgServis, series: 'servis' },
+  { id: 'hangar', src: imgHangarDron, series: 'hangar' },
+  { id: 'dron-otvoreni', src: imgDronAlt, series: 'dron' },
+  { id: 'dron-14', src: imgDron14, series: 'dron' },
+  { id: 'dron-15', src: imgDron15, series: 'dron' },
+  { id: 'dron-16', src: imgDron16, series: 'dron' },
+  { id: 'dron-26', src: imgDron26, series: 'dron' },
+  { id: 'dron-27', src: imgDron27, series: 'dron' },
+  { id: 'vez', src: imgVezCamci, series: 'vez' },
+  { id: 'pluca', src: imgPluća, series: 'pluca' },
+  { id: 'pluca-02', src: imgPluća2, series: 'pluca' },
+  { id: 'pluca-03', src: imgPluća3, series: 'pluca' },
+  { id: 'pluca-dron', src: imgPlucaAlt, series: 'pluca' }
 ];
 
-// Lightbox verzija: ista izvorna slika, webp, bez upscale-a (width/height = nativna).
+const items = sources.map((s) => ({
+  id: s.id,
+  src: s.src,
+  alt: seriesAlt[s.series][lang] || seriesAlt[s.series].hr
+}));
+
+// Lightbox: webp bez upscale-a, ali najviše 1600 px širine da 25 slika
+// ne zauzima nekoliko MB u dist/ (učitavaju se tek pri otvaranju).
+const LIGHTBOX_MAX = 1600;
 const lightbox = await Promise.all(
   items.map(async (item) => {
-    const img = await getImage({ src: item.src, format: 'webp', quality: 85 });
+    const width = Math.min(item.src.width, LIGHTBOX_MAX);
+    const img = await getImage({ src: item.src, width, format: 'webp', quality: 85 });
     return {
       id: item.id,
       src: img.src,
       width: img.attributes.width,
       height: img.attributes.height,
-      alt: item.alt[lang] || item.alt.hr
+      alt: item.alt
     };
   })
 );
-
-// Determinirana rotacija: svaka posjetiteljeva sesija (podijeljena na <section>) dobiva
-// drugačiji redoslijed bez pomaka layouta (izvor: id-evi, JS preuređuje DOM).
-const ordered = items.map((item) => ({ ...item, alt: item.alt[lang] || item.alt.hr }));
 ---
 
 <!-- Galerija -->
@@ -69,13 +149,15 @@ const ordered = items.map((item) => ({ ...item, alt: item.alt[lang] || item.alt.
       <p class="text-slate-400 text-sm mt-1">{current.desc}</p>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4" data-gallery-grid>
-      {ordered.map((item, i) => (
+    <!-- Masonry (CSS columns): portretne snimke zadržavaju prirodni omjer,
+         landscape se ne razvlači, a nema praznih ćelija u mreži. -->
+    <div class="columns-2 md:columns-3 gap-4" data-gallery-grid>
+      {items.map((item, i) => (
         <button
           type="button"
-          class="aspect-4/3 rounded-xl overflow-hidden border border-slate-800 group relative cursor-zoom-in focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
+          class="mb-4 w-full break-inside-avoid rounded-xl overflow-hidden border border-slate-800 group relative cursor-zoom-in focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
           data-gallery-item={i}
-          aria-label={`${t('gallery.open')} ${i + 1} ${t('gallery.of')} ${ordered.length}: ${item.alt}`}
+          aria-label={`${t('gallery.open')} ${i + 1} ${t('gallery.of')} ${items.length}: ${item.alt}`}
         >
           <Image
             src={item.src}
@@ -85,7 +167,7 @@ const ordered = items.map((item) => ({ ...item, alt: item.alt[lang] || item.alt.
             format="webp"
             loading="lazy"
             decoding="async"
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            class="w-full h-auto block group-hover:scale-105 transition-transform duration-300"
           />
           <span class="absolute inset-0 bg-slate-950/0 group-hover:bg-slate-950/20 transition-colors duration-300 pointer-events-none"></span>
           <span class="absolute bottom-2 right-2 w-8 h-8 rounded-lg bg-slate-950/70 backdrop-blur-sm border border-white/10 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
@@ -198,8 +280,9 @@ const ordered = items.map((item) => ({ ...item, alt: item.alt[lang] || item.alt.
       }
     });
 
-    // Rotacija redoslijeda: determinirana po sessionStorage da navigacija
-    // unutar SPA-a ne mijenja redoslijed usred pregledavanja.
+    // Rotacija redoslijeda: determinirana po sessionStorage da SPA navigacija
+    // ne promijeni redoslijed usred pregledavanja. Kod starih posjećenih sesija
+    // broj se razlikuje pa se spremnik poništi i generira novi.
     let order = null;
     try { order = JSON.parse(sessionStorage.getItem('gallery-order') || 'null'); } catch (err) { order = null; }
     if (!Array.isArray(order) || order.length !== items.length) {
@@ -210,8 +293,7 @@ const ordered = items.map((item) => ({ ...item, alt: item.alt[lang] || item.alt.
       }
       try { sessionStorage.setItem('gallery-order', JSON.stringify(order)); } catch (err) { /* privatni mod */ }
     }
-    // order[p] = izvorni indeks slike na poziciji p → pozicija elementa je
-    // order.indexOf(izvorniIndeks), pa se mapa ažurira in-place (bez re-查询 DOM-a).
+    // order[p] = izvorni indeks na poziciji p → pozicija elementa je indexOf.
     order.forEach((originalIndex) => grid.appendChild(items[originalIndex]));
     items.forEach((el) => {
       const original = Number(el.dataset.galleryItem);
