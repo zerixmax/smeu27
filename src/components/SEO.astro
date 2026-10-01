@@ -4,12 +4,14 @@ import { ClientRouter } from 'astro:transitions';
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
   lang?: 'hr' | 'en' | 'de';
 }
 
 const {
   title = "Suha Marina Proizd | Suhi Vez i Servis Brodova Vela Luka",
   description = "Suha marina Proizd u Veloj Luci na Korčuli (500 m od mora). Čuvanje brodova, kamionski kran 16 t s 3 širilice za brage, servis motora i popravci stakloplastike.",
+  image = "/og-image.jpg",
   lang = 'hr'
 } = Astro.props;
 
@@ -19,6 +21,9 @@ const base = site.toString().replace(/\/+$/, '');
 const ogLocale = lang === 'en' ? 'en_GB' : lang === 'de' ? 'de_DE' : 'hr_HR';
 // Bez locale prefixa — samo su naslovne stranice lokalizirane (vidjeti Navbar.astro)
 const canonical = new URL(Astro.url.pathname, site).href;
+// Absolute URL ključan za WhatsApp/Facebook scraper — relativne putanje se odbacuju
+const ogImageURL = new URL(image, site).href;
+const ogImageType = image.toLowerCase().endsWith('.png') ? 'image/png' : 'image/jpeg';
 ---
 
 <meta charset="UTF-8" />
@@ -48,16 +53,20 @@ const canonical = new URL(Astro.url.pathname, site).href;
 <meta property="og:url" content={canonical} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={`${base}/og-image.jpg`} />
+<meta property="og:image" content={ogImageURL} />
+<meta property="og:image:secure_url" content={ogImageURL} />
+<meta property="og:image:type" content={ogImageType} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content="Suha Marina Proizd - Vela Luka" />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonical} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={`${base}/og-image.jpg`} />
+<meta name="twitter:image" content={ogImageURL} />
+<meta name="twitter:image:alt" content="Suha Marina Proizd - Vela Luka" />
 
 <!-- Astro SOP: ClientRouter -->
 <ClientRouter />
