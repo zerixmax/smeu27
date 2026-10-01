@@ -1,7 +1,7 @@
 {
-  "version": "1.0.12",
-  "build": "20261001.4",
+  "version": "1.0.13",
+  "build": "20261001.5",
   "stage": "production",
-  "updatedAt": "2026-10-01 11:20",
-  "changelog": "Galerija: 6 nasumicnih slika na stranici (od 25), lightbox lista svih 25; 404 pozadina olaksana (opacity 0.07, bez grayscale)"
+  "updatedAt": "2026-10-01 11:52",
+  "changelog": "Dodani kompletni Open Graph i Twitter Card meta tagovi s apsolutnim OG slikom (WhatsApp kompatibilno)"
 }
