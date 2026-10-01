@@ -20,6 +20,39 @@ const kwKatalog = [
   ...kw.de.electronics
 ];
 
+// Prošireni stručni pojmovi: ovlašteni servis motora, pramčani motori /
+// ribolovna elektronika, podvodni pregledi za HRB i komercijalna pomoć na moru.
+const extendedKnowsAbout = [
+  // Ovlašteni servis vanbrodskih motora i garancije
+  "Ovlašteni servis vanbrodskih motora Honda",
+  "Ovlašteni servis Suzuki Marine",
+  "Ovlašteni servis Tohatsu",
+  "Ovlašteni servis Hidea",
+  "Servis Yamaha i Mercury motora",
+  "Računalna dijagnostika brodskih motora",
+  "Računalna dijagnostika i očitavanje grešaka brodskih motora",
+  "Podešavanje parametara rada vanbrodskih motora",
+  "Sanacija oštećenja trupa kod prodora vode",
+  "Interventno krpanje trupa drvenih brodova",
+  // Pramčani motori i ribolovna elektronika
+  "Ugradnja Minn Kota pramčanih motora",
+  "Garmin Force ugradnja i kalibracija",
+  "Lowrance Ghost trolling motor",
+  "MotorGuide montaža",
+  "Thru-hull montaža sondi kroz trup",
+  "Kalibracija sonara i CHIRP sondi",
+  "Bow-mount trolling motor installation (Minn Kota, Garmin Force)",
+  "Bugmotoren-Montage und Echolot-Kalibrierung (Minn Kota, Garmin Force)",
+  // HRB podvodni pregledi i podvodni radovi
+  "Podvodni pregledi za Hrvatski registar brodova (HRB)",
+  "In-water survey Croatian Register of Shipping",
+  "Unterwasser-Inspektionen für das kroatische Schiffsregister (HRB)",
+  "Zamjena cink protektora u moru",
+  "Izrada i polaganje kolpa morta",
+  "Deblokada propelera od konopa i muringa",
+  "Komercijalna pomoć na moru i tegljenje plovila"
+];
+
 const latitude = 42.9586505;
 
 // Recenzije koje su vidljive u sekciji #lokacija-recenzije (recenzije.autentične)
@@ -97,6 +130,10 @@ const schema = {
         {
           "@type": "AdministrativeArea",
           "name": "Pelješki kanal i Lastovski kanal"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Srednji i južni Jadran"
         }
       ],
       "openingHoursSpecification": [
@@ -121,58 +158,59 @@ const schema = {
         "Popravci stakloplastike i gelcoata",
         "Ugradnja brodske opreme i elektronike",
         "Pranje podvodnog dijela trupa",
+        ...extendedKnowsAbout,
         ...kwKatalog
       ],
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
-        "name": "Marine & Dry Dock Services",
+        "name": "Nautičke i marinske usluge Obrt Proizd",
         "itemListElement": [
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Emergency Diver - Propeller Fouling Removal",
-              "description": "Hitni ronilački radovi: rezanje i uklanjanje zapetljanih konopa, najlona i mreža s propele i osovine u luci Vela Luka."
+              "name": "Suhi vez i manipulacija plovilima (kran 16 t Scania F600 AXP)",
+              "description": "Skladištenje na osiguranom postolju 500 m od mora, otvoreno ili natkriveno čuvanje, te vađenje i spuštanje brodova kamionskim kranom Scania F600 AXP nosivosti 16 tona s 3 širilice za brage."
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Corpo Morto & Mooring Anchor Deployment",
-              "description": "Postavljanje, kontrola i sanacija betonskih blokova (korpo morto), lanaca i bova za siguran privez."
+              "name": "Ovlašteni servis motora (Honda, Suzuki, Tohatsu, Hidea) i dijagnostika",
+              "description": "Servis radi dobivanja i očuvanja tvorničkog jamstva za vanbrodske motore, redovno održavanje, računalna dijagnostika i priprema za sezonu za Yamaha i Mercury sustave te unutarnje motore."
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "16t Crane Haul-Out & Launch",
-              "description": "Vađenje i spuštanje brodova kamionskim kranom Scania F600 AXP nosivosti 16 tona s 3 širilice za brage."
+              "name": "Ugradnja pramčanih motora (Minn Kota, Garmin Force) i brodske elektronike",
+              "description": "Ugradnja pramčanih elektromotora, sonara, plottera i GPS-a (Garmin, Lowrance, Humminbird, Simrad) te precizno pozicioniranje krmenih i thru-hull sondi kroz trup."
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Marine Electronics & Sonar Setup",
-              "description": "Ugradnja sondi kroz trup, Garmin i Lowrance navigacijskih uređaja, dvostrukih akumulatorskih sustava i vinčeva."
+              "name": "Podvodni pregledi za Hrvatski registar brodova (HRB) i radovi ronioca",
+              "description": "Podvodni pregledi trupa, propelera, kormila i pontona za HRB, zamjena cinkova i propelera u moru, postavljanje i kontrola kolpa morta i muringa te hitno odmotavanje konopa."
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Outboard Engine Service & Winterizing",
-              "description": "Redovno održavanje, priprema za zimu, zamjena impelera, ulja i filtera za Yamaha, Suzuki i Mercury vanbrodske motore."
+              "name": "Postavljanje kolpa morta, sanacija muringa i vezova",
+              "description": "Izrada, transport i roničko postavljanje korpo morta, lanaca i bova te pregled i popravak vezova za siguran stalni vez."
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Fiberglass & Gelcoat Hull Repair",
-              "description": "Sanacija oštećenja gelcoata, plastificiranje, antivegetativna zaštita i popravci gumenjaka."
+              "name": "Komercijalna pomoć na moru, vuča i hitno tegljenje plovila",
+              "description": "Hitna pomoć na moru i akvatoriju te tegljenje plovila u luci, 24/7, uz djelovanje na području Korčule, Pelješta i srednjeg i južnog Jadrana."
             }
           }
         ]
@@ -191,7 +229,8 @@ const schema = {
       "areaServed": [
         { "@type": "AdministrativeArea", "name": "Vela Luka" },
         { "@type": "AdministrativeArea", "name": "Otok Korčula" },
-        { "@type": "AdministrativeArea", "name": "Pelješki kanal i Lastovski kanal" }
+        { "@type": "AdministrativeArea", "name": "Pelješki kanal i Lastovski kanal" },
+        { "@type": "AdministrativeArea", "name": "Srednji i južni Jadran" }
       ],
       "availableService": [
         {
@@ -203,6 +242,11 @@ const schema = {
           "@type": "Service",
           "name": "Water Ingress Emergency Response",
           "description": "Privremeno krpanje prodora vode i hitno vađenje na kran od 16 t ako trup popusti."
+        },
+        {
+          "@type": "Service",
+          "name": "Commercial Marine Assistance & Towing",
+          "description": "Hitna pomoć na moru i tegljenje plovila u akvatoriju Vela Luke, 24/7."
         }
       ]
     }

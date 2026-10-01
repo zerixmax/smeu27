@@ -64,10 +64,11 @@ const ratingValue = 5.0;
     <!-- Mreža: Karta lijevo, Recenzije desno -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-      <!-- Google Maps Embed -->
-      <div class="lg:col-span-7 rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900 aspect-[4/3] sm:aspect-[16/10] relative">
+      <!-- Google Maps Embed (fasada: iframe se učitava tek na skrol/klik) -->
+      <div id="map-container" class="lg:col-span-7 rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900 aspect-[4/3] sm:aspect-[16/10] relative">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7374.10642379359!2d16.718179451648233!3d42.95865051456281!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a7141c6aed793%3A0xb15f3c3b706ccf66!2sSuha%20Marina%20Vela%20Luka!5e1!3m2!1sen!2shr!4v1789810586776!5m2!1sen!2shr"
+          id="map-iframe"
+          data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7374.10642379359!2d16.718179451648233!3d42.95865051456281!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a7141c6aed793%3A0xb15f3c3b706ccf66!2sSuha%20Marina%20Vela%20Luka!5e1!3m2!1sen!2shr!4v1789810586776!5m2!1sen!2shr"
           width="100%"
           height="100%"
           style="border:0;"
@@ -75,8 +76,39 @@ const ratingValue = 5.0;
           loading="lazy"
           referrerpolicy="strict-origin-when-cross-origin"
           title={t('locrev.map_title')}
-          class="w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
+          tabindex="-1"
+          aria-hidden="true"
+          class="w-full h-full opacity-0 grayscale hover:grayscale-0 transition-opacity duration-500"
         ></iframe>
+
+        <!-- Fasada: nula Google zahtjeva do interakcije ili dolaska u vidno polje -->
+        <div
+          id="map-placeholder"
+          class="absolute inset-0 z-10 flex flex-col items-center justify-center p-6 text-center bg-slate-900/95 backdrop-blur-sm transition-opacity duration-300"
+        >
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-3 border border-emerald-500/20">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <span class="text-sm font-semibold text-white mb-1">{t('locrev.map_pin')}</span>
+          <span class="text-xs text-slate-400 mb-4 max-w-xs">{t('locrev.map_loading')}</span>
+          <button
+            id="map-load-btn"
+            type="button"
+            class="px-4 py-2.5 text-xs font-bold rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white transition-colors"
+          >
+            {t('locrev.map_load')}
+          </button>
+          <noscript>
+            <a
+              href="https://maps.google.com/?cid=12781987515089309542"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block mt-3 text-xs text-emerald-400 underline"
+            >
+              {t('locrev.map_noscript')}
+            </a>
+          </noscript>
+        </div>
 
         <div class="absolute bottom-3 left-3 bg-slate-950/90 backdrop-blur-md border border-slate-800 rounded-xl px-3 py-2 text-[11px] text-slate-300 flex items-center gap-1.5">
           <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -126,3 +158,54 @@ const ratingValue = 5.0;
 
   </div>
 </section>
+
+<!-- Skripta usklađena s Astro SOP-om (astro:page-load) -->
+<script>
+  function setupLazyMap() {
+    const container = document.getElementById('map-container');
+    const iframe = document.getElementById('map-iframe');
+    const placeholder = document.getElementById('map-placeholder');
+    const btn = document.getElementById('map-load-btn');
+
+    if (!container || !iframe) return;
+
+    // iframe bez src = nula mrežnih zahtjeva prema Googleu pri inicijalnom učitavanju
+    const loadMap = () => {
+      if (iframe.dataset.loaded) return;
+      iframe.dataset.loaded = 'true';
+
+      const src = iframe.getAttribute('data-src');
+      if (!src) return;
+
+      iframe.addEventListener('load', () => {
+        iframe.classList.remove('opacity-0');
+        iframe.removeAttribute('aria-hidden');
+        iframe.removeAttribute('tabindex');
+        if (placeholder) {
+          placeholder.classList.add('opacity-0', 'pointer-events-none');
+          placeholder.setAttribute('aria-hidden', 'true');
+        }
+      }, { once: true });
+
+      iframe.setAttribute('src', src);
+    };
+
+    btn?.addEventListener('click', loadMap, { once: true });
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            loadMap();
+            observer.disconnect();
+          }
+        }
+      }, { rootMargin: '200px' });
+      observer.observe(container);
+    } else {
+      loadMap();
+    }
+  }
+
+  document.addEventListener('astro:page-load', setupLazyMap);
+</script>

@@ -1,0 +1,175 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import QuickContactCTA from '../components/QuickContactCTA.astro';
+
+const lang = 'hr';
+
+const seoTitle = "Ugradnja Minn Kota, Garmin i Lowrance opreme za brodove | Korčula – Hrvatska";
+const seoDescription = "Profesionalna ugradnja pramčanih elektromotora, sonara, GPS navigacije i ribolovne elektronike na Korčuli. Više od 20 godina iskustva u ribolovu i radu s opremom Garmin, Lowrance, Humminbird, Minn Kota, Garmin Force i MotorGuide.";
+
+const phoneDisplay = "+385 98 954 03 88";
+const phoneRaw = "385989540388";
+
+const bowMotors = ["Minn Kota", "Garmin Force", "Lowrance Ghost", "MotorGuide"];
+const sonars = ["Garmin", "Lowrance", "Humminbird", "Simrad", "Raymarine"];
+
+const whatsappMessage = encodeURIComponent("Pozdrav! Zanima me ponuda i ugradnja pramčanog motora / ribolovne elektronike na plovilo.");
+const whatsappUrl = `https://wa.me/${phoneRaw}?text=${whatsappMessage}`;
+
+// Service shema je referencom vezana na #business čvor iz Schema.astro (Layout)
+// → jedan poslovni entitet, bez dupliciranja LocalBusiness podataka.
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Ugradnja pramčanih elektromotora i ribolovne elektronike",
+  "serviceType": "Marine electronics installation",
+  "provider": {
+    "@type": "LocalBusiness",
+    "@id": "https://suhamarina.eu/#business",
+    "name": "Suha Marina Proizd",
+    "telephone": "+385989540388"
+  },
+  "areaServed": ["Otok Korčula", "Dubrovačko-neretvanska županija", "Srednji i južni Jadran"],
+  "description": seoDescription,
+  "knowsAbout": [
+    "Minn Kota montaža",
+    "Garmin Force ugradnja",
+    "Lowrance Ghost",
+    "MotorGuide",
+    "Thru-hull montaža sondi kroz trup",
+    "Kalibracija sonara i sondera",
+    "Dvostruki baterijski sustavi za pramčane motore",
+    "NMEA 2000 brodska mreža"
+  ]
+};
+---
+
+<Layout title={seoTitle} description={seoDescription} lang={lang}>
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+
+  <Navbar lang={lang} />
+
+  <main class="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto flex-1">
+
+    <!-- Navigacijski povratak -->
+    <div class="mb-8">
+      <a href="/" class="inline-flex items-center gap-2 text-xs font-mono text-emerald-400 hover:text-emerald-300">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Povratak na naslovnu
+      </a>
+    </div>
+
+    <!-- Hero blok stranice -->
+    <header class="mb-12">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-semibold uppercase tracking-wider mb-4">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        20+ godina iskustva u ribolovu na moru
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
+        Brodska elektronika i oprema za ribolov – Korčula
+      </h1>
+      <p class="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed">
+        Nalazimo se na području otoka Korčule i pružamo profesionalnu ugradnju, povezivanje i podešavanje opreme za ribolov i plovila.
+      </p>
+    </header>
+
+    <!-- Ključna prednost i iskustvo -->
+    <section class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 mb-12 shadow-xl">
+      <h2 class="text-xl sm:text-2xl font-bold text-white mb-3">Iskustvo iz prakse, ne iz kataloga</h2>
+      <p class="text-sm sm:text-base text-slate-300 leading-relaxed mb-6">
+        Više od 20 godina aktivnog iskustva u ribolovu omogućuje nam da u potpunosti razumijemo stvarne potrebe ribolovaca i pravilno prilagodimo opremu svakom tipu broda i uvjetima na moru. Vaš brod i vaša oprema zaslužuju pravilnu ugradnju kako biste izvukli maksimum iz svakog izlaska na more.
+      </p>
+
+      <!-- CTA blok za brzi WhatsApp upit -->
+      <div class="flex flex-col sm:flex-row gap-4 pt-4 border-t border-slate-800">
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm transition-colors"
+        >
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/></svg>
+          Zatražite ponudu putem WhatsAppa
+        </a>
+        <a
+          href={`tel:+${phoneRaw}`}
+          class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm transition-colors border border-slate-700"
+        >
+          Nazovite: {phoneDisplay}
+        </a>
+      </div>
+    </section>
+
+    <!-- Tehničke specifikacije ugradnje -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+
+      <!-- Pramčani motori -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6">
+        <div class="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center font-bold mb-4 border border-sky-500/20">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v18M5 8l7-5 7 5M5 16l7 5 7-5"/></svg>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2">Pramčani elektromotori</h3>
+        <p class="text-xs text-slate-400 mb-4 leading-relaxed">
+          Stručna montaža nosača, provlačenje ožičenja, ugradnja osigurača i spajanje na namjenske baterijske sustave (LiFePO4 / AGM).
+        </p>
+        <ul class="space-y-2 text-xs font-medium text-slate-300">
+          {bowMotors.map((motor) => (
+            <li class="flex items-center gap-2">
+              <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              {motor}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Sonari i elektronika -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6">
+        <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center font-bold mb-4 border border-indigo-500/20">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12a9 9 0 0118 0M6 12a6 6 0 0112 0M9.5 12a3.5 3.5 0 015 0M12 12h.01"/></svg>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2">Sonari, GPS &amp; Fishfinderi</h3>
+        <p class="text-xs text-slate-400 mb-4 leading-relaxed">
+          Precizno pozicioniranje sondi (krmene i kroz trup / thru-hull), kalibracija uređaja i podešavanje prikaza za čitanje strukture dna.
+        </p>
+        <ul class="space-y-2 text-xs font-medium text-slate-300">
+          {sonars.map((sonar) => (
+            <li class="flex items-center gap-2">
+              <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              {sonar}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Detaljna lista zahvata -->
+    <section class="bg-slate-900/50 border border-slate-800 rounded-3xl p-6 sm:p-8 mb-12">
+      <h2 class="text-xl font-bold text-white mb-4">Što sve obuhvaća naša usluga na terenu:</h2>
+      <div class="space-y-3 text-sm text-slate-300">
+        <div class="flex items-start gap-3">
+          <span class="text-emerald-400 font-bold">•</span>
+          <span><strong>Montaža i povezivanje:</strong> Pramčane električne motore ugrađujemo prema specifikacijama proizvođača uz osiguranje čvrstoće nosača.</span>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="text-emerald-400 font-bold">•</span>
+          <span><strong>Pozicioniranje sondi:</strong> Izbor idealnog mjesta na trupu kako bi se eliminirali mjehurići zraka i smetnje pri većim brzinama plovidbe.</span>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="text-emerald-400 font-bold">•</span>
+          <span><strong>Brodska NMEA mreža:</strong> Spajanje motora, sonara i autopilota u jedinstven sustav za navigaciju i sidrenje na točki (Spot-Lock / Anchor mode).</span>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="text-emerald-400 font-bold">•</span>
+          <span><strong>Savjetovanje i podešavanje:</strong> Praktični savjeti o postavkama frekvencija (CHIRP, SideScan, DownScan) prilagođeni terenima južnog Jadrana.</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <QuickContactCTA lang={lang} />
+  <Footer lang={lang} />
+</Layout>

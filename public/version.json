@@ -1,7 +1,7 @@
 {
-  "version": "1.0.8",
-  "build": "20260919.10",
+  "version": "1.0.10",
+  "build": "20261001.2",
   "stage": "production",
-  "updatedAt": "2026-09-19 12:25",
-  "changelog": "Senior review fixovi: Tailwind v4 migracija, hreflang/OG fix, Schema.org realni podaci, self-hosted fontovi, digitalna arhiva cjenika (NN 101/2026)"
+  "updatedAt": "2026-10-01 09:48",
+  "changelog": "Dijagnostika i podešavanje parametara motora (HR/EN/DE), popravci drvenih brodova, Service shema s telefonom, lightbox galerija s rotacijom slika, humoristični 404"
 }

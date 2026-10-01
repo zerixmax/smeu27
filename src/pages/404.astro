@@ -1,26 +1,51 @@
 ---
+import { getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+
+import imgPlanet from '../assets/images/gallery/planet-nova-2018.jpg';
+
+// Pozadinska fotografija (1920×1896). Prebacuje se u webp bez upscale-a;
+// učitava se lijeno jer je uklopljena u tamnu masku.
+const backdrop = await getImage({
+  src: imgPlanet,
+  format: 'webp',
+  quality: 60,
+  widths: [960, 1440, 1920],
+  sizes: '100vw'
+});
 ---
 
 <Layout 
-  title="404 - Stranica nije pronađena | Suha Marina Proizd" 
-  description="Tražena stranica ne postoji ili je premještena. Vratite se na naslovnu stranicu Suha Marina Proizd Vela Luka."
+  title="404 - Uplovili smo u krivu uvalu | Suha Marina Proizd" 
+  description="Ova stranica ne postoji — uplovili smo u krivu uvalu. Vratite se na naslovnu stranicu Suha Marina Proizd u Veloj Luci na Korčuli."
   lang="hr"
 >
   <Navbar lang="hr" />
 
-  <main class="flex-1 flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-radial from-slate-900 via-slate-950 to-slate-950">
+  <main class="flex-1 flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-slate-950">
+    <!-- Fotografija plaže i plovila kao pozadina, potamnjena radi čitljivosti teksta -->
+    <img
+      src={backdrop.src}
+      alt=""
+      width={backdrop.attributes.width}
+      height={backdrop.attributes.height}
+      loading="lazy"
+      decoding="async"
+      class="absolute inset-0 w-full h-full object-cover opacity-25 grayscale"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-slate-950/85 via-slate-950/75 to-slate-950 pointer-events-none"></div>
+
     <!-- Pozadinski svjetlosni efekt -->
-    <div class="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none"></div>
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-red-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
     <div class="relative z-10 max-w-lg w-full text-center">
       <!-- Značka greške -->
       <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-600/10 text-red-500 border border-red-600/20 text-xs font-semibold uppercase tracking-wider mb-6">
         <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
-        Greška 404 • Izgubljeni na moru
+        Greška 404 • uplovili smo u krivu uvalu
       </div>
 
       <!-- Brojka 404 s gradijentom -->
@@ -30,11 +55,13 @@ import Footer from '../components/Footer.astro';
 
       <!-- Naslov i opis -->
       <h2 class="text-2xl sm:text-3xl font-bold text-white mb-3">
-        Kurs nije pronađen
+        Ups, uplovili smo na krivu pažu!
       </h2>
       
       <p class="text-slate-400 text-sm sm:text-base leading-relaxed mb-8">
-        Stranica koju tražite ne postoji, premještena je ili je unesena neispravna adresa. Vratite se na sigurnu rutu ili nas izravno kontaktirajte.
+        Ova stranica ne postoji — <strong class="text-slate-300">doplovili smo u krivu uvalu</strong>.
+        Naš GPS nam je danas odbio poslušnost, pa smo se poslijepili uz obalu i ispričavamo.
+        Niste sami u ovome: dnevno krenemo u zlu luku. Vi samo nemate svoj kran za vađenje.
       </p>
 
       <!-- Akcijski gumbi -->
@@ -46,7 +73,7 @@ import Footer from '../components/Footer.astro';
           <svg class="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
           </svg>
-          <span>Povratak na naslovnu</span>
+          <span>Isplutati na početnu</span>
         </a>
 
         <a

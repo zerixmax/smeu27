@@ -3,9 +3,24 @@ interface Props {
   lang?: 'hr' | 'en' | 'de';
 }
 
+interface ServiceItem {
+  num: string;
+  title: string;
+  desc: string;
+  exp?: string;
+  link?: { href: string; label: string };
+}
+
+interface LangData {
+  heading: string;
+  subheading: string;
+  services: ServiceItem[];
+  emergency: { badge: string; title: string; subtitle: string; items: string[] };
+}
+
 const { lang = 'hr' } = Astro.props;
 
-const data = {
+const data: Record<'hr' | 'en' | 'de', LangData> = {
   hr: {
     heading: "Sveobuhvatna marinska podrška",
     subheading: "Kompletne tehničke i servisne usluge na jednom mjestu za bezbrižnu plovidbu.",
@@ -23,22 +38,29 @@ const data = {
       {
         num: "03",
         title: "Servis i konzervacija motora",
-        desc: "Redovno održavanje i priprema za zimu za Yamaha, Suzuki i Mercury vanbrodske motore; zamjena impelera, ulja i filtera te profesionalna ugradnja novih motora."
+        desc: "Ovlašteni servis radi dobivanja i očuvanja tvorničkog jamstva za vanbrodske motore: Honda, Suzuki, Tohatsu, Hidea. Računalna dijagnostika, očitavanje grešaka i podešavanje parametara rada motora. Redovno održavanje i priprema za sezonu za Yamaha i Mercury te unutarnje brodske motore."
       },
       {
         num: "04",
-        title: "Popravci stakloplastike i trupa",
-        desc: "Sanacija oštećenja gelcoata, plastificiranje, farbanje, antivegetativna zaštita (koper) te servis gumenjaka."
+        title: "Popravci stakloplastike, trupa i drvenih brodova",
+        desc: "Sanacija oštećenja gelcoata, plastificiranje, farbanje, antivegetativna zaštita (koper) te servis gumenjaka. Popravci i krpanje trupa drvenih brodova, zamjena oštećenih dasaka i brtvljenje."
       },
       {
         num: "05",
-        title: "Ugradnja opreme i elektronike",
-        desc: "Montaža krmenih platformi, skala, sidrenih vitla, navigacijskih sondera i plotera (Garmin, Lowrance, Minn Kota), bušenje i ugradnja sondi kroz trup te izrada inox tankova po mjeri."
+        title: "Brodska elektronika i ribolovna oprema",
+        desc: "Više od 20 godina iskustva u ribolovu. Stručna ugradnja pramčanih elektromotora (Minn Kota, Garmin Force, Lowrance Ghost, MotorGuide), sonara, plottera i GPS-a (Garmin, Lowrance, Humminbird, Simrad). Precizno pozicioniranje krmenih i thru-hull sondi kroz trup.",
+        exp: "20+ god. iskustva",
+        link: { href: "/ugradnja-minn-kota-garmin-force-korcula", label: "Detalji ugradnje" }
       },
       {
         num: "06",
         title: "Pranje pod visokim tlakom",
         desc: "Temeljito skidanje algi i školjaka neposredno nakon vađenja broda uz ekološka biorazgradiva sredstva za čišćenje."
+      },
+      {
+        num: "07",
+        title: "Podvodni radovi i HRB pregledi",
+        desc: "Podvodni pregledi trupa, propelera, kormila i pontona za potrebe Hrvatskog registra brodova (HRB). Zamjena cinkova i propelera u moru, postavljanje i kontrola kolpa morta i muringa te hitno odmotavanje konopa."
       }
     ],
     emergency: {
@@ -68,23 +90,30 @@ const data = {
       },
       {
         num: "03",
-        title: "Engine Service & Winterizing",
-        desc: "Routine maintenance and winterizing for Yamaha, Suzuki and Mercury outboard engines; impeller, oil, and filter replacements, and expert engine installations."
+        title: "Engine Service & Winterization",
+        desc: "Authorized service maintaining factory warranties for outboard engines: Honda, Suzuki, Tohatsu, Hidea. Computer diagnostics, error code reading, and precise engine parameter tuning. Regular maintenance and seasonal prep for Yamaha, Mercury, and inboard engines."
       },
       {
         num: "04",
-        title: "Fiberglass & Gelcoat Repairs",
-        desc: "Gelcoat cosmetic repairs, lamination, polishing, antifouling application, and RIB inflatable tube patching."
+        title: "Fiberglass, Hull & Wooden Boat Repairs",
+        desc: "Gelcoat cosmetic repairs, lamination, polishing, antifouling application, and RIB inflatable tube patching. Wooden boat hull repair and patching, replacement of damaged planking, and sealing."
       },
       {
         num: "05",
-        title: "Marine Electronics & Equipment",
-        desc: "Installation of swim platforms, ladders, windlasses, GPS fishfinders (Garmin, Lowrance, Minn Kota), thru-hull transducer mounting, and custom stainless steel marine tanks."
+        title: "Marine Electronics & Fishing Gear",
+        desc: "Over 20 years of sea fishing experience. Expert installation of bow-mount trolling motors (Minn Kota, Garmin Force, Lowrance Ghost, MotorGuide), fishfinders, and GPS plotters. Professional thru-hull and transom transducer mounting.",
+        exp: "20+ years experience",
+        link: { href: "/ugradnja-minn-kota-garmin-force-korcula", label: "Installation details" }
       },
       {
         num: "06",
         title: "High-Pressure Hull Washing",
         desc: "Immediate high-pressure wash removing algae and barnacles straight after haul-out using eco-friendly detergents."
+      },
+      {
+        num: "07",
+        title: "Underwater Works & CRS Inspections",
+        desc: "In-water inspections of hull, shaft, rudder, and pontoons for the Croatian Register of Shipping (CRS/HRB). In-water zinc anode and prop replacement, corpo morto mooring setup, and emergency rope clearing."
       }
     ],
     emergency: {
@@ -114,23 +143,30 @@ const data = {
       },
       {
         num: "03",
-        title: "Motorenservice & Einwinterung",
-        desc: "Regelmäßige Wartung und Einwinterung für Yamaha-, Suzuki- und Mercury-Außenbordmotoren; Wechsel von Impeller, Öl und Filtern sowie Neumotormontage."
+        title: "Bootsservice & Motorkonservierung",
+        desc: "Autorisierter Service zum Erhalt der Werksgarantie für Außenborder: Honda, Suzuki, Tohatsu, Hidea. Computerdiagnose, Auslesen von Fehlercodes und Motorparameter-Einstellung. Regelmäßige Wartung und Saisonvorbereitung für Yamaha, Mercury und Innenborder."
       },
       {
         num: "04",
-        title: "GFK- & Rumpfreparaturen",
-        desc: "Instandsetzung von Gelcoat-Schäden, Laminieren, Polieren, Antifouling-Beschichtung sowie Reparatur von Festrumpfschlauchbooten."
+        title: "GFK-, Rumpf- & Holzbootreparaturen",
+        desc: "Instandsetzung von Gelcoat-Schäden, Laminieren, Polieren, Antifouling-Beschichtung sowie Reparatur von Festrumpfschlauchbooten. Reparatur und Abdichtung des Rumpfs von Holzbooten, Austausch beschädigter Beplankung."
       },
       {
         num: "05",
-        title: "Bootsausrüstung & Elektronik",
-        desc: "Montage von Badeplattformen, Leitern, Ankerwinden, GPS-Kartenplottern (Garmin, Lowrance, Minn Kota), Through-Hull-Gebermontage und Anfertigung von Edelstahltanks nach Maß."
+        title: "Bordelektronik & Angelzubehör",
+        desc: "Über 20 Jahre Erfahrung im Meeresangeln. Fachgerechte Montage von Bugmotoren (Minn Kota, Garmin Force, Lowrance Ghost, MotorGuide), Echoloten und GPS-Kartenplottern. Präzise Durchbruchgeber-Montage (Thru-Hull).",
+        exp: "20+ Jahre Erfahrung",
+        link: { href: "/ugradnja-minn-kota-garmin-force-korcula", label: "Einbaudetails" }
       },
       {
         num: "06",
         title: "Hochdruck-Rumpfreinigung",
         desc: "Gründliche Beseitigung von Algen und Seepocken unmittelbar nach dem Auskranen mit umweltfreundlichen Reinigern."
+      },
+      {
+        num: "07",
+        title: "Unterwasserarbeiten & HRB-Inspektionen",
+        desc: "Unterwasser-Inspektionen für das kroatische Schiffsregister (CRS/HRB). Zinkanoden- und Propellertausch im Wasser, Verlegung von Grundgeschirr (Corpo Morto) und Mooring sowie Notfall-Freischneiden."
       }
     ],
     emergency: {
@@ -165,6 +201,20 @@ const current = data[lang] || data.hr;
           </div>
           <h3 class="text-xl font-bold text-white mb-2">{item.title}</h3>
           <p class="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
+          {item.link && (
+            <div class="mt-4 pt-4 border-t border-slate-800 flex items-center justify-between gap-3">
+              <span class="text-[11px] text-emerald-400 font-mono">{item.exp}</span>
+              <a
+                href={item.link.href}
+                class="text-xs text-slate-300 hover:text-white flex items-center gap-1 group font-semibold"
+              >
+                {item.link.label}
+                <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          )}
         </div>
       ))}
 

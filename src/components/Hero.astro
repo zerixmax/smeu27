@@ -107,11 +107,13 @@ const spreadersText = lang === 'en' ? '3 spreaders' : lang === 'de' ? '3 Travers
           <Image
             src={imgKran}
             alt="Kamionski kran Scania F600 AXP od 16 tona s 3 širilice diže jedrilicu u Veloj Luci"
+            widths={[360, 450]}
+            sizes="(max-width: 1023px) calc(100vw - 2rem), 490px"
             class="w-full h-full object-cover"
-            width={960}
-            loading="eager"
-            decoding="async"
             format="webp"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent pointer-events-none"></div>
           <div class="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs text-slate-300 font-medium pointer-events-none">

@@ -27,10 +27,11 @@ Nova web stranica donosi:
 | **Astro** | Glavni web framework (Static Site Generation - SSG) |
 | **TypeScript** | Statička tipizacija (`strict` način rada) |
 | **Tailwind CSS v4** | Suvremeno stiliziranje u tamnoj nautičkoj temi (`@tailwindcss/vite`) |
-| **Self-hosted fontovi** | Inter & JetBrains Mono (`public/fonts/`, `font-display: swap`) |
-| **Astro Assets** | Automatska konverzija i kompresija slika u WebP format |
+| **Self-hosted fontovi** | Inter & JetBrains Mono, **4 variable WOFF2 datoteke** (`public/fonts/`, `font-display: swap`) |
+| **Astro Assets** | Automatska konverzija i kompresija slika u WebP formatu |
 | **Astro ClientRouter** | SPA tranzicije među stranicama bez ponovnog učitavanja |
-| **Schema.org JSON-LD** | Strukturirani podaci za lokalno poslovanje (*LocalBusiness*) |
+| **Schema.org JSON-LD** | Strukturirani podaci za lokalno poslovanje (*LocalBusiness*, *EmergencyService*, *Service*) |
+| **Nginx (`nginx:alpine`)** | Produkcijski poslužitelj statičkog sadržaja (gzip + cache politike po tipu asseta) |
 
 ---
 
@@ -40,11 +41,19 @@ Nova web stranica donosi:
 suhamarinaeu27/
 ├── docs/
 │   ├── dev-logs/
-│   │   └── 2026-09-19.md       # Dnevnik rada i kronologija promjena po sesijama
+│   │   ├── 2026-09-19.md       # Dnevnik rada i kronologija promjena po sesijama
+│   │   └── 2026-10-01.md       # Optimizacija LCP/fonata/usluga, landing, nginx
 │   └── DOKUMENTACIJA.md        # Glavni tehnički dokument projekta
 ├── scripts/
 │   └── snapshot-cjenik.mjs     # Automatska pohrana verzija cjenika u arhivu (pre-build)
+├── nginx.conf                  # Nginx konfiguracija produkcijskog kontejnera
+├── Dockerfile                  # Dvofazni build: Node (build) → nginx:alpine (serving)
 ├── public/                     # Statičke datoteke (favicon, robots.txt, fontovi, og-image)
+│   ├── fonts/                  # 4 variable WOFF2 (Inter, JetBrains Mono; latin + latin-ext)
+│   │   ├── fonts.css           # @font-face s weight-range deskriptorima
+│   │   ├── Inter-var-latin.woff2 / Inter-var-latin-ext.woff2
+│   │   └── JetBrainsMono-var-latin.woff2 / JetBrainsMono-var-latin-ext.woff2
+│   └── version.json            # Javni izlaz verzije (sinkroniziran s src/data/version.json)
 ├── src/
 │   ├── assets/
 │   │   ├── images/
@@ -53,6 +62,7 @@ suhamarinaeu27/
 │   ├── components/             # Modularne Astro komponente
 │   ├── data/
 │   │   ├── cjenik.json         # Središnji izvor podataka o cijenama i uslugama
+│   │   ├── version.json        # Verzija/build prikazana u podnožju
 │   │   └── arkhiva/            # Snapshotovi svih objavljenih verzija cjenika
 │   ├── i18n/
 │   │   └── ui.ts               # Rječnik prijevoda (HR, EN, DE) i useTranslations hook
@@ -62,6 +72,7 @@ suhamarinaeu27/
 │   └── pages/
 │       ├── index.astro         # Glavna stranica (hrvatski jezik)
 │       ├── objava-cjenika.astro# Javna objava + digitalna arhiva cjenika
+│       ├── ugradnja-minn-kota-garmin-force-korcula.astro # Landing stranica (HR)
 │       ├── cjenik.csv.ts       # Dinamički generator CSV datoteke prema NN 101/2026
 │       ├── cjenik-download.csv.ts # Alias ruta za /cjenik-download.csv
 │       ├── arkhiva/[datum].csv.ts # Strojni CSV preuzimanje arhiviranih verzija
@@ -125,11 +136,27 @@ Implementiran je lagan i proširiv sustav prevođenja u `src/i18n/ui.ts`.
 ## 6. Optimizacija performansi i medija
 
 1. **Astro Assets (`<Image />`):**  
-   Sve slike u galeriji i logotipi partnera automatski se dimenzioniraju, komprimiraju i poslužuju u suvremenom `.webp` formatu pri generiranju stranice.
-2. **YouTube Lite Fasada:**  
+   Sve slike u galeriji i logotipi partnera automatski se dimenzioniraju, komprimiraju i poslužuju u suvremenom `.webp` formatu pri generiranju stranice. Širine u `srcset`-u **ne smiju prelaziti nativnu rezoluciju** izvorne slike (upscale samo troši bandwidth); `Hero.astro` zato koristi `widths={[360, 450]}` uz `loading="eager"` i `fetchpriority="high"` jer je hero slika **LCP element**.
+2. **Self-hosted variable fontovi:**  
+   `public/fonts/fonts.css` deklariira **4 `@font-face` bloka** (Inter + JetBrains Mono × latin/latin-ext) s weight-range deskriptorima (`100 900` / `400 800`) i `font-display: swap`. Inter i JetBrains Mono su na Google Fonts-u objavljeni kao **variable fontovi** — sve težine dijele isti URL, pa su 16 zasebnih datoteka bile identičan duplikat (~885 KB → 176 KB), a uz to se variable font renderirao clamp-an na 400 pa `font-extrabold`/`font-black` **nije radio**. Oba Inter podskupa se preloadaju jer su hrvatski dijakritici (č, ć, ž, š, đ) u `latin-ext`.
+3. **YouTube Lite Fasada:**  
    Umjesto učitavanja teškog YouTube iframea pri prvom prikazu (što bi usporilo učitavanje za preko 1 MB i više od 20 mrežnih zahtjeva), prikazuje se optimizirana slika naslovnice s gumbom za reprodukciju. Pravi YouTube iframe učitava se tek na korisnički klik.
-3. **ClientRouter:**  
+4. **Google Maps Fasada** (`src/components/LocationAndReviews.astro`):  
+   Embed iframe **nema `src`** u početnom HTML-u — URL je u `data-src` atributu, pa pri inicijalnom učitavanju nema **nijednog** zahtjeva prema Googleu. Mapa se učitava na klik guba ili kad se sekcija približi viewportu (`IntersectionObserver`, `rootMargin: '200px'`). Dok se ne učita, iframe je `aria-hidden="true" tabindex="-1"`, a bez JavaScripta `<noscript>` nudi izravan link na Google Maps. **Sve skripte komponenti slušaju na `astro:page-load`** radi ClientRouter prijelaza.
+5. **ClientRouter:**  
    Pruža trenutni prijelaz između stranica bez potpunog osvježavanja preglednika, zadržavajući visoke SEO standarde statičkog HTML-a.
+6. **Nginx cache i kompresija** (`nginx.conf`):
+
+   | Lokacija | Cache-Control | Napomena |
+   |---|---|---|
+   | `/_astro/` | `public, max-age=31536000, immutable` | Astro u ime stavlja content hash → `immutable` je siguran |
+   | `/fonts/` | `public, max-age=604800, must-revalidate` | Imena fontova **nisu hash-ana**; nakon uvođenja hasha → 1 godina |
+   | `/` (HTML) | `public, max-age=0, must-revalidate` | Osigurava da korisnik ne vidi zastarjeli HTML |
+   | `*.csv` | `public, max-age=3600` | Uz `Content-Type: text/csv; charset=utf-8` |
+
+   `gzip` je uključen s `gzip_min_length 256` (samo tekstualni tipovi — woff2/webp/jpg su već komprimirani).
+
+   > **Nginx zamka:** `add_header` u `location` bloku **ne nasljeđuje** `add_header` sa server razine. Svaki `location` s vlastitim `add_header` mora eksplicitno ponoviti sigurnosna zaglavlja, inače ih gubi na tim rutama. Također, uz `expires 1y` **nemojte** dodavati vlastiti `add_header Cache-Control` — dobivate dva zaglavlja.
 
 ---
 
@@ -155,3 +182,32 @@ npx astro check
 npm run build
 ```
 Izlazni optimizirani statički HTML, CSS, JS i WebP mediji smještaju se u direktorij `dist/`, spremni za postavljanje na produkcijski web poslužitelj.
+
+### Provjera nginx konfiguracije (Docker)
+
+`nginx.conf` može se validirati bez pokretanja kontejnera:
+```bash
+docker run --rm -v "$PWD/nginx.conf:/etc/nginx/conf.d/default.conf:ro" nginx:alpine nginx -t
+```
+
+Testiranje zaglavlja na stvarnom poslužitelju (zaustavlja nakon provjere):
+```bash
+docker run -d --rm --name shm-nginx-test -p 8099:80 \
+  -v "$PWD/nginx.conf:/etc/nginx/conf.d/default.conf:ro" \
+  -v "$PWD/dist:/usr/share/nginx/html:ro" nginx:alpine
+curl -s -o /dev/null -D - -H "Accept-Encoding: gzip" http://localhost:8099/
+docker stop shm-nginx-test
+```
+
+---
+
+## 8. Verzioniranje
+
+Verzija je zapisana u **tri** datoteke koje moraju ostati sinkronizirane:
+- `package.json` (`npm version patch --no-git-tag-version`)
+- `src/data/version.json` — izvor verzije za footer (`Footer.astro:5`)
+- `public/version.json` — javno dostupna kopija iste verzije
+
+Format build ID-a je `YYYYMMDD.N`; footer prikazuje `vX.Y.Z#YYYYMMDD.N`. Nakon svake sesije provjeriti da se ispravna verzija pojavljuje u `dist/index.html`.
+
+Trenutno stanje: **v1.0.9 / `20261001.1`**.

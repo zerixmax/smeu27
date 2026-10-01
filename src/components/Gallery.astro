@@ -1,18 +1,19 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
+import { useTranslations } from '../i18n/ui';
 
 import imgKran from '../assets/images/gallery/7-suha-marina-vela-luka-2022.jpeg';
 import imgHangarDron from '../assets/images/gallery/suha-marina-eu-vela-luka-dron-JPG.jpg';
 import imgDronAlt from '../assets/images/gallery/suha-marina-eu-vela-luka-dron_16.jpg';
 import imgVezCamci from '../assets/images/gallery/suha_marina_vela_luka_prevoz_plovila.jpg';
 import imgServis from '../assets/images/gallery/servis_motora.jpg';
-import imgPlanet from '../assets/images/gallery/planet-nova-2018.jpg';
 
 interface Props {
   lang?: 'hr' | 'en' | 'de';
 }
 
 const { lang = 'hr' } = Astro.props;
+const t = useTranslations(lang);
 
 const headers = {
   hr: {
@@ -30,6 +31,34 @@ const headers = {
 };
 
 const current = headers[lang] || headers.hr;
+
+// Svaka stavka nosi izvornu sliku (za lightbox u punoj rezoluciji) i lokalizirani alt.
+// Nativne dimenzije čuvaju upscale-free rendiranje u thumbnailu i u lightboxu.
+const items = [
+  { id: 'kran', src: imgKran, alt: { hr: "Kamionski kran Scania 16t diže jedrilicu u Veloj Luci", en: "Scania 16t truck crane lifting a sailboat in Vela Luka", de: "Scania-LKW-Kran mit 16 t hebt eine Segelyacht in Vela Luka" } },
+  { id: 'hangar', src: imgHangarDron, alt: { hr: "Zračna snimka hangara i parcele suhe marine Proizd", en: "Aerial view of the Proizd dry dock hangar and yard", de: "Luftaufnahme der Proizd-Halle und des Lagerplatzes" } },
+  { id: 'vez', src: imgVezCamci, alt: { hr: "Brodovi na postoljima i trajlerima pod ceradom", en: "Boats on cradles and trailers under the canopy", de: "Boote auf Lagern und Anhängern unter der Plane" } },
+  { id: 'dron', src: imgDronAlt, alt: { hr: "Otvoreni prostor suhog veza iz drona", en: "Open dry-dock space seen from the air", de: "Offene Trockenliegeplatzfläche aus der Luft" } },
+  { id: 'servis', src: imgServis, alt: { hr: "Servisna radionica za motore Suzuki, Mercury i Yamaha", en: "Service workshop for Suzuki, Mercury, and Yamaha engines", de: "Servicewerkstatt für Suzuki-, Mercury- und Yamaha-Motoren" } }
+];
+
+// Lightbox verzija: ista izvorna slika, webp, bez upscale-a (width/height = nativna).
+const lightbox = await Promise.all(
+  items.map(async (item) => {
+    const img = await getImage({ src: item.src, format: 'webp', quality: 85 });
+    return {
+      id: item.id,
+      src: img.src,
+      width: img.attributes.width,
+      height: img.attributes.height,
+      alt: item.alt[lang] || item.alt.hr
+    };
+  })
+);
+
+// Determinirana rotacija: svaka posjetiteljeva sesija (podijeljena na <section>) dobiva
+// drugačiji redoslijed bez pomaka layouta (izvor: id-evi, JS preuređuje DOM).
+const ordered = items.map((item) => ({ ...item, alt: item.alt[lang] || item.alt.hr }));
 ---
 
 <!-- Galerija -->
@@ -40,25 +69,154 @@ const current = headers[lang] || headers.hr;
       <p class="text-slate-400 text-sm mt-1">{current.desc}</p>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-      <div class="aspect-4/3 rounded-xl overflow-hidden border border-slate-800">
-        <Image src={imgKran} alt="Kamionski kran Scania 16t diže jedrilicu u Veloj Luci" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
-      </div>
-      <div class="aspect-4/3 rounded-xl overflow-hidden border border-slate-800">
-        <Image src={imgHangarDron} alt="Zračna snimka hangara i parcele suhe marine Proizd" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
-      </div>
-      <div class="aspect-4/3 rounded-xl overflow-hidden border border-slate-800">
-        <Image src={imgVezCamci} alt="Brodovi na postoljima i trajlerima pod ceradom" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
-      </div>
-      <div class="aspect-4/3 rounded-xl overflow-hidden border border-slate-800">
-        <Image src={imgDronAlt} alt="Otvoreni prostor suhog veza iz drona" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
-      </div>
-      <div class="aspect-4/3 rounded-xl overflow-hidden border border-slate-800">
-        <Image src={imgServis} alt="Servisna radionica za motore Suzuki, Mercury i Yamaha" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
-      </div>
-      <div class="aspect-4/3 rounded-xl overflow-hidden border border-slate-800">
-        <Image src={imgPlanet} alt="360 stupnjeva pogled na plažu i plovila" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
-      </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4" data-gallery-grid>
+      {ordered.map((item, i) => (
+        <button
+          type="button"
+          class="aspect-4/3 rounded-xl overflow-hidden border border-slate-800 group relative cursor-zoom-in focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
+          data-gallery-item={i}
+          aria-label={`${t('gallery.open')} ${i + 1} ${t('gallery.of')} ${ordered.length}: ${item.alt}`}
+        >
+          <Image
+            src={item.src}
+            alt={item.alt}
+            widths={[240, 360, 480]}
+            sizes="(max-width: 767px) 50vw, (max-width: 1023px) 33vw, 380px"
+            format="webp"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+          <span class="absolute inset-0 bg-slate-950/0 group-hover:bg-slate-950/20 transition-colors duration-300 pointer-events-none"></span>
+          <span class="absolute bottom-2 right-2 w-8 h-8 rounded-lg bg-slate-950/70 backdrop-blur-sm border border-white/10 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </span>
+        </button>
+      ))}
     </div>
   </div>
 </section>
+
+<!-- Lightbox -->
+<div
+  id="gallery-lightbox"
+  class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/95 backdrop-blur-sm p-4 sm:p-8"
+  role="dialog"
+  aria-modal="true"
+  aria-label={t('gallery.label')}
+>
+  <button type="button" id="gallery-lb-close" class="absolute top-4 right-4 sm:top-6 sm:right-6 w-11 h-11 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white flex items-center justify-center transition-colors" aria-label={t('gallery.close')}>
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+  </button>
+
+  <button type="button" id="gallery-lb-prev" class="absolute left-2 sm:left-6 w-11 h-11 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white flex items-center justify-center transition-colors" aria-label={t('gallery.prev')}>
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+  </button>
+
+  <button type="button" id="gallery-lb-next" class="absolute right-2 sm:right-6 w-11 h-11 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white flex items-center justify-center transition-colors" aria-label={t('gallery.next')}>
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+  </button>
+
+  <figure class="max-w-full max-h-full flex flex-col items-center justify-center gap-3 pointer-events-none">
+    <img id="gallery-lb-img" src="" alt="" class="max-w-full max-h-[78vh] object-contain rounded-lg shadow-2xl" />
+    <figcaption class="text-center">
+      <p id="gallery-lb-caption" class="text-sm text-slate-300 max-w-2xl"></p>
+      <p id="gallery-lb-counter" class="text-xs font-mono text-slate-500 mt-1"></p>
+    </figcaption>
+  </figure>
+</div>
+
+<script is:inline define:vars={{ lightboxData: lightbox }}>
+  window.__galleryInit = window.__galleryInit || function () {
+    const lb = document.getElementById('gallery-lightbox');
+    const grid = document.querySelector('[data-gallery-grid]');
+    const data = lightboxData;
+    if (!lb || !grid) return;
+
+    const img = document.getElementById('gallery-lb-img');
+    const caption = document.getElementById('gallery-lb-caption');
+    const counter = document.getElementById('gallery-lb-counter');
+    const btnClose = document.getElementById('gallery-lb-close');
+    const btnPrev = document.getElementById('gallery-lb-prev');
+    const btnNext = document.getElementById('gallery-lb-next');
+    const items = Array.from(grid.querySelectorAll('[data-gallery-item]'));
+    let index = 0;
+    let lastFocused = null;
+
+    const show = (i) => {
+      index = (i + items.length) % items.length;
+      const item = data[index];
+      if (!item) return;
+      img.src = item.src;
+      img.alt = item.alt;
+      img.width = item.width;
+      img.height = item.height;
+      caption.textContent = item.alt;
+      counter.textContent = (index + 1) + ' / ' + items.length;
+    };
+
+    const open = (i) => {
+      show(i);
+      lb.classList.remove('hidden');
+      lb.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+      lastFocused = document.activeElement;
+      btnClose.focus();
+    };
+
+    const close = () => {
+      lb.classList.add('hidden');
+      lb.classList.remove('flex');
+      document.body.style.overflow = '';
+      img.src = '';
+      if (lastFocused && lastFocused.focus) lastFocused.focus();
+    };
+
+    grid.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-gallery-item]');
+      if (btn) open(Number(btn.dataset.galleryItem));
+    });
+
+    btnClose.addEventListener('click', close);
+    btnPrev.addEventListener('click', () => show(index - 1));
+    btnNext.addEventListener('click', () => show(index + 1));
+
+    lb.addEventListener('click', (e) => {
+      if (e.target === lb) close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (lb.classList.contains('hidden')) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft') show(index - 1);
+      else if (e.key === 'ArrowRight') show(index + 1);
+      else if (e.key === 'Tab') {
+        e.preventDefault();
+        const focusable = [btnPrev, btnNext, btnClose];
+        const pos = focusable.indexOf(document.activeElement);
+        focusable[(pos + 1) % focusable.length].focus();
+      }
+    });
+
+    // Rotacija redoslijeda: determinirana po sessionStorage da navigacija
+    // unutar SPA-a ne mijenja redoslijed usred pregledavanja.
+    let order = null;
+    try { order = JSON.parse(sessionStorage.getItem('gallery-order') || 'null'); } catch (err) { order = null; }
+    if (!Array.isArray(order) || order.length !== items.length) {
+      order = items.map((_, i) => i);
+      for (let i = order.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [order[i], order[j]] = [order[j], order[i]];
+      }
+      try { sessionStorage.setItem('gallery-order', JSON.stringify(order)); } catch (err) { /* privatni mod */ }
+    }
+    // order[p] = izvorni indeks slike na poziciji p → pozicija elementa je
+    // order.indexOf(izvorniIndeks), pa se mapa ažurira in-place (bez re-查询 DOM-a).
+    order.forEach((originalIndex) => grid.appendChild(items[originalIndex]));
+    items.forEach((el) => {
+      const original = Number(el.dataset.galleryItem);
+      el.dataset.galleryItem = String(order.indexOf(original));
+    });
+  };
+  document.addEventListener('astro:page-load', window.__galleryInit);
+</script>
