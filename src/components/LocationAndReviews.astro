@@ -37,26 +37,26 @@ const ratingValue = 5.0;
 ---
 
 <!-- Sekcija: Lokacija + Google mape + recenzije -->
-<section id="lokacija-recenzije" class="py-20 border-b border-slate-800 bg-slate-950/80">
+<section id="lokacija-recenzije" class="py-20 border-b border-slate-200 bg-slate-100/80">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <!-- Zaglavlje sekcije -->
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
       <div>
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-semibold uppercase tracking-wider mb-3">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 text-sky-800 border border-sky-200 text-xs font-semibold uppercase tracking-wider mb-3">
+          <span class="w-2 h-2 rounded-full bg-sky-700"></span>
           {t('locrev.badge')}
         </div>
-        <h2 class="text-3xl sm:text-4xl font-black text-white">{t('locrev.title')}</h2>
-        <p class="text-sm text-slate-400 mt-2 max-w-xl">{t('locrev.desc')}</p>
+        <h2 class="text-3xl sm:text-4xl font-black text-slate-900">{t('locrev.title')}</h2>
+        <p class="text-sm text-slate-600 mt-2 max-w-xl">{t('locrev.desc')}</p>
       </div>
 
       <!-- Google Rating Badge -->
-      <div class="flex items-center gap-4 bg-slate-900 border border-slate-800 rounded-2xl p-4 self-start md:self-auto shadow-lg">
-        <div class="text-3xl font-black text-amber-400">{ratingValue.toFixed(1)}</div>
+      <div class="flex items-center gap-4 bg-white border border-slate-200 rounded-2xl p-4 self-start md:self-auto shadow-sm">
+        <div class="text-3xl font-black font-mono text-slate-900">{ratingValue.toFixed(1)}</div>
         <div>
-          <div class="flex text-amber-400 text-sm" aria-label={`Google: 5.0/5`}>★★★★★</div>
-          <p class="text-xs text-slate-400 mt-0.5">{t('locrev.rating_label')}</p>
+          <div class="flex text-amber-500 text-sm" aria-label={`Google: 5.0/5`}>★★★★★</div>
+          <p class="text-xs text-slate-600 mt-0.5">{t('locrev.rating_label')}</p>
         </div>
       </div>
     </div>
@@ -65,7 +65,7 @@ const ratingValue = 5.0;
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
       <!-- Google Maps Embed (fasada: iframe se učitava tek na skrol/klik) -->
-      <div id="map-container" class="lg:col-span-7 rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900 aspect-[4/3] sm:aspect-[16/10] relative">
+      <div id="map-container" class="lg:col-span-7 rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-white aspect-[4/3] sm:aspect-[16/10] relative">
         <iframe
           id="map-iframe"
           data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7374.10642379359!2d16.718179451648233!3d42.95865051456281!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a7141c6aed793%3A0xb15f3c3b706ccf66!2sSuha%20Marina%20Vela%20Luka!5e1!3m2!1sen!2shr!4v1789810586776!5m2!1sen!2shr"
@@ -78,23 +78,23 @@ const ratingValue = 5.0;
           title={t('locrev.map_title')}
           tabindex="-1"
           aria-hidden="true"
-          class="w-full h-full opacity-0 grayscale hover:grayscale-0 transition-opacity duration-500"
+          class="w-full h-full opacity-0 transition-opacity duration-500"
         ></iframe>
 
         <!-- Fasada: nula Google zahtjeva do interakcije ili dolaska u vidno polje -->
         <div
           id="map-placeholder"
-          class="absolute inset-0 z-10 flex flex-col items-center justify-center p-6 text-center bg-slate-900/95 backdrop-blur-sm transition-opacity duration-300"
+          class="absolute inset-0 z-10 flex flex-col items-center justify-center p-6 text-center bg-slate-50/95 backdrop-blur-sm transition-opacity duration-300"
         >
-          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-3 border border-emerald-500/20">
+          <div class="w-12 h-12 rounded-xl bg-sky-50 text-sky-800 flex items-center justify-center mb-3 border border-sky-200">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
           </div>
-          <span class="text-sm font-semibold text-white mb-1">{t('locrev.map_pin')}</span>
-          <span class="text-xs text-slate-400 mb-4 max-w-xs">{t('locrev.map_loading')}</span>
+          <span class="text-sm font-semibold text-slate-900 mb-1">{t('locrev.map_pin')}</span>
+          <span class="text-xs text-slate-600 mb-4 max-w-xs">{t('locrev.map_loading')}</span>
           <button
             id="map-load-btn"
             type="button"
-            class="px-4 py-2.5 text-xs font-bold rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white transition-colors"
+            class="px-4 py-2.5 text-xs font-bold rounded-lg bg-sky-800 hover:bg-sky-900 text-white transition-colors"
           >
             {t('locrev.map_load')}
           </button>
@@ -103,15 +103,15 @@ const ratingValue = 5.0;
               href="https://maps.google.com/?cid=12781987515089309542"
               target="_blank"
               rel="noopener noreferrer"
-              class="block mt-3 text-xs text-emerald-400 underline"
+              class="block mt-3 text-xs text-sky-700 underline"
             >
               {t('locrev.map_noscript')}
             </a>
           </noscript>
         </div>
 
-        <div class="absolute bottom-3 left-3 bg-slate-950/90 backdrop-blur-md border border-slate-800 rounded-xl px-3 py-2 text-[11px] text-slate-300 flex items-center gap-1.5">
-          <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="absolute bottom-3 left-3 bg-white/95 backdrop-blur-md border border-slate-200 rounded-xl px-3 py-2 text-[11px] text-slate-800 font-medium flex items-center gap-1.5 shadow-sm">
+          <svg class="w-3.5 h-3.5 text-sky-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
           </svg>
@@ -122,21 +122,21 @@ const ratingValue = 5.0;
       <!-- Recenzije nautičara -->
       <div class="lg:col-span-5 space-y-4">
         {reviews.map((rev) => (
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-colors shadow-sm">
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 hover:border-sky-600 transition-colors shadow-sm">
             <div class="flex items-center justify-between mb-2">
               <div class="flex items-center gap-2">
-                <div class="w-8 h-8 rounded-full bg-red-600/20 text-red-500 font-bold text-xs flex items-center justify-center border border-red-600/30">
+                <div class="w-8 h-8 rounded-full bg-slate-100 text-sky-800 font-bold text-xs flex items-center justify-center border border-slate-200">
                   {rev.author[0]}
                 </div>
                 <div>
-                  <h4 class="text-sm font-bold text-white leading-tight">{rev.author}</h4>
-                  <span class="text-[11px] text-slate-400">{rev.role}</span>
+                  <h4 class="text-sm font-bold text-slate-900 leading-tight">{rev.author}</h4>
+                  <span class="text-[11px] text-slate-600">{rev.role}</span>
                 </div>
               </div>
-              <span class="text-amber-400 text-xs tracking-wider">{'★'.repeat(rev.rating)}</span>
+              <span class="text-amber-500 text-xs tracking-wider">{'★'.repeat(rev.rating)}</span>
             </div>
-            <p class="text-xs text-slate-300 leading-relaxed italic mt-2">"{rev.text}"</p>
-            <span class="block text-[10px] text-slate-400 text-right mt-2 font-mono">{rev.date}</span>
+            <p class="text-xs text-slate-800 leading-relaxed italic mt-2">"{rev.text}"</p>
+            <span class="block text-[10px] text-slate-500 text-right mt-2 font-mono">{rev.date}</span>
           </div>
         ))}
 
@@ -146,7 +146,7 @@ const ratingValue = 5.0;
             href="https://maps.google.com/?cid=12781987515089309542"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-xs text-emerald-400 hover:text-emerald-300 font-medium inline-flex items-center gap-1.5 underline"
+            class="text-xs text-sky-700 hover:text-sky-900 font-semibold inline-flex items-center gap-1.5 underline"
           >
             <span>{t('locrev.cta')}</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>

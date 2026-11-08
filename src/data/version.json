@@ -1,7 +1,7 @@
 {
-  "version": "1.0.13",
-  "build": "20261001.5",
+  "version": "1.0.14",
+  "build": "20261108.1",
   "stage": "production",
-  "updatedAt": "2026-10-01 11:52",
-  "changelog": "Dodani kompletni Open Graph i Twitter Card meta tagovi s apsolutnim OG slikom (WhatsApp kompatibilno)"
+  "updatedAt": "2026-11-08 21:12",
+  "changelog": "Daylight Marine redizajn, kompletna doslovna integracija Nikolinog teksta, 3 SEO klaster rute, BackToTop i kontakt usklađenje"
 }

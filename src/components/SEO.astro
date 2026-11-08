@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title = "Suha Marina Proizd | Suhi Vez i Servis Brodova Vela Luka",
-  description = "Suha marina Proizd u Veloj Luci na Korčuli (500 m od mora). Čuvanje brodova, kamionski kran 16 t s 3 širilice za brage, servis motora i popravci stakloplastike.",
+  description = "Suha marina Proizd u Veloj Luci na Korčuli — siguran suhi vez 500 m od mora, vađenje i prijevoz plovila kamionskom dizalicom Scania 16 t, servis svih vanbrodskih i brodskih motora te popravci trupa i elektronike.",
   image = "/og-image.jpg",
   lang = 'hr'
 } = Astro.props;
@@ -20,9 +20,9 @@ const base = site.toString().replace(/\/+$/, '');
 
 const ogLocale = lang === 'en' ? 'en_GB' : lang === 'de' ? 'de_DE' : 'hr_HR';
 // Bez locale prefixa — samo su naslovne stranice lokalizirane (vidjeti Navbar.astro)
-const canonical = new URL(Astro.url.pathname, site).href;
+const canonical = new URL(Astro.url.pathname, site).toString();
 // Absolute URL ključan za WhatsApp/Facebook scraper — relativne putanje se odbacuju
-const ogImageURL = new URL(image, site).href;
+const ogImageURL = new URL(image, site).toString();
 const ogImageType = image.toLowerCase().endsWith('.png') ? 'image/png' : 'image/jpeg';
 ---
 
@@ -30,7 +30,7 @@ const ogImageType = image.toLowerCase().endsWith('.png') ? 'image/png' : 'image/
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>{title}</title>
 <meta name="description" content={description} />
-<meta name="theme-color" content="#020617" />
+<meta name="theme-color" content="#f8fafc" />
 <link rel="canonical" href={canonical} />
 
 <!-- Favicon -->

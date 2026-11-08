@@ -1,0 +1,195 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import QuickContactCTA from '../components/QuickContactCTA.astro';
+
+const lang = 'hr';
+
+const seoTitle = "Podvodni radovi i HRB pregledi Korčula | Podvodna kamera, baloni i sanacija trupa";
+const seoDescription = "Profesionalni podvodni radovi i pregledi za Hrvatski registar brodova (HRB) na Korčuli i Jadranu. Snimanje podvodnom kamerom s monitorom i komunikacijom s roniocem, vađenje tereta podvodnim balonima, sidrišta, muring i sanacija trupova (drvo, čelik, plastika, aluminij).";
+
+const phoneDisplay = "+385 98 954 03 88";
+const phoneRaw = "385989540388";
+
+const inspectionFeatures = [
+  "Postavljanje pontona i podvodni pregledi pri Hrvatskom registru brodova.",
+  "Podvodni radovi na plovilima.",
+  "Snimanje podvodnom kamerom spojenom na monitor uz komunikaciju s roniocem.",
+  "Saniranje oštećenja podvodnog trupa broda (drvo, željezo, plastika, aluminij)."
+];
+
+const divingWorks = [
+  "Postavljanje sidrišta, muringa i izrada kolpa morta.",
+  "Podizanje tereta podvodnim balonima.",
+  "Oslobađanje i zamjena propelera i anodne zaštite.",
+  "Uređenje vezova."
+];
+
+const hullMaterials = [
+  { name: "Drvo", desc: "Tradicionalna drvena brodogradnja, zamjena oštećenih dasaka, kalafatavanje i brtvljenje." },
+  { name: "Željezo / Čelik", desc: "Sanacija proboja, korozije i podvodnih elemenata na željeznim i čeličnim trupovima." },
+  { name: "Plastika (GRP)", desc: "Laminiranje, sanacija osmoze, udaraca, gelcoata i kobilice na plastičnim plovilima." },
+  { name: "Aluminij", desc: "Popravci, brtvljenje i antikorozivna zaštita aluminijskih radnih i rekreativnih plovila." }
+];
+
+const whatsappMessage = encodeURIComponent("Pozdrav! Trebam podvodni pregled / ronilačke radove (Suha Marina Proizd).");
+const whatsappUrl = `https://wa.me/${phoneRaw}?text=${whatsappMessage}`;
+
+// Service shema vezana na #business čvor iz Schema.astro
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "PODVODNI RADOVI I PREGLEDI BRODOVA PRI HRB-u",
+  "serviceType": "Commercial diving, HRB underwater inspection, and hull repair",
+  "provider": {
+    "@type": "LocalBusiness",
+    "@id": "https://suhamarina.eu/#business",
+    "name": "Suha Marina Proizd",
+    "telephone": "+385989540388"
+  },
+  "areaServed": ["Vela Luka", "Otok Korčula", "Pelješki kanal i Lastovski kanal", "Srednji i južni Jadran"],
+  "description": seoDescription,
+  "knowsAbout": [...divingWorks, ...inspectionFeatures]
+};
+---
+
+<Layout title={seoTitle} description={seoDescription} lang={lang}>
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+
+  <Navbar lang={lang} />
+
+  <main class="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto flex-1">
+
+    <!-- Navigacijski povratak -->
+    <div class="mb-8">
+      <a href="/" class="inline-flex items-center gap-2 text-xs font-mono font-semibold text-sky-700 hover:text-sky-900">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Povratak na naslovnu
+      </a>
+    </div>
+
+    <!-- Hero blok stranice -->
+    <header class="mb-12">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 text-sky-800 border border-sky-200 text-xs font-semibold uppercase tracking-wider mb-4">
+        <span class="w-2 h-2 rounded-full bg-sky-700"></span>
+        HRB podvodni pregledi • Kamera s monitorom • 24/7 Intervencije
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 leading-tight">
+        PODVODNI RADOVI I PREGLEDI BRODOVA PRI HRB-u
+      </h1>
+      <p class="mt-4 text-base sm:text-lg text-slate-700 leading-relaxed">
+        Izvodimo podvodne radove na plovilima, postavljanje pontona i podvodne preglede pri Hrvatskom registru brodova uz snimanje podvodnom kamerom spojenom na monitor i komunikaciju s roniocem, podizanje tereta podvodnim balonima te saniranje oštećenja podvodnog trupa broda (drvo, željezo, plastika, aluminij).
+      </p>
+    </header>
+
+    <!-- Glavni CTA blok -->
+    <section class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 mb-12 shadow-sm">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mb-3">Snimanje podvodnom kamerom spojenom na monitor uz komunikaciju s roniocem</h2>
+      <p class="text-sm sm:text-base text-slate-700 leading-relaxed mb-6">
+        Naša oprema omogućuje <strong>snimanje podvodnom kamerom spojenom na monitor uz komunikaciju s roniocem</strong>. Inspektor pri Hrvatskom registru brodova ili vlasnik plovila u stvarnom vremenu prati podvodne radove na plovilima, pregled trupa, propelera, anodne zaštite ili pontona.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 pt-4 border-t border-slate-200">
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold text-sm transition-colors shadow-sm"
+        >
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/></svg>
+          Pošaljite upit putem WhatsAppa
+        </a>
+        <a
+          href={`tel:+${phoneRaw}`}
+          class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-sm transition-colors shadow-sm"
+        >
+          Hitni poziv roniocu: {phoneDisplay}
+        </a>
+      </div>
+    </section>
+
+    <!-- Dvije kolone: HRB pregledi & Ronilački radovi -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
+        <div class="w-10 h-10 rounded-xl bg-slate-100 text-sky-800 flex items-center justify-center font-bold mb-4 border border-slate-200">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 mb-2">HRB pregledi i podvodni radovi</h3>
+        <ul class="space-y-2.5 text-xs font-medium text-slate-700 mt-4">
+          {inspectionFeatures.map((item) => (
+            <li class="flex items-start gap-2">
+              <svg class="w-3.5 h-3.5 text-sky-700 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
+        <div class="w-10 h-10 rounded-xl bg-slate-100 text-sky-800 flex items-center justify-center font-bold mb-4 border border-slate-200">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 mb-2">Sidrišta, muring i podvodni baloni</h3>
+        <ul class="space-y-2.5 text-xs font-medium text-slate-700 mt-4">
+          {divingWorks.map((item) => (
+            <li class="flex items-start gap-2">
+              <svg class="w-3.5 h-3.5 text-sky-700 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Sanacija svih vrsta trupova -->
+    <section class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 mb-12 shadow-sm">
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Sanacija i popravci trupova u svim materijalima</h2>
+      <p class="text-xs sm:text-sm text-slate-600 mb-6">
+        Nakon podvodne inspekcije ili hitnog vađenja kamionskom dizalicom Scania 16 t, izvodimo kompletnu sanaciju trupa neovisno o materijalu gradnje:
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {hullMaterials.map((mat) => (
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <h3 class="text-sm font-bold text-slate-900 mb-1">{mat.name}</h3>
+            <p class="text-xs text-slate-700 leading-relaxed">{mat.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Povezane specijalističke usluge (SEO klaster) -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
+      <a
+        href="/servis-i-dijagnostika-brodskih-motora"
+        class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-sky-600 transition-colors group shadow-sm"
+      >
+        <span class="text-xs font-mono font-bold text-sky-800 uppercase tracking-wider">Povezana usluga</span>
+        <h3 class="text-base font-bold text-slate-900 mt-1 group-hover:text-sky-700 transition-colors">
+          Ovlašteni servis i dijagnostika brodskih motora →
+        </h3>
+        <p class="text-xs text-slate-600 mt-1">
+          Honda, Suzuki, Tohatsu, Hidea, Yamaha dijagnostika, servis pete/trima, crni tankovi i Flexiteek.
+        </p>
+      </a>
+      <a
+        href="/ugradnja-minn-kota-garmin-force-korcula"
+        class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-sky-600 transition-colors group shadow-sm"
+      >
+        <span class="text-xs font-mono font-bold text-sky-800 uppercase tracking-wider">Povezana usluga</span>
+        <h3 class="text-base font-bold text-slate-900 mt-1 group-hover:text-sky-700 transition-colors">
+          Brodska elektronika, Furuno/Garmin i solarni sustavi →
+        </h3>
+        <p class="text-xs text-slate-600 mt-1">
+          Ugradnja Minn Kota i Garmin Force pramčanih motora, sonara, radara, solarnih panela i regulatora napona.
+        </p>
+      </a>
+    </section>
+
+  </main>
+
+  <QuickContactCTA lang={lang} />
+  <Footer lang={lang} />
+</Layout>

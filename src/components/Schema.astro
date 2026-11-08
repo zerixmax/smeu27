@@ -50,7 +50,15 @@ const extendedKnowsAbout = [
   "Zamjena cink protektora u moru",
   "Izrada i polaganje kolpa morta",
   "Deblokada propelera od konopa i muringa",
-  "Komercijalna pomoć na moru i tegljenje plovila"
+  "Komercijalna pomoć na moru i tegljenje plovila",
+  // Specifični radovi, oprema i intervencije (Faza 1)
+  "Flexiteek ugradnja",
+  "Ispiranje rashladnog sustava od kamenca",
+  "Izrada crnih tankova",
+  "Snimanje podvodnom kamerom s monitorom",
+  "Podizanje tereta podvodnim balonima",
+  "Servis pete i trima",
+  "Tegljenje gliserima za vuču"
 ];
 
 const latitude = 42.9586505;
@@ -88,18 +96,23 @@ const schema = {
       "@id": "https://suhamarina.eu/#business",
       "name": "Suha Marina Proizd - Nautički Servis Vela Luka",
       "alternateName": ["PROIZD Team Marine Service", "Obrt Proizd"],
-      "description": "Suha marina i servis plovila u Veloj Luci na Korčuli. Hitne ronilačke intervencije, vađenje i spuštanje kamionskim kranom Scania F600 AXP 16 t, ugradnja korpo morta, elektronike i servis motora.",
+      "description": "Suha marina Proizd u Veloj Luci na Korčuli — suhi vez 500 m od mora, vađenje i prijevoz plovila kamionskom dizalicom Scania F600 AXP 16 t, servis svih vanbrodskih i brodskih motora, ugradnja elektronike i hitne ronilačke intervencije.",
       "url": "https://suhamarina.eu",
       "logo": "https://suhamarina.eu/favicon.svg",
       "image": "https://suhamarina.eu/og-image.jpg",
       "hasMap": "https://maps.google.com/?cid=12781987515089309542",
+      "sameAs": [
+        "https://www.facebook.com/suhamarina.proizd",
+        "https://www.instagram.com/suhamarina.proizd"
+      ],
       "telephone": "+385989540388",
-      "email": "info@velalukarent.com",
+      "email": "nikola.mul@gmail.com",
       "priceRange": "€€",
       "currenciesAccepted": "EUR",
       "paymentAccepted": "Cash, Bank Transfer",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "Ulica 41, br. 42",
         "addressLocality": "Vela Luka",
         "addressRegion": "Dubrovačko-neretvanska županija",
         "postalCode": "20270",

@@ -20,16 +20,16 @@ function getItemTitle(stavka: typeof cjenikData.stavke[0]) {
 ---
 
 <!-- Sekcija: Cjenik s NN 101/2026 i HOK usklađenošću -->
-<section id="cjenik" class="py-20 bg-slate-900/60 border-b border-slate-800">
+<section id="cjenik" class="py-20 bg-white border-b border-slate-200">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
       <div>
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-mono mb-2">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100 border border-slate-200 text-sky-800 text-xs font-mono font-bold mb-2">
           {t('prices.badge')}
         </div>
-        <h2 class="text-3xl font-black text-white">{t('prices.title')}</h2>
-        <p class="text-xs text-slate-400 mt-1 max-w-xl">
+        <h2 class="text-3xl font-black text-slate-900">{t('prices.title')}</h2>
+        <p class="text-xs text-slate-600 mt-1 max-w-xl">
           {t('prices.desc')}
         </p>
       </div>
@@ -37,37 +37,37 @@ function getItemTitle(stavka: typeof cjenikData.stavke[0]) {
       <a
         href="/cjenik-download.csv"
         download={buildCsvFileName(cjenikData)}
-        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-bold text-emerald-400 shadow-sm transition-all"
+        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-sky-800 hover:bg-sky-900 border border-sky-900 text-xs font-bold text-white shadow-sm transition-all"
       >
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
         <span>{t('prices.csv_btn')}</span>
       </a>
     </div>
 
-    <div class="overflow-x-auto rounded-2xl border border-slate-800 bg-slate-950 shadow-xl">
-      <table class="w-full text-left text-sm text-slate-300">
-        <thead class="bg-slate-900 text-xs uppercase tracking-wider text-slate-400 border-b border-slate-800">
+    <div class="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <table class="w-full text-left text-sm text-slate-800">
+        <thead class="bg-slate-100 text-xs uppercase tracking-wider text-slate-700 border-b border-slate-200">
           <tr>
-            <th class="py-4 px-6">{t('prices.th_service')}</th>
-            <th class="py-4 px-6">{t('prices.th_current')}</th>
-            <th class="py-4 px-6 text-slate-400 bg-slate-900/80">{t('prices.th_anchor')}</th>
-            <th class="py-4 px-6 text-xs text-slate-400">{specialOfferHeader}</th>
+            <th class="py-4 px-6 font-bold">{t('prices.th_service')}</th>
+            <th class="py-4 px-6 font-bold">{t('prices.th_current')}</th>
+            <th class="py-4 px-6 font-bold text-slate-700 bg-slate-100">{t('prices.th_anchor')}</th>
+            <th class="py-4 px-6 text-xs font-bold text-slate-700">{specialOfferHeader}</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-slate-800/60">
+        <tbody class="divide-y divide-slate-200">
           {cjenikData.stavke.map((stavka) => (
-            <tr class="hover:bg-slate-900/40 transition-colors">
-              <td class="py-4 px-6 font-medium text-white">
+            <tr class="hover:bg-slate-50 transition-colors">
+              <td class="py-4 px-6 font-semibold text-slate-800">
                 {getItemTitle(stavka)}
-                {stavka.napomena && <span class="block text-xs text-slate-400 font-normal mt-0.5">{stavka.napomena}</span>}
+                {stavka.napomena && <span class="block text-xs text-slate-600 font-normal mt-0.5">{stavka.napomena}</span>}
               </td>
-              <td class="py-4 px-6 font-mono font-bold text-white text-base">
+              <td class="py-4 px-6 font-mono font-bold text-slate-900 text-base">
                 {stavka.cijena.toFixed(2)} €
               </td>
-              <td class="py-4 px-6 font-mono text-slate-400 bg-slate-900/30">
+              <td class="py-4 px-6 font-mono text-slate-700 bg-slate-50">
                 {stavka.sidrenaCijena.toFixed(2)} €
               </td>
-              <td class="py-4 px-6 text-xs text-slate-400">
+              <td class="py-4 px-6 text-xs text-slate-600">
                 {stavka.posebanOblik}
               </td>
             </tr>

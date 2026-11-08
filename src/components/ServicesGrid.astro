@@ -6,7 +6,8 @@ interface Props {
 interface ServiceItem {
   num: string;
   title: string;
-  desc: string;
+  desc?: string;
+  bullets?: string[];
   exp?: string;
   link?: { href: string; label: string };
 }
@@ -37,8 +38,25 @@ const data: Record<'hr' | 'en' | 'de', LangData> = {
       },
       {
         num: "03",
-        title: "Servis i konzervacija motora",
-        desc: "Ovlašteni servis radi dobivanja i očuvanja tvorničkog jamstva za vanbrodske motore: Honda, Suzuki, Tohatsu, Hidea. Računalna dijagnostika, očitavanje grešaka i podešavanje parametara rada motora. Redovno održavanje i priprema za sezonu za Yamaha i Mercury te unutarnje brodske motore."
+        title: "SERVIS BRODSKIH I VANBRODSKIH MOTORA",
+        bullets: [
+          "Ovlašteni servis s garancijom za vanbrodske motore Suzuki, Honda, Tohatsu i Hidea.",
+          "Kompjutorsko očitavanje grešaka dijagnostikom za sve vanbrodske motore, uključujući i Yamaha motore.",
+          "Ugradnja i odabir propelera.",
+          "Ugradnja motora i brodske opreme (sajli, hidraulike timuna, satova).",
+          "Zimske tende i pokrivala za brodove.",
+          "Zamjena ležajeva i šupernica.",
+          "Izrada i ugradnja crnog tanka.",
+          "Čišćenje karburatora.",
+          "Servis pete i trima motora.",
+          "Ispiranje sustava za hlađenje od naslaga kamenca.",
+          "Zamjena cinkova.",
+          "Ugradnja opreme od kroma (bimini tende, špiruni, stepenice...).",
+          "Alati i izvlakači za vađenje propelera i ležajeva.",
+          "Ugradnja umjetne tikovine Flexiteek."
+        ],
+        exp: "Ovlašteni servis • Dijagnostika",
+        link: { href: "/servis-i-dijagnostika-brodskih-motora", label: "Detalji servisa" }
       },
       {
         num: "04",
@@ -47,9 +65,15 @@ const data: Record<'hr' | 'en' | 'de', LangData> = {
       },
       {
         num: "05",
-        title: "Brodska elektronika i ribolovna oprema",
-        desc: "Više od 20 godina iskustva u ribolovu. Stručna ugradnja pramčanih elektromotora (Minn Kota, Garmin Force, Lowrance Ghost, MotorGuide), sonara, plottera i GPS-a (Garmin, Lowrance, Humminbird, Simrad). Precizno pozicioniranje krmenih i thru-hull sondi kroz trup.",
-        exp: "20+ god. iskustva",
+        title: "BRODSKA ELEKTRIKA I ELEKTRONIKA",
+        desc: "Više od 30 godina iskustva na moru i u ribolovu omogućuje nam da pravilno prilagodimo modernu elektroniku i opremu svakom brodu. Od 2011. godine imamo servis za ugradnju i popravak brodskih dijelova.",
+        bullets: [
+          "Profesionalna ugradnja pramčanih elektromotora (Minn Kota, MotorGuide, Garmin, Lowrance...).",
+          "Prema potrebama ribolovaca, pravilno podešavanje radara, GPS-a i sonara (Lowrance, Garmin, Furuno, Humminbird, Simrad, Raymarine).",
+          "Iskustvo u odabiru, pozicioniranju i podešavanju sondi za pronalazak ribe na različitim dubinama i terenima.",
+          "Ugradnja solarnih ploča, punjača baterija i regulatora napona."
+        ],
+        exp: "30+ god. iskustva • od 2011.",
         link: { href: "/ugradnja-minn-kota-garmin-force-korcula", label: "Detalji ugradnje" }
       },
       {
@@ -59,18 +83,38 @@ const data: Record<'hr' | 'en' | 'de', LangData> = {
       },
       {
         num: "07",
-        title: "Podvodni radovi i HRB pregledi",
-        desc: "Podvodni pregledi trupa, propelera, kormila i pontona za potrebe Hrvatskog registra brodova (HRB). Zamjena cinkova i propelera u moru, postavljanje i kontrola kolpa morta i muringa te hitno odmotavanje konopa."
+        title: "PODVODNI RADOVI I PREGLEDI BRODOVA PRI HRB-u",
+        bullets: [
+          "Postavljanje sidrišta, muringa i izrada kolpa morta.",
+          "Postavljanje pontona i podvodni pregledi pri Hrvatskom registru brodova.",
+          "Podvodni radovi na plovilima.",
+          "Snimanje podvodnom kamerom spojenom na monitor uz komunikaciju s roniocem.",
+          "Podizanje tereta podvodnim balonima.",
+          "Oslobađanje i zamjena propelera i anodne zaštite.",
+          "Saniranje oštećenja podvodnog trupa broda (drvo, željezo, plastika, aluminij).",
+          "Uređenje vezova."
+        ],
+        exp: "HRB • Kamera s monitorom",
+        link: { href: "/podvodni-radovi-i-hrb-pregledi-korcula", label: "Detalji podvodnih radova" }
+      },
+      {
+        num: "08",
+        title: "POMOĆ NA MORU I TEGLJENJE BRODOVA",
+        bullets: [
+          "Pomoć plovilima u kvaru na području srednjeg i južnog Jadrana.",
+          "Tegljenje plovila gliserima za vuču tereta.",
+          "Brze intervencije iz Vele Luke."
+        ]
       }
     ],
     emergency: {
       badge: "Hitne intervencije",
-      title: "Hitne intervencije u luci i akvatoriju",
-      subtitle: "Ronioc / Hitni zahvati",
+      title: "POMOĆ NA MORU I TEGLJENJE BRODOVA",
+      subtitle: "Ronioc & Tegljenje / Hitni zahvati",
       items: [
-        "Oslobađanje osovine i propele od konopa i mreža u moru (bez vađenja ako je moguće).",
-        "Privremeno krpanje prodora vode i hitno vađenje na kran od 16 t ako trup popusti.",
-        "Ugradnja i kontrola korpo morta i bova za siguran vez."
+        "Pomoć plovilima u kvaru na području srednjeg i južnog Jadrana.",
+        "Tegljenje plovila gliserima za vuču tereta.",
+        "Brze intervencije iz Vele Luke."
       ]
     }
   },
@@ -90,8 +134,25 @@ const data: Record<'hr' | 'en' | 'de', LangData> = {
       },
       {
         num: "03",
-        title: "Engine Service & Winterization",
-        desc: "Authorized service maintaining factory warranties for outboard engines: Honda, Suzuki, Tohatsu, Hidea. Computer diagnostics, error code reading, and precise engine parameter tuning. Regular maintenance and seasonal prep for Yamaha, Mercury, and inboard engines."
+        title: "INBOARD & OUTBOARD ENGINE SERVICE",
+        bullets: [
+          "Authorized warranty service for Suzuki, Honda, Tohatsu, and Hidea outboard engines.",
+          "Computer diagnostic fault reading for all outboard engines, including Yamaha engines.",
+          "Propeller selection and installation.",
+          "Installation of engines and marine equipment (control cables, hydraulic steering, gauges).",
+          "Winter boat covers and canopies.",
+          "Replacement of bearings and stuffing boxes (shaft seals).",
+          "Custom fabrication and installation of black water holding tanks.",
+          "Carburetor cleaning.",
+          "Lower unit (gearcase) and power trim service.",
+          "Cooling system descaling and flushing.",
+          "Zinc anode replacement.",
+          "Stainless steel (chrome) hardware installation (bimini tops, bowsprits, ladders...).",
+          "Specialized tools and pullers for propeller and bearing removal.",
+          "Flexiteek synthetic teak decking installation."
+        ],
+        exp: "Authorized Service • Diagnostics",
+        link: { href: "/servis-i-dijagnostika-brodskih-motora", label: "Service details" }
       },
       {
         num: "04",
@@ -100,9 +161,15 @@ const data: Record<'hr' | 'en' | 'de', LangData> = {
       },
       {
         num: "05",
-        title: "Marine Electronics & Fishing Gear",
-        desc: "Over 20 years of sea fishing experience. Expert installation of bow-mount trolling motors (Minn Kota, Garmin Force, Lowrance Ghost, MotorGuide), fishfinders, and GPS plotters. Professional thru-hull and transom transducer mounting.",
-        exp: "20+ years experience",
+        title: "MARINE ELECTRICS & ELECTRONICS",
+        desc: "More than 30 years of experience at sea and in fishing allows us to properly adapt modern electronics and equipment to every vessel. Since 2011, we have operated a specialized service for installing and repairing marine components.",
+        bullets: [
+          "Professional installation of bow-mount trolling motors (Minn Kota, MotorGuide, Garmin, Lowrance...).",
+          "Tailored to anglers' needs: proper tuning of radars, GPS plotters, and sonars (Lowrance, Garmin, Furuno, Humminbird, Simrad, Raymarine).",
+          "Expertise in selecting, positioning, and tuning transducers for fish finding across various depths and seabed terrains.",
+          "Installation of solar panels, battery chargers, and voltage regulators."
+        ],
+        exp: "30+ yrs experience • since 2011",
         link: { href: "/ugradnja-minn-kota-garmin-force-korcula", label: "Installation details" }
       },
       {
@@ -112,18 +179,38 @@ const data: Record<'hr' | 'en' | 'de', LangData> = {
       },
       {
         num: "07",
-        title: "Underwater Works & CRS Inspections",
-        desc: "In-water inspections of hull, shaft, rudder, and pontoons for the Croatian Register of Shipping (CRS/HRB). In-water zinc anode and prop replacement, corpo morto mooring setup, and emergency rope clearing."
+        title: "UNDERWATER WORKS & CRS/HRB SHIP INSPECTIONS",
+        bullets: [
+          "Installation of anchorages, moorings, and custom concrete mooring blocks (corpo morto).",
+          "Pontoon installation and underwater ship inspections for the Croatian Register of Shipping (CRS/HRB).",
+          "Underwater maintenance and repair works on vessels.",
+          "Underwater camera video inspection connected to a surface monitor with live diver communication.",
+          "Heavy load recovery using underwater lift bags.",
+          "Clearing and replacement of propellers and sacrificial anodes.",
+          "Underwater hull damage repair across all materials (wood, steel/iron, fiberglass, aluminum).",
+          "Berth and mooring setup and maintenance."
+        ],
+        exp: "CRS/HRB • Underwater Camera",
+        link: { href: "/podvodni-radovi-i-hrb-pregledi-korcula", label: "Diving details" }
+      },
+      {
+        num: "08",
+        title: "SEA ASSISTANCE & BOAT TOWING",
+        bullets: [
+          "Assistance to disabled vessels across the central and southern Adriatic.",
+          "Boat towing using dedicated heavy-duty towboats.",
+          "Rapid emergency response from Vela Luka."
+        ]
       }
     ],
     emergency: {
       badge: "Emergency Response",
-      title: "Emergency Marine Services in Port & Waters",
-      subtitle: "Diver / emergency operations",
+      title: "SEA ASSISTANCE & BOAT TOWING",
+      subtitle: "Diver & Towing / Emergency Operations",
       items: [
-        "Propeller and shaft freed from ropes and nets in the water (no haul-out required when possible).",
-        "Temporary hull-leak patching and emergency 16 t crane haul-out if the hull is compromised.",
-        "Corpo morto and mooring buoy installation & inspection for safe mooring."
+        "Assistance to disabled vessels across the central and southern Adriatic.",
+        "Boat towing using dedicated heavy-duty towboats.",
+        "Rapid emergency response from Vela Luka."
       ]
     }
   },
@@ -143,8 +230,25 @@ const data: Record<'hr' | 'en' | 'de', LangData> = {
       },
       {
         num: "03",
-        title: "Bootsservice & Motorkonservierung",
-        desc: "Autorisierter Service zum Erhalt der Werksgarantie für Außenborder: Honda, Suzuki, Tohatsu, Hidea. Computerdiagnose, Auslesen von Fehlercodes und Motorparameter-Einstellung. Regelmäßige Wartung und Saisonvorbereitung für Yamaha, Mercury und Innenborder."
+        title: "SERVICE FÜR INNEN- UND AUSSENBORDER",
+        bullets: [
+          "Autorisierter Garantieservice für Suzuki, Honda, Tohatsu und Hidea Außenbordmotoren.",
+          "Computergestützte Fehlerdiagnose für alle Außenbordmotoren, einschließlich Yamaha-Motoren.",
+          "Auswahl und Montage von Propellern.",
+          "Einbau von Motoren und Bootsausrüstung (Schaltzüge, Hydrauliklenkung, Instrumente).",
+          "Winterpersenninge und Bootsabdeckungen.",
+          "Austausch von Lagern und Stopfbuchsen (Wellendichtungen).",
+          "Anfertigung und Einbau von Schwarzwassertanks.",
+          "Vergaserreinigung.",
+          "Service für Unterwasserteil (Getriebe) und Trimm.",
+          "Entkalkung und Spülung des Kühlsystems.",
+          "Austausch von Zinkanoden.",
+          "Montage von Edelstahlausrüstung (Bimini-Tops, Bugspriets, Badeleitern...).",
+          "Spezialwerkzeuge und Abzieher zur Propeller- und Lagerdemontage.",
+          "Verlegung von künstlichem Teakholz (Flexiteek)."
+        ],
+        exp: "Vertragsservice • Diagnose",
+        link: { href: "/servis-i-dijagnostika-brodskih-motora", label: "Servicedetails" }
       },
       {
         num: "04",
@@ -153,9 +257,15 @@ const data: Record<'hr' | 'en' | 'de', LangData> = {
       },
       {
         num: "05",
-        title: "Bordelektronik & Angelzubehör",
-        desc: "Über 20 Jahre Erfahrung im Meeresangeln. Fachgerechte Montage von Bugmotoren (Minn Kota, Garmin Force, Lowrance Ghost, MotorGuide), Echoloten und GPS-Kartenplottern. Präzise Durchbruchgeber-Montage (Thru-Hull).",
-        exp: "20+ Jahre Erfahrung",
+        title: "BORDELEKTRIK UND BORDELEKTRONIK",
+        desc: "Mehr als 30 Jahre Erfahrung auf See und beim Fischen ermöglichen es uns, moderne Elektronik und Ausrüstung optimal an jedes Boot anzupassen. Seit 2011 betreiben wir unseren Service für den Einbau und die Reparatur von Schiffsteilen.",
+        bullets: [
+          "Professionelle Montage von Bug-Elektromotoren (Minn Kota, MotorGuide, Garmin, Lowrance...).",
+          "Fachgerechte Einstellung von Radar, GPS und Echoloten nach den Anforderungen von Anglern (Lowrance, Garmin, Furuno, Humminbird, Simrad, Raymarine).",
+          "Erfahrung bei Auswahl, Positionierung und Einstellung von Gebern zur Fischortung in unterschiedlichen Tiefen und Bodenstrukturen.",
+          "Installation von Solarmodulen, Batterieladegeräten und Spannungsreglern."
+        ],
+        exp: "30+ Jahre Erfahrung • seit 2011",
         link: { href: "/ugradnja-minn-kota-garmin-force-korcula", label: "Einbaudetails" }
       },
       {
@@ -165,18 +275,38 @@ const data: Record<'hr' | 'en' | 'de', LangData> = {
       },
       {
         num: "07",
-        title: "Unterwasserarbeiten & HRB-Inspektionen",
-        desc: "Unterwasser-Inspektionen für das kroatische Schiffsregister (CRS/HRB). Zinkanoden- und Propellertausch im Wasser, Verlegung von Grundgeschirr (Corpo Morto) und Mooring sowie Notfall-Freischneiden."
+        title: "UNTERWASSERARBEITEN & HRB-SCHIFFSPRÜFUNGEN",
+        bullets: [
+          "Verlegung von Ankerplätzen, Moorings und Anfertigung von Betonblöcken (Corpo Morto).",
+          "Pontonmontage und Unterwasser-Inspektionen beim Kroatischen Schiffsregister (CRS/HRB).",
+          "Unterwasserarbeiten an Wasserfahrzeugen.",
+          "Aufnahmen mit einer an einen Monitor angeschlossenen Unterwasserkamera inklusive Taucherkommunikation.",
+          "Heben von Lasten mit Unterwasser-Hebesäcken.",
+          "Befreien und Wechseln von Propellern und Opferanoden.",
+          "Instandsetzung von Schäden am Unterwasserschiff (Holz, Stahl/Eisen, GFK, Aluminium).",
+          "Einrichtung und Wartung von Liegeplätzen."
+        ],
+        exp: "CRS/HRB • Unterwasserkamera",
+        link: { href: "/podvodni-radovi-i-hrb-pregledi-korcula", label: "Tauchdetails" }
+      },
+      {
+        num: "08",
+        title: "SEEHILFE UND BOOTSSCHLEPPDIENST",
+        bullets: [
+          "Hilfeleistung für manövrierunfähige Boote im mittleren und südlichen Adriaraum.",
+          "Schleppen von Wasserfahrzeugen mit speziellen Zugbooten.",
+          "Schnelle Einsätze direkt ab Vela Luka."
+        ]
       }
     ],
     emergency: {
       badge: "Notfall-Einsatz",
-      title: "Notfälle im Hafen und Revier",
-      subtitle: "Taucher / Notfall-Einsätze",
+      title: "SEEHILFE UND BOOTSSCHLEPPDIENST",
+      subtitle: "Taucher & Schleppdienst / Notfälle",
       items: [
-        "Propeller und Welle von Leinen und Netzen unter Wasser befreien (wenn möglich ohne Auskranen).",
-        "Vorübergehende Abdichtung von Wassereinbrüchen und Notauskranen mit dem 16-t-Kran bei Rumpfschäden.",
-        "Einbau und Kontrolle von Corpo Morto und Mooringbojen für sichere Liegeplätze."
+        "Hilfeleistung für manövrierunfähige Boote im mittleren und südlichen Adriaraum.",
+        "Schleppen von Wasserfahrzeugen mit speziellen Zugbooten.",
+        "Schnelle Einsätze direkt ab Vela Luka."
       ]
     }
   }
@@ -186,27 +316,40 @@ const current = data[lang] || data.hr;
 ---
 
 <!-- Sekcija: Usluge -->
-<section id="usluge" class="py-20 bg-slate-900/50 border-b border-slate-800">
+<section id="usluge" class="py-20 bg-slate-100/80 border-b border-slate-200">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center max-w-3xl mx-auto mb-16">
-      <h2 class="text-3xl sm:text-4xl font-black text-white">{current.heading}</h2>
-      <p class="mt-3 text-slate-400">{current.subheading}</p>
+      <h2 class="text-3xl sm:text-4xl font-black text-slate-900">{current.heading}</h2>
+      <p class="mt-3 text-slate-600">{current.subheading}</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {current.services.map((item) => (
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-colors">
-          <div class="w-12 h-12 rounded-xl bg-red-600/10 text-red-500 flex items-center justify-center mb-5 font-black text-xl">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:border-sky-600 transition-colors flex flex-col">
+          <div class="w-12 h-12 rounded-xl bg-slate-100 text-sky-800 border border-slate-200 flex items-center justify-center mb-5 font-mono font-bold text-xl">
             {item.num}
           </div>
-          <h3 class="text-xl font-bold text-white mb-2">{item.title}</h3>
-          <p class="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
+          <h3 class="text-xl font-bold text-slate-900 mb-2">{item.title}</h3>
+          {item.desc && (
+            <p class="text-sm text-slate-700 leading-relaxed mb-3">{item.desc}</p>
+          )}
+          {item.bullets && (
+            <ul class="space-y-1.5 text-sm text-slate-700 leading-relaxed flex-1">
+              {item.bullets.map((bullet) => (
+                <li class="flex items-start gap-2">
+                  <span class="text-sky-700 font-bold shrink-0">•</span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+          {!item.bullets && <div class="flex-1" />}
           {item.link && (
-            <div class="mt-4 pt-4 border-t border-slate-800 flex items-center justify-between gap-3">
-              <span class="text-[11px] text-emerald-400 font-mono">{item.exp}</span>
+            <div class="mt-4 pt-4 border-t border-slate-200 flex items-center justify-between gap-3">
+              <span class="text-[11px] text-sky-800 font-mono font-semibold">{item.exp}</span>
               <a
                 href={item.link.href}
-                class="text-xs text-slate-300 hover:text-white flex items-center gap-1 group font-semibold"
+                class="text-xs text-sky-700 hover:text-sky-900 flex items-center gap-1 group font-semibold"
               >
                 {item.link.label}
                 <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -221,28 +364,28 @@ const current = data[lang] || data.hr;
       <!-- Istaknuti blok: Hitne intervencije u luci i akvatoriju -->
       <div
         id="hitne-intervencije"
-        class="lg:col-span-3 bg-gradient-to-br from-red-950/40 via-slate-900 to-slate-900 border-2 border-red-600/40 rounded-2xl p-6 sm:p-8 shadow-glow-red"
+        class="lg:col-span-3 bg-white border-2 border-red-200 rounded-2xl p-6 sm:p-8 shadow-sm"
       >
         <div class="flex items-center gap-3 flex-wrap">
-          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-600/15 border border-red-500/40 text-red-400 text-xs font-black uppercase tracking-widest">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200 text-red-700 text-xs font-black uppercase tracking-widest">
             <span class="relative flex w-2 h-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
-              <span class="relative inline-flex rounded-full w-2 h-2 bg-red-500"></span>
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-600 opacity-75"></span>
+              <span class="relative inline-flex rounded-full w-2 h-2 bg-red-600"></span>
             </span>
             {current.emergency.badge}
           </span>
-          <span class="text-xs text-slate-400">24/7</span>
+          <span class="text-xs font-mono font-bold text-slate-600">24/7</span>
         </div>
 
-        <h3 class="mt-4 text-2xl sm:text-3xl font-black text-white">
-          <span class="text-red-500">{current.emergency.subtitle}</span>
-          <span class="text-slate-500 font-bold text-sm block sm:inline sm:ml-3">— {current.emergency.title}</span>
+        <h3 class="mt-4 text-2xl sm:text-3xl font-black text-slate-900">
+          <span class="text-red-700">{current.emergency.subtitle}</span>
+          <span class="text-slate-600 font-bold text-sm block sm:inline sm:ml-3">— {current.emergency.title}</span>
         </h3>
 
         <ul class="mt-5 space-y-3">
           {current.emergency.items.map((item) => (
-            <li class="flex items-start gap-3 text-sm text-slate-200 leading-relaxed">
-              <svg class="w-5 h-5 text-red-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <li class="flex items-start gap-3 text-sm text-slate-700 leading-relaxed">
+              <svg class="w-5 h-5 text-red-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
               </svg>
               <span>{item}</span>
@@ -252,7 +395,7 @@ const current = data[lang] || data.hr;
 
         <a
           href="tel:+385989540388"
-          class="mt-6 inline-flex items-center gap-2 px-5 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl shadow-glow-red transition-all text-sm"
+          class="mt-6 inline-flex items-center gap-2 px-5 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl shadow-sm transition-all text-sm"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>

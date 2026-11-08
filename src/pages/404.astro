@@ -24,10 +24,8 @@ const backdrop = await getImage({
 >
   <Navbar lang="hr" />
 
-  <main class="flex-1 flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-zinc-950">
-    <!-- Fotografija plaže i plovila kao pozadina. Grayscale drži sliku bezbojnom
-         da ne plavi tekst, a neutralni (zinc, ne slate) gradijent osigurava
-         čitljivost bez plavog odnosa. -->
+  <main class="flex-1 flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-slate-50">
+    <!-- Fotografija plaže i plovila kao pozadina -->
     <img
       src={backdrop.src}
       alt=""
@@ -35,33 +33,32 @@ const backdrop = await getImage({
       height={backdrop.attributes.height}
       loading="lazy"
       decoding="async"
-      class="absolute inset-0 w-full h-full object-cover opacity-45 grayscale"
+      class="absolute inset-0 w-full h-full object-cover opacity-15 grayscale"
     />
-    <div class="absolute inset-0 bg-gradient-to-b from-zinc-950/85 via-zinc-950/70 to-zinc-950 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-white/80 pointer-events-none"></div>
 
-    <!-- Pozadinski svjetlosni efekt -->
-    <div class="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-red-600/10 rounded-full blur-3xl pointer-events-none"></div>
+    <!-- Pozadinska mreža -->
+    <div class="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none"></div>
 
-    <div class="relative z-10 max-w-lg w-full text-center">
+    <div class="relative z-10 max-w-lg w-full text-center bg-white border border-slate-200 rounded-3xl p-8 sm:p-10 shadow-sm">
       <!-- Značka greške -->
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-600/10 text-red-500 border border-red-600/20 text-xs font-semibold uppercase tracking-wider mb-6">
-        <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sky-50 text-sky-800 border border-sky-200 text-xs font-semibold uppercase tracking-wider mb-6">
+        <span class="w-2 h-2 rounded-full bg-sky-700"></span>
         Greška 404 • uplovili smo u krivu uvalu
       </div>
 
-      <!-- Brojka 404 s gradijentom -->
-      <h1 class="text-7xl sm:text-9xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-200 to-slate-600 mb-4 select-none">
+      <!-- Brojka 404 u čvrstoj marinsko plavoj boji bez tekstualnog gradijenta -->
+      <h1 class="text-7xl sm:text-9xl font-black font-mono tracking-tight text-sky-800 mb-4 select-none">
         404
       </h1>
 
       <!-- Naslov i opis -->
-      <h2 class="text-2xl sm:text-3xl font-bold text-white mb-3">
-        Ups, uplovili smo na krivu pažu!
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">
+        Ups, uplovili smo na krivu plažu!
       </h2>
       
-      <p class="text-slate-400 text-sm sm:text-base leading-relaxed mb-8">
-        Ova stranica ne postoji — <strong class="text-slate-300">doplovili smo u krivu uvalu</strong>.
+      <p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-8">
+        Ova stranica ne postoji — <strong class="text-slate-900">doplovili smo u krivu uvalu</strong>.
         Naš GPS nam je danas odbio poslušnost, pa smo se poslijepili uz obalu i ispričavamo.
         Niste sami u ovome: dnevno krenemo u zlu luku. Vi samo nemate svoj kran za vađenje.
       </p>
@@ -70,7 +67,7 @@ const backdrop = await getImage({
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a
           href="/"
-          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl shadow-glow-red transition-all text-sm group"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-sky-800 hover:bg-sky-900 text-white font-bold rounded-xl shadow-sm transition-all text-sm group"
         >
           <svg class="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
@@ -80,17 +77,17 @@ const backdrop = await getImage({
 
         <a
           href="/#cjenik"
-          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-slate-900 hover:bg-slate-800 text-slate-200 font-bold rounded-xl border border-slate-700 shadow-sm transition-all text-sm"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-xl border border-slate-200 shadow-sm transition-all text-sm"
         >
           <span>Pogledaj cjenik</span>
         </a>
       </div>
 
       <!-- Višejezična pomoćna napomena -->
-      <div class="mt-12 pt-6 border-t border-slate-800/80 text-xs text-slate-400 flex items-center justify-center gap-4">
-        <span>Page not found? <a href="/en/" class="text-slate-300 hover:underline">English</a></span>
+      <div class="mt-10 pt-6 border-t border-slate-200 text-xs text-slate-600 flex items-center justify-center gap-4">
+        <span>Page not found? <a href="/en/" class="text-sky-700 font-semibold hover:underline">English</a></span>
         <span>•</span>
-        <span>Seite nicht gefunden? <a href="/de/" class="text-slate-300 hover:underline">Deutsch</a></span>
+        <span>Seite nicht gefunden? <a href="/de/" class="text-sky-700 font-semibold hover:underline">Deutsch</a></span>
       </div>
     </div>
   </main>

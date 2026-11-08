@@ -1,0 +1,60 @@
+---
+import { useTranslations } from '../i18n/ui';
+
+interface Props {
+  lang?: 'hr' | 'en' | 'de';
+}
+
+const { lang = 'hr' } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<button
+  id="back-to-top"
+  type="button"
+  aria-label={t('cta.back_to_top')}
+  title={t('cta.back_to_top')}
+  class="fixed bottom-6 right-6 z-40 max-md:bottom-20 w-11 h-11 rounded-xl bg-sky-800 hover:bg-sky-900 text-white border border-sky-900 shadow-lg flex items-center justify-center transition-opacity duration-300 opacity-0 pointer-events-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-600"
+>
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7" />
+  </svg>
+</button>
+
+<!-- Skripta usklađena s Astro SOP-om (astro:page-load, nula vanjskih biblioteka, nula CLS-a) -->
+<script>
+  let cleanupBackToTop: (() => void) | null = null;
+
+  function setupBackToTop() {
+    if (cleanupBackToTop) {
+      cleanupBackToTop();
+      cleanupBackToTop = null;
+    }
+
+    const btn = document.getElementById('back-to-top');
+    if (!btn) return;
+
+    const updateVisibility = () => {
+      const visible = window.scrollY > 300;
+      btn.classList.toggle('opacity-0', !visible);
+      btn.classList.toggle('pointer-events-none', !visible);
+      btn.classList.toggle('opacity-100', visible);
+      btn.classList.toggle('pointer-events-auto', visible);
+    };
+
+    const scrollToTop = () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    btn.addEventListener('click', scrollToTop);
+    updateVisibility();
+
+    cleanupBackToTop = () => {
+      window.removeEventListener('scroll', updateVisibility);
+      btn.removeEventListener('click', scrollToTop);
+    };
+  }
+
+  document.addEventListener('astro:page-load', setupBackToTop);
+</script>

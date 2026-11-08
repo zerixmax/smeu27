@@ -6,14 +6,20 @@ import QuickContactCTA from '../components/QuickContactCTA.astro';
 
 const lang = 'hr';
 
-const seoTitle = "Ugradnja Minn Kota, Garmin i Lowrance opreme za brodove | Korčula – Hrvatska";
-const seoDescription = "Profesionalna ugradnja pramčanih elektromotora, sonara, GPS navigacije i ribolovne elektronike na Korčuli. Više od 20 godina iskustva u ribolovu i radu s opremom Garmin, Lowrance, Humminbird, Minn Kota, Garmin Force i MotorGuide.";
+const seoTitle = "Ugradnja Minn Kota, Garmin, Furuno i Lowrance opreme | Korčula – Hrvatska";
+const seoDescription = "Profesionalna ugradnja pramčanih elektromotora, Furuno i Garmin sonara, radara, solarnih sustava, regulatora napona i ribolovne elektronike na Korčuli. Više od 30 godina iskustva na moru i u ribolovu, servis posluje od 2011. godine.";
 
 const phoneDisplay = "+385 98 954 03 88";
 const phoneRaw = "385989540388";
 
 const bowMotors = ["Minn Kota", "Garmin Force", "Lowrance Ghost", "MotorGuide"];
-const sonars = ["Garmin", "Lowrance", "Humminbird", "Simrad", "Raymarine"];
+const sonars = ["Furuno", "Garmin", "Lowrance", "Humminbird", "Simrad", "Raymarine"];
+const powerSystems = [
+  "Solarni paneli i MPPT regulatori napona",
+  "Brodski punjači baterija i DC-DC punjači",
+  "LiFePO4 i AGM dvostruki baterijski sustavi",
+  "Radari, autopiloti i NMEA 2000 umrežavanje"
+];
 
 const whatsappMessage = encodeURIComponent("Pozdrav! Zanima me ponuda i ugradnja pramčanog motora / ribolovne elektronike na plovilo.");
 const whatsappUrl = `https://wa.me/${phoneRaw}?text=${whatsappMessage}`;
@@ -23,8 +29,8 @@ const whatsappUrl = `https://wa.me/${phoneRaw}?text=${whatsappMessage}`;
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  "name": "Ugradnja pramčanih elektromotora i ribolovne elektronike",
-  "serviceType": "Marine electronics installation",
+  "name": "Ugradnja pramčanih elektromotora, sonara, solarnih sustava i ribolovne elektronike",
+  "serviceType": "Marine electronics and solar power installation",
   "provider": {
     "@type": "LocalBusiness",
     "@id": "https://suhamarina.eu/#business",
@@ -38,8 +44,10 @@ const serviceSchema = {
     "Garmin Force ugradnja",
     "Lowrance Ghost",
     "MotorGuide",
+    "Furuno sonari i radari",
     "Thru-hull montaža sondi kroz trup",
     "Kalibracija sonara i sondera",
+    "Solarni paneli, punjači baterija i regulatori napona",
     "Dvostruki baterijski sustavi za pramčane motore",
     "NMEA 2000 brodska mreža"
   ]
@@ -55,7 +63,7 @@ const serviceSchema = {
 
     <!-- Navigacijski povratak -->
     <div class="mb-8">
-      <a href="/" class="inline-flex items-center gap-2 text-xs font-mono text-emerald-400 hover:text-emerald-300">
+      <a href="/" class="inline-flex items-center gap-2 text-xs font-mono font-semibold text-sky-700 hover:text-sky-900">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
         Povratak na naslovnu
       </a>
@@ -63,39 +71,54 @@ const serviceSchema = {
 
     <!-- Hero blok stranice -->
     <header class="mb-12">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-semibold uppercase tracking-wider mb-4">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        20+ godina iskustva u ribolovu na moru
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 text-sky-800 border border-sky-200 text-xs font-semibold uppercase tracking-wider mb-4">
+        <span class="w-2 h-2 rounded-full bg-sky-700"></span>
+        30+ godina iskustva na moru i u ribolovu • Servis od 2011. godine
       </div>
-      <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
-        Brodska elektronika i oprema za ribolov – Korčula
+      <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 leading-tight">
+        BRODSKA ELEKTRIKA I ELEKTRONIKA
       </h1>
-      <p class="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed">
-        Nalazimo se na području otoka Korčule i pružamo profesionalnu ugradnju, povezivanje i podešavanje opreme za ribolov i plovila.
+      <p class="mt-4 text-base sm:text-lg text-slate-700 leading-relaxed">
+        Više od 30 godina iskustva na moru i u ribolovu omogućuje nam da pravilno prilagodimo modernu elektroniku i opremu svakom brodu. Od 2011. godine imamo servis za ugradnju i popravak brodskih dijelova.
       </p>
     </header>
 
-    <!-- Ključna prednost i iskustvo -->
-    <section class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 mb-12 shadow-xl">
-      <h2 class="text-xl sm:text-2xl font-bold text-white mb-3">Iskustvo iz prakse, ne iz kataloga</h2>
-      <p class="text-sm sm:text-base text-slate-300 leading-relaxed mb-6">
-        Više od 20 godina aktivnog iskustva u ribolovu omogućuje nam da u potpunosti razumijemo stvarne potrebe ribolovaca i pravilno prilagodimo opremu svakom tipu broda i uvjetima na moru. Vaš brod i vaša oprema zaslužuju pravilnu ugradnju kako biste izvukli maksimum iz svakog izlaska na more.
-      </p>
+    <!-- Ključna prednost i iskustvo + doslovne stavke iz Nikolinog dokumenta -->
+    <section class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 mb-12 shadow-sm">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mb-4">Usluge brodske elektrike i elektronike</h2>
+      <ul class="space-y-3 text-sm sm:text-base text-slate-700 leading-relaxed mb-6">
+        <li class="flex items-start gap-3">
+          <span class="text-sky-700 font-bold">•</span>
+          <span>Profesionalna ugradnja pramčanih elektromotora (Minn Kota, MotorGuide, Garmin, Lowrance...).</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-sky-700 font-bold">•</span>
+          <span>Prema potrebama ribolovaca, pravilno podešavanje radara, GPS-a i sonara (Lowrance, Garmin, Furuno, Humminbird, Simrad, Raymarine).</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-sky-700 font-bold">•</span>
+          <span>Iskustvo u odabiru, pozicioniranju i podešavanju sondi za pronalazak ribe na različitim dubinama i terenima.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-sky-700 font-bold">•</span>
+          <span>Ugradnja solarnih ploča, punjača baterija i regulatora napona.</span>
+        </li>
+      </ul>
 
       <!-- CTA blok za brzi WhatsApp upit -->
-      <div class="flex flex-col sm:flex-row gap-4 pt-4 border-t border-slate-800">
+      <div class="flex flex-col sm:flex-row gap-4 pt-4 border-t border-slate-200">
         <a
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm transition-colors"
+          class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold text-sm transition-colors shadow-sm"
         >
           <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/></svg>
           Zatražite ponudu putem WhatsAppa
         </a>
         <a
           href={`tel:+${phoneRaw}`}
-          class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm transition-colors border border-slate-700"
+          class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-sky-800 hover:bg-sky-900 text-white font-bold text-sm transition-colors border border-sky-900 shadow-sm"
         >
           Nazovite: {phoneDisplay}
         </a>
@@ -103,41 +126,60 @@ const serviceSchema = {
     </section>
 
     <!-- Tehničke specifikacije ugradnje -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
 
       <!-- Pramčani motori -->
-      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6">
-        <div class="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center font-bold mb-4 border border-sky-500/20">
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
+        <div class="w-10 h-10 rounded-xl bg-slate-100 text-sky-800 flex items-center justify-center font-bold mb-4 border border-slate-200">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v18M5 8l7-5 7 5M5 16l7 5 7-5"/></svg>
         </div>
-        <h3 class="text-xl font-bold text-white mb-2">Pramčani elektromotori</h3>
-        <p class="text-xs text-slate-400 mb-4 leading-relaxed">
-          Stručna montaža nosača, provlačenje ožičenja, ugradnja osigurača i spajanje na namjenske baterijske sustave (LiFePO4 / AGM).
+        <h3 class="text-xl font-bold text-slate-900 mb-2">Pramčani elektromotori</h3>
+        <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+          Profesionalna ugradnja pramčanih elektromotora (Minn Kota, MotorGuide, Garmin, Lowrance...):
         </p>
-        <ul class="space-y-2 text-xs font-medium text-slate-300">
+        <ul class="space-y-2 text-xs font-medium text-slate-700">
           {bowMotors.map((motor) => (
             <li class="flex items-center gap-2">
-              <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <svg class="w-3.5 h-3.5 text-sky-700 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               {motor}
             </li>
           ))}
         </ul>
       </div>
 
-      <!-- Sonari i elektronika -->
-      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6">
-        <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center font-bold mb-4 border border-indigo-500/20">
+      <!-- Sonari, radari i elektronika -->
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
+        <div class="w-10 h-10 rounded-xl bg-slate-100 text-sky-800 flex items-center justify-center font-bold mb-4 border border-slate-200">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12a9 9 0 0118 0M6 12a6 6 0 0112 0M9.5 12a3.5 3.5 0 015 0M12 12h.01"/></svg>
         </div>
-        <h3 class="text-xl font-bold text-white mb-2">Sonari, GPS &amp; Fishfinderi</h3>
-        <p class="text-xs text-slate-400 mb-4 leading-relaxed">
-          Precizno pozicioniranje sondi (krmene i kroz trup / thru-hull), kalibracija uređaja i podešavanje prikaza za čitanje strukture dna.
+        <h3 class="text-xl font-bold text-slate-900 mb-2">Sonari, Radari &amp; GPS</h3>
+        <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+          Prema potrebama ribolovaca, pravilno podešavanje radara, GPS-a i sonara te sondi za pronalazak ribe:
         </p>
-        <ul class="space-y-2 text-xs font-medium text-slate-300">
+        <ul class="space-y-2 text-xs font-medium text-slate-700">
           {sonars.map((sonar) => (
             <li class="flex items-center gap-2">
-              <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <svg class="w-3.5 h-3.5 text-sky-700 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               {sonar}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Solarni sustavi i napajanje -->
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
+        <div class="w-10 h-10 rounded-xl bg-slate-100 text-sky-800 flex items-center justify-center font-bold mb-4 border border-slate-200">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 mb-2">Solarni sustavi &amp; napajanje</h3>
+        <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+          Ugradnja solarnih ploča, punjača baterija i regulatora napona za potpunu energetsku neovisnost:
+        </p>
+        <ul class="space-y-2 text-xs font-medium text-slate-700">
+          {powerSystems.map((item) => (
+            <li class="flex items-center gap-2">
+              <svg class="w-3.5 h-3.5 text-sky-700 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              {item}
             </li>
           ))}
         </ul>
@@ -146,26 +188,58 @@ const serviceSchema = {
     </div>
 
     <!-- Detaljna lista zahvata -->
-    <section class="bg-slate-900/50 border border-slate-800 rounded-3xl p-6 sm:p-8 mb-12">
-      <h2 class="text-xl font-bold text-white mb-4">Što sve obuhvaća naša usluga na terenu:</h2>
-      <div class="space-y-3 text-sm text-slate-300">
+    <section class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 mb-12 shadow-sm">
+      <h2 class="text-xl font-bold text-slate-900 mb-4">Što sve obuhvaća naša usluga na terenu:</h2>
+      <div class="space-y-3 text-sm text-slate-700">
         <div class="flex items-start gap-3">
-          <span class="text-emerald-400 font-bold">•</span>
+          <span class="text-sky-700 font-bold">•</span>
           <span><strong>Montaža i povezivanje:</strong> Pramčane električne motore ugrađujemo prema specifikacijama proizvođača uz osiguranje čvrstoće nosača.</span>
         </div>
         <div class="flex items-start gap-3">
-          <span class="text-emerald-400 font-bold">•</span>
-          <span><strong>Pozicioniranje sondi:</strong> Izbor idealnog mjesta na trupu kako bi se eliminirali mjehurići zraka i smetnje pri većim brzinama plovidbe.</span>
+          <span class="text-sky-700 font-bold">•</span>
+          <span><strong>Pozicioniranje sondi (Furuno, Garmin, Lowrance):</strong> Izbor idealnog mjesta na trupu kako bi se eliminirali mjehurići zraka i smetnje pri većim brzinama plovidbe.</span>
         </div>
         <div class="flex items-start gap-3">
-          <span class="text-emerald-400 font-bold">•</span>
-          <span><strong>Brodska NMEA mreža:</strong> Spajanje motora, sonara i autopilota u jedinstven sustav za navigaciju i sidrenje na točki (Spot-Lock / Anchor mode).</span>
+          <span class="text-sky-700 font-bold">•</span>
+          <span><strong>Solarni paneli, punjači i regulatori napona:</strong> Projektiranje i spajanje kompletnog sustava punjenja servisnih i pramčanih baterija.</span>
         </div>
         <div class="flex items-start gap-3">
-          <span class="text-emerald-400 font-bold">•</span>
-          <span><strong>Savjetovanje i podešavanje:</strong> Praktični savjeti o postavkama frekvencija (CHIRP, SideScan, DownScan) prilagođeni terenima južnog Jadrana.</span>
+          <span class="text-sky-700 font-bold">•</span>
+          <span><strong>Brodska NMEA mreža i radari:</strong> Spajanje motora, sonara, radara i autopilota u jedinstven sustav za navigaciju i sidrenje na točki (Spot-Lock / Anchor mode).</span>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="text-sky-700 font-bold">•</span>
+          <span><strong>Savjetovanje i podešavanje:</strong> Praktični savjeti iz 30+ godina ribolovnog iskustva o postavkama frekvencija (CHIRP, SideScan, DownScan) prilagođeni terenima južnog Jadrana.</span>
         </div>
       </div>
+    </section>
+
+    <!-- Povezane specijalističke usluge (SEO klaster) -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
+      <a
+        href="/servis-i-dijagnostika-brodskih-motora"
+        class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-sky-600 transition-colors group shadow-sm"
+      >
+        <span class="text-xs font-mono font-bold text-sky-800 uppercase tracking-wider">Povezana usluga</span>
+        <h3 class="text-base font-bold text-slate-900 mt-1 group-hover:text-sky-700 transition-colors">
+          Ovlašteni servis i dijagnostika brodskih motora →
+        </h3>
+        <p class="text-xs text-slate-600 mt-1">
+          Honda, Suzuki, Tohatsu, Hidea, Yamaha dijagnostika, servis pete/trima, crni tankovi i Flexiteek.
+        </p>
+      </a>
+      <a
+        href="/podvodni-radovi-i-hrb-pregledi-korcula"
+        class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-sky-600 transition-colors group shadow-sm"
+      >
+        <span class="text-xs font-mono font-bold text-sky-800 uppercase tracking-wider">Povezana usluga</span>
+        <h3 class="text-base font-bold text-slate-900 mt-1 group-hover:text-sky-700 transition-colors">
+          Podvodni radovi i HRB pregledi kamerom →
+        </h3>
+        <p class="text-xs text-slate-600 mt-1">
+          Snimanje podvodnom kamerom s monitorom, podvodni baloni, kolpa morta i sanacija svih vrsta trupova.
+        </p>
+      </a>
     </section>
 
   </main>

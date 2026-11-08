@@ -1,7 +1,7 @@
 # Tehnička dokumentacija projekta: Suha Marina PROIZD (suhamarina.eu)
 
-**Verzija dokumentacije:** 1.0.0  
-**Datum ažuriranja:** 19. rujna 2026.  
+**Verzija dokumentacije:** 1.1.0 (`v1.0.14` / build `20261108.1`)  
+**Datum ažuriranja:** 8. studenoga 2026.  
 **Autor:** OleaD  
 **Klijent:** Obrt Proizd – Suha Marina, Vela Luka, Otok Korčula  
 
@@ -12,11 +12,13 @@
 Cilj projekta je kompletna modernizacija i migracija web stranice s naslijeđenog Joomla 3.10.12 CMS-a na suvremeni statički generiran web stog (Jamstack) pogonjen **Astro** razvojnim okvirom.
 
 Nova web stranica donosi:
-- **Maksimalne performanse i brzinu učitavanja** (statički HTML bez serverskog opterećenja).
+- **Maksimalne performanse i brzinu učitavanja** (9 statičkih HTML ruta + CSV rute bez serverskog opterećenja).
+- **Inženjersku "Daylight Marine" estetiku** optimiziranu za maksimalnu čitljivost na izravnom suncu i na moru (čiste svijetle površine `bg-white` / `bg-slate-50`, oštar tamnoplavi i antracitni tekst `text-slate-900` / `text-sky-800`, bez AI tekstualnih gradijenata, s kontrastnim marinskim podnožjem `bg-slate-900`).
+- **Doslovno usklađen stručni sadržaj i SEO klaster arhitekturu** (3 namjenske SEO landing podstranice za servis motora, ribolovnu elektroniku i podvodne radove / HRB preglede).
 - **Zakonito isticanje cijena (NN 101/2026)** s referentnim/sidrenim cijenama i strojnim CSV izvozom usklađenim s HOK predloškom.
 - **Višejezičnost (i18n)** s podrškom za hrvatski (HR), engleski (EN) i njemački (DE) jezik.
-- **Optimiziranu konverziju na mobilnim uređajima** putem trajnog (sticky) CTA panela za poziv i WhatsApp upite.
-- **Strukturirane SEO podatke (Schema.org)** i `hreflang` jezične anotacije.
+- **Optimiziranu konverziju na mobilnim uređajima** putem trajnog (sticky) CTA panela za poziv i WhatsApp upite te diskretnog `BackToTop` gumba.
+- **Strukturirane SEO podatke (Schema.org)**, kompletan Open Graph / Twitter Card i `hreflang` jezične anotacije.
 
 ---
 
@@ -24,13 +26,13 @@ Nova web stranica donosi:
 
 | Tehnologija | Uloga / Opis |
 |---|---|
-| **Astro** | Glavni web framework (Static Site Generation - SSG) |
+| **Astro** | Glavni web framework (Static Site Generation - SSG, 9 HTML stranica) |
 | **TypeScript** | Statička tipizacija (`strict` način rada) |
-| **Tailwind CSS v4** | Suvremeno stiliziranje u tamnoj nautičkoj temi (`@tailwindcss/vite`) |
+| **Tailwind CSS v4** | Suvremeno stiliziranje u svijetloj inženjerskoj **Daylight Marine** temi (`@tailwindcss/vite`) |
 | **Self-hosted fontovi** | Inter & JetBrains Mono, **4 variable WOFF2 datoteke** (`public/fonts/`, `font-display: swap`) |
 | **Astro Assets** | Automatska konverzija i kompresija slika u WebP formatu |
 | **Astro ClientRouter** | SPA tranzicije među stranicama bez ponovnog učitavanja |
-| **Schema.org JSON-LD** | Strukturirani podaci za lokalno poslovanje (*LocalBusiness*, *EmergencyService*, *Service*) |
+| **Schema.org JSON-LD** | Strukturirani podaci za lokalno poslovanje (*AutoRepair/LocalBusiness*, *EmergencyService*, *Service*, *FAQPage*, *VideoObject*) |
 | **Nginx (`nginx:alpine`)** | Produkcijski poslužitelj statičkog sadržaja (gzip + cache politike po tipu asseta) |
 
 ---
@@ -41,8 +43,10 @@ Nova web stranica donosi:
 suhamarinaeu27/
 ├── docs/
 │   ├── dev-logs/
-│   │   ├── 2026-09-19.md       # Dnevnik rada i kronologija promjena po sesijama
-│   │   └── 2026-10-01.md       # Optimizacija LCP/fonata/usluga, landing, nginx
+│   │   ├── 2026-09-19.md       # Dnevnik rada i kronologija promjena (inicijalni razvoj)
+│   │   ├── 2026-10-01.md       # Optimizacija LCP/fontova/usluga, landing, nginx
+│   │   ├── 2026-10-09.md       # Galerija (25 unikatnih fotografija), 404/500, OG tagovi
+│   │   └── 08-11-2026.md       # Faze 1–4 + Sprint 4 (Daylight Marine redizajn & Nikolin tekst)
 │   └── DOKUMENTACIJA.md        # Glavni tehnički dokument projekta
 ├── scripts/
 │   └── snapshot-cjenik.mjs     # Automatska pohrana verzija cjenika u arhivu (pre-build)
@@ -57,30 +61,34 @@ suhamarinaeu27/
 ├── src/
 │   ├── assets/
 │   │   ├── images/
-│   │   │   └── gallery/        # Galerija visoke rezolucije (kran, hangar, servis)
+│   │   │   └── gallery/        # Galerija visoke rezolucije (25 unikatnih fotografija)
 │   │   └── logos/              # Vektorski i rasterski logotipi brendova i obrta
-│   ├── components/             # Modularne Astro komponente
+│   ├── components/             # Modularne Astro komponente (Navbar, Hero, ServicesGrid, BackToTop...)
 │   ├── data/
-│   │   ├── cjenik.json         # Središnji izvor podataka o cijenama i uslugama
+│   │   ├── cjenik.json         # Središnji izvor podataka o cijenama i uslugama (Ulica 41, br. 42)
 │   │   ├── version.json        # Verzija/build prikazana u podnožju
 │   │   └── arkhiva/            # Snapshotovi svih objavljenih verzija cjenika
 │   ├── i18n/
 │   │   └── ui.ts               # Rječnik prijevoda (HR, EN, DE) i useTranslations hook
 │   ├── layouts/
-│   │   └── Layout.astro        # Glavni HTML kostur sa SEO, meta, fontovima i Schema.org
+│   │   └── Layout.astro        # Glavni HTML kostur sa SEO, meta, fontovima, Schema.org i BackToTop
 │   ├── lib/                    # Dijeljeni moduli (CSV builder, arhiva)
-│   └── pages/
-│       ├── index.astro         # Glavna stranica (hrvatski jezik)
-│       ├── objava-cjenika.astro# Javna objava + digitalna arhiva cjenika
-│       ├── ugradnja-minn-kota-garmin-force-korcula.astro # Landing stranica (HR)
+│   └── pages/                  # 9 HTML stranica + 3 CSV endpointa:
+│       ├── index.astro         # 1. Glavna stranica (HR)
+│       ├── en/index.astro      # 2. Engleska verzija naslovnice (EN)
+│       ├── de/index.astro      # 3. Njemačka verzija naslovnice (DE)
+│       ├── objava-cjenika.astro# 4. Javna objava + digitalna arhiva cjenika (NN 101/2026)
+│       ├── ugradnja-minn-kota-garmin-force-korcula.astro    # 5. SEO klaster: Brodska elektrika i elektronika
+│       ├── servis-i-dijagnostika-brodskih-motora.astro      # 6. SEO klaster: Servis i dijagnostika motora
+│       ├── podvodni-radovi-i-hrb-pregledi-korcula.astro     # 7. SEO klaster: Podvodni radovi i HRB pregledi
+│       ├── 404.astro           # 8. Prilagođena 404 stranica
+│       ├── 500.astro           # 9. Prilagođena 500 stranica
 │       ├── cjenik.csv.ts       # Dinamički generator CSV datoteke prema NN 101/2026
 │       ├── cjenik-download.csv.ts # Alias ruta za /cjenik-download.csv
-│       ├── arkhiva/[datum].csv.ts # Strojni CSV preuzimanje arhiviranih verzija
-│       ├── en/                 # Engleska verzija stranice
-│       └── de/                 # Njemačka verzija stranice
+│       └── arkhiva/[datum].csv.ts # Strojno CSV preuzimanje arhiviranih verzija
 ├── astro.config.mjs            # Konfiguracijska datoteka Astra (sitemap, Tailwind v4)
 ├── package.json                # Ovisnosti projekta i npm skripte
-├── src/styles/global.css       # Tailwind v4 (@import + @theme) i custom utilities
+├── src/styles/global.css       # Tailwind v4 (@import + @theme) i Daylight Marine stilovi
 └── tsconfig.json               # TypeScript pravila
 ```
 
@@ -201,13 +209,19 @@ docker stop shm-nginx-test
 
 ---
 
-## 8. Verzioniranje
+## 8. Verzioniranje i povijest faza (v1.0.14)
 
 Verzija je zapisana u **tri** datoteke koje moraju ostati sinkronizirane:
-- `package.json` (`npm version patch --no-git-tag-version`)
-- `src/data/version.json` — izvor verzije za footer (`Footer.astro:5`)
+- `package.json` (`"version": "1.0.14"`)
+- `src/data/version.json` — izvor verzije za footer (`Footer.astro`)
 - `public/version.json` — javno dostupna kopija iste verzije
 
 Format build ID-a je `YYYYMMDD.N`; footer prikazuje `vX.Y.Z#YYYYMMDD.N`. Nakon svake sesije provjeriti da se ispravna verzija pojavljuje u `dist/index.html`.
 
-Trenutno stanje: **v1.0.9 / `20261001.1`**.
+Trenutno stanje: **v1.0.14 / `20261108.1`** (Završene Faze 1–4 i Sprint 4):
+- **Faza 1:** Globalni podaci (`Ulica 41, br. 42`, `nikola.mul@gmail.com`), `sameAs` društvene mreže, prošireni `knowsAbout` u Schema.org te usklađeni Open Graph / Twitter Card meta podaci s apsolutnim URL-om slike (`1200×630 px`).
+- **Faza 2:** Navigacija i podnožje (`Navbar.astro`, `Footer.astro`) s društvenim mrežama (Facebook, Instagram, WhatsApp), poveznicom na ribolovnu elektroniku i komponentom `BackToTop.astro` (Astro SOP, nula CLS-a).
+- **Faza 3:** Proširenje i višejezično usklađenje kartica usluga (`ServicesGrid.astro` — HR, EN, DE).
+- **Faza 4:** 3 specijalizirane SEO klaster landing stranice (`/ugradnja-minn-kota-garmin-force-korcula`, `/servis-i-dijagnostika-brodskih-motora`, `/podvodni-radovi-i-hrb-pregledi-korcula`) s `Service` JSON-LD shemama (ukupno **9 HTML ruta**).
+- **Sprint 4 (Faza 1 & Faza 2):** Prelazak na **Daylight Marine** inženjersku paletu visoke čitljivosti na suncu (uklonjeni svi tekstualni gradijenti i tamne pozadine kartica) te **100% doslovna integracija Nikolinog teksta** iz Word dokumenta u Hero sekciju, kartice usluga i SEO podstranice.
+

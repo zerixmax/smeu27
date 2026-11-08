@@ -92,23 +92,23 @@ const faqSchema = {
 ---
 
 <!-- Sekcija: Često postavljana pitanja -->
-<section id="faq" class="py-20 bg-slate-900/50 border-b border-slate-800">
+<section id="faq" class="py-20 bg-white border-b border-slate-200">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center max-w-2xl mx-auto mb-12">
-      <h2 class="text-3xl sm:text-4xl font-black text-white">{current.heading}</h2>
-      <p class="mt-3 text-slate-400">{current.subheading}</p>
+      <h2 class="text-3xl sm:text-4xl font-black text-slate-900">{current.heading}</h2>
+      <p class="mt-3 text-slate-600">{current.subheading}</p>
     </div>
 
     <div class="space-y-4">
       {current.items.map((item) => (
-        <details class="group bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-slate-700 transition-colors">
-          <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer select-none text-left font-bold text-white list-none">
+        <details class="group bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-sky-600 transition-colors shadow-sm">
+          <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer select-none text-left font-bold text-slate-800 list-none">
             <span class="text-sm sm:text-base">{item.q}</span>
-            <svg class="w-5 h-5 text-red-500 shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 text-sky-700 shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
           </summary>
-          <div class="px-6 pb-5 -mt-1 text-sm text-slate-400 leading-relaxed">
+          <div class="px-6 pb-5 -mt-1 text-sm text-slate-700 leading-relaxed">
             {item.a}
           </div>
         </details>

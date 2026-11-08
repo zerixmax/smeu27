@@ -47,24 +47,24 @@ const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
   "embedUrl": `https://www.youtube-nocookie.com/embed/${videoId}`
 })} />
 
-<section class="py-16 bg-slate-900/40 border-b border-slate-800">
+<section class="py-16 bg-slate-100/80 border-b border-slate-200">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 
-    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-600/10 text-red-500 border border-red-600/20 text-xs font-semibold uppercase tracking-wider mb-4">
-      <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 text-sky-800 border border-sky-200 text-xs font-semibold uppercase tracking-wider mb-4">
+      <span class="w-2 h-2 rounded-full bg-sky-700"></span>
       4K zračni prikaz • 0:41 min
     </div>
 
-    <h2 class="text-3xl sm:text-4xl font-black text-white">
+    <h2 class="text-3xl sm:text-4xl font-black text-slate-900">
       {videoTitle}
     </h2>
 
-    <p class="mt-3 text-slate-400 text-sm sm:text-base max-w-2xl mx-auto mb-10">
+    <p class="mt-3 text-slate-600 text-sm sm:text-base max-w-2xl mx-auto mb-10">
       {videoSubtitle}
     </p>
 
     <!-- Lite Embed Container (0 ms početnog YouTube skriptnog laganja) -->
-    <div class="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-950 group mx-auto">
+    <div class="relative w-full aspect-video rounded-3xl overflow-hidden shadow-lg border border-slate-200 bg-slate-900 group mx-auto">
       <div
         id="video-player-trigger"
         class="relative w-full h-full cursor-pointer flex items-center justify-center"
@@ -77,32 +77,32 @@ const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
         <img
           src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
           alt="Suha Marina Proizd Vela Luka - zračna snimka dronom"
-          class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-85"
+          class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
           loading="lazy"
           decoding="async"
         />
 
-        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-black/30"></div>
+        <div class="absolute inset-0 bg-slate-950/35"></div>
 
-        <!-- Pulse Play Gumb -->
-        <div class="relative z-10 w-20 h-20 rounded-full bg-red-600 text-white flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300">
+        <!-- Play Gumb -->
+        <div class="relative z-10 w-20 h-20 rounded-full bg-sky-700 text-white flex items-center justify-center shadow-xl group-hover:scale-110 group-hover:bg-sky-600 transition-all duration-300">
           <svg class="w-9 h-9 fill-current translate-x-0.5" viewBox="0 0 24 24">
             <path d="M8 5v14l11-7z"/>
           </svg>
         </div>
 
-        <div class="absolute bottom-4 left-6 right-6 z-10 flex items-center justify-between text-xs text-slate-300 font-medium">
-          <span class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <div class="absolute bottom-4 left-6 right-6 z-10 flex items-center justify-between text-xs text-white font-medium">
+          <span class="flex items-center gap-2 bg-slate-900/80 px-3 py-1 rounded-md">
+            <span class="w-2 h-2 rounded-full bg-sky-400"></span>
             Suha Marina Proizd • Vela Luka
           </span>
-          <span class="bg-black/75 backdrop-blur-xs px-2.5 py-1 rounded-md text-slate-200 font-mono">0:41</span>
+          <span class="bg-slate-900/80 px-2.5 py-1 rounded-md text-white font-mono">0:41</span>
         </div>
       </div>
     </div>
 
-    <div class="mt-4 text-xs text-slate-400">
-      Izravna poveznica: <a href={videoUrl} target="_blank" rel="noopener noreferrer" class="text-slate-300 underline hover:text-white">{videoUrl}</a>
+    <div class="mt-4 text-xs text-slate-600">
+      Izravna poveznica: <a href={videoUrl} target="_blank" rel="noopener noreferrer" class="text-sky-700 underline hover:text-sky-900 font-medium">{videoUrl}</a>
     </div>
 
   </div>

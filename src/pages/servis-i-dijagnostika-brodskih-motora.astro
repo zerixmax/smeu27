@@ -1,0 +1,197 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import QuickContactCTA from '../components/QuickContactCTA.astro';
+
+const lang = 'hr';
+
+const seoTitle = "Servis i dijagnostika brodskih motora Korčula | Honda, Suzuki, Tohatsu, Hidea, Yamaha";
+const seoDescription = "Ovlašteni servis vanbrodskih motora (Honda, Suzuki, Tohatsu, Hidea) i računalna dijagnostika grešaka (Yamaha, Mercury, unutarnji motori) u Veloj Luci na Korčuli. Servis pete i trima, ispiranje kamenca, izvlakači ležajeva, crni tankovi i Flexiteek.";
+
+const phoneDisplay = "+385 98 954 03 88";
+const phoneRaw = "385989540388";
+
+const authorizedBrands = ["Suzuki Marine", "Honda Marine", "Tohatsu", "Hidea"];
+const diagnosticBrands = ["Yamaha (dijagnostika i očitavanje grešaka)", "Mercury / MerCruiser", "Unutarnji dizelski i benzinski motori"];
+
+const mechanicalWorks = [
+  "Ovlašteni servis s garancijom za vanbrodske motore Suzuki, Honda, Tohatsu i Hidea.",
+  "Kompjutorsko očitavanje grešaka dijagnostikom za sve vanbrodske motore, uključujući i Yamaha motore.",
+  "Ugradnja i odabir propelera.",
+  "Ugradnja motora i brodske opreme (sajli, hidraulike timuna, satova).",
+  "Zimske tende i pokrivala za brodove.",
+  "Zamjena ležajeva i šupernica.",
+  "Izrada i ugradnja crnog tanka.",
+  "Čišćenje karburatora.",
+  "Servis pete i trima motora.",
+  "Ispiranje sustava za hlađenje od naslaga kamenca.",
+  "Zamjena cinkova.",
+  "Ugradnja opreme od kroma (bimini tende, špiruni, stepenice...).",
+  "Alati i izvlakači za vađenje propelera i ležajeva.",
+  "Ugradnja umjetne tikovine Flexiteek."
+];
+
+const whatsappMessage = encodeURIComponent("Pozdrav! Zanima me servis / dijagnostika brodskog motora u Suhoj Marini Proizd.");
+const whatsappUrl = `https://wa.me/${phoneRaw}?text=${whatsappMessage}`;
+
+// Service shema vezana na #business čvor iz Schema.astro
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "SERVIS BRODSKIH I VANBRODSKIH MOTORA",
+  "serviceType": "Marine engine repair, diagnostics, and maintenance",
+  "provider": {
+    "@type": "LocalBusiness",
+    "@id": "https://suhamarina.eu/#business",
+    "name": "Suha Marina Proizd",
+    "telephone": "+385989540388"
+  },
+  "areaServed": ["Vela Luka", "Otok Korčula", "Dubrovačko-neretvanska županija", "Srednji i južni Jadran"],
+  "description": seoDescription,
+  "knowsAbout": mechanicalWorks
+};
+---
+
+<Layout title={seoTitle} description={seoDescription} lang={lang}>
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+
+  <Navbar lang={lang} />
+
+  <main class="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto flex-1">
+
+    <!-- Navigacijski povratak -->
+    <div class="mb-8">
+      <a href="/" class="inline-flex items-center gap-2 text-xs font-mono font-semibold text-sky-700 hover:text-sky-900">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Povratak na naslovnu
+      </a>
+    </div>
+
+    <!-- Hero blok stranice -->
+    <header class="mb-12">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 text-sky-800 border border-sky-200 text-xs font-semibold uppercase tracking-wider mb-4">
+        <span class="w-2 h-2 rounded-full bg-sky-700"></span>
+        Ovlašteni servis i računalna dijagnostika • od 2011. godine
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 leading-tight">
+        SERVIS BRODSKIH I VANBRODSKIH MOTORA
+      </h1>
+      <p class="mt-4 text-base sm:text-lg text-slate-700 leading-relaxed">
+        U sklopu Suhe Marine Proizd u Veloj Luci na otoku Korčuli obavljamo ovlašteni servis s garancijom, kompjutorsko očitavanje grešaka dijagnostikom za sve vanbrodske motore, generalne mehaničke popravke te ugradnju brodske opreme.
+      </p>
+    </header>
+
+    <!-- Glavni CTA blok -->
+    <section class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 mb-12 shadow-sm">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mb-3">Očuvanje tvorničkog jamstva i pouzdan rad u sezoni</h2>
+      <p class="text-sm sm:text-base text-slate-700 leading-relaxed mb-6">
+        Kao ovlašteni servis s garancijom za vanbrodske motore <strong>Suzuki, Honda, Tohatsu i Hidea</strong> vršimo redovne servise kojima zadržavate valjano tvorničko jamstvo, uz kompjutorsko očitavanje grešaka dijagnostikom za sve vanbrodske motore, uključujući i <strong>Yamaha</strong> motore.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 pt-4 border-t border-slate-200">
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold text-sm transition-colors shadow-sm"
+        >
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/></svg>
+          Rezervirajte termin putem WhatsAppa
+        </a>
+        <a
+          href={`tel:+${phoneRaw}`}
+          class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-sky-800 hover:bg-sky-900 text-white font-bold text-sm transition-colors border border-sky-900 shadow-sm"
+        >
+          Nazovite servis: {phoneDisplay}
+        </a>
+      </div>
+    </section>
+
+    <!-- Dvije kolone: Ovlašteni brendovi & Dijagnostika -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
+        <div class="w-10 h-10 rounded-xl bg-slate-100 text-sky-800 flex items-center justify-center font-bold mb-4 border border-slate-200">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 mb-2">Ovlašteni servis s garancijom</h3>
+        <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+          Ovlašteni servis s garancijom za vanbrodske motore Suzuki, Honda, Tohatsu i Hidea:
+        </p>
+        <ul class="space-y-2 text-xs font-medium text-slate-700">
+          {authorizedBrands.map((brand) => (
+            <li class="flex items-center gap-2">
+              <svg class="w-3.5 h-3.5 text-sky-700 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              {brand}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
+        <div class="w-10 h-10 rounded-xl bg-slate-100 text-sky-800 flex items-center justify-center font-bold mb-4 border border-slate-200">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 mb-2">Kompjutorsko očitavanje grešaka dijagnostikom</h3>
+        <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+          Kompjutorsko očitavanje grešaka dijagnostikom za sve vanbrodske motore, uključujući i Yamaha motore:
+        </p>
+        <ul class="space-y-2 text-xs font-medium text-slate-700">
+          {diagnosticBrands.map((brand) => (
+            <li class="flex items-center gap-2">
+              <svg class="w-3.5 h-3.5 text-sky-700 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              {brand}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Kompletan popis svih 14 stavki iz Nikolinog dokumenta -->
+    <section class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 mb-12 shadow-sm">
+      <h2 class="text-xl font-bold text-slate-900 mb-4">SERVIS BRODSKIH I VANBRODSKIH MOTORA — sve usluge:</h2>
+      <ul class="space-y-2.5 text-sm text-slate-700">
+        {mechanicalWorks.map((work) => (
+          <li class="flex items-start gap-3">
+            <span class="text-sky-700 font-bold">•</span>
+            <span>{work}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- Povezane specijalističke usluge (SEO klaster) -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
+      <a
+        href="/ugradnja-minn-kota-garmin-force-korcula"
+        class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-sky-600 transition-colors group shadow-sm"
+      >
+        <span class="text-xs font-mono font-bold text-sky-800 uppercase tracking-wider">Povezana usluga</span>
+        <h3 class="text-base font-bold text-slate-900 mt-1 group-hover:text-sky-700 transition-colors">
+          Brodska elektronika, Furuno/Garmin i solarni sustavi →
+        </h3>
+        <p class="text-xs text-slate-600 mt-1">
+          Ugradnja Minn Kota i Garmin Force pramčanih motora, sonara, radara, solarnih panela i regulatora napona.
+        </p>
+      </a>
+      <a
+        href="/podvodni-radovi-i-hrb-pregledi-korcula"
+        class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-sky-600 transition-colors group shadow-sm"
+      >
+        <span class="text-xs font-mono font-bold text-sky-800 uppercase tracking-wider">Povezana usluga</span>
+        <h3 class="text-base font-bold text-slate-900 mt-1 group-hover:text-sky-700 transition-colors">
+          Podvodni radovi i HRB pregledi kamerom →
+        </h3>
+        <p class="text-xs text-slate-600 mt-1">
+          Snimanje podvodnom kamerom s monitorom, podvodni baloni, kolpa morta i sanacija svih vrsta trupova.
+        </p>
+      </a>
+    </section>
+
+  </main>
+
+  <QuickContactCTA lang={lang} />
+  <Footer lang={lang} />
+</Layout>
