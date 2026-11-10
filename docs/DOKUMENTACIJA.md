@@ -1,7 +1,7 @@
 # Tehnička dokumentacija projekta: Suha Marina PROIZD (suhamarina.eu)
 
-**Verzija dokumentacije:** 1.1.0 (`v1.0.14` / build `20261108.1`)  
-**Datum ažuriranja:** 8. studenoga 2026.  
+**Verzija dokumentacije:** 1.2.0 (`v1.0.15` / build `20261110.1`)  
+**Datum ažuriranja:** 10. studenoga 2026.  
 **Autor:** OleaD  
 **Klijent:** Obrt Proizd – Suha Marina, Vela Luka, Otok Korčula  
 
@@ -46,13 +46,14 @@ suhamarinaeu27/
 │   │   ├── 2026-09-19.md       # Dnevnik rada i kronologija promjena (inicijalni razvoj)
 │   │   ├── 2026-10-01.md       # Optimizacija LCP/fontova/usluga, landing, nginx
 │   │   ├── 2026-10-09.md       # Galerija (25 unikatnih fotografija), 404/500, OG tagovi
-│   │   └── 08-11-2026.md       # Faze 1–4 + Sprint 4 (Daylight Marine redizajn & Nikolin tekst)
+│   │   ├── 08-11-2026.md       # Faze 1–4 + Sprint 4 (Daylight Marine redizajn & Nikolin tekst)
+│   │   └── 10-11-2026.md       # Sprint 5 (masonry, društvene mreže, crs.hr, AI/GEO llms.txt)
 │   └── DOKUMENTACIJA.md        # Glavni tehnički dokument projekta
 ├── scripts/
 │   └── snapshot-cjenik.mjs     # Automatska pohrana verzija cjenika u arhivu (pre-build)
 ├── nginx.conf                  # Nginx konfiguracija produkcijskog kontejnera
 ├── Dockerfile                  # Dvofazni build: Node (build) → nginx:alpine (serving)
-├── public/                     # Statičke datoteke (favicon, robots.txt, fontovi, og-image)
+├── public/                     # Statičke datoteke (favicon, robots.txt, llms.txt, fontovi, og-image)
 │   ├── fonts/                  # 4 variable WOFF2 (Inter, JetBrains Mono; latin + latin-ext)
 │   │   ├── fonts.css           # @font-face s weight-range deskriptorima
 │   │   ├── Inter-var-latin.woff2 / Inter-var-latin-ext.woff2
@@ -209,19 +210,30 @@ docker stop shm-nginx-test
 
 ---
 
-## 8. Verzioniranje i povijest faza (v1.0.14)
+## 8. Verzioniranje i povijest faza (v1.0.15)
 
 Verzija je zapisana u **tri** datoteke koje moraju ostati sinkronizirane:
-- `package.json` (`"version": "1.0.14"`)
+- `package.json` (`"version": "1.0.15"`)
 - `src/data/version.json` — izvor verzije za footer (`Footer.astro`)
 - `public/version.json` — javno dostupna kopija iste verzije
 
 Format build ID-a je `YYYYMMDD.N`; footer prikazuje `vX.Y.Z#YYYYMMDD.N`. Nakon svake sesije provjeriti da se ispravna verzija pojavljuje u `dist/index.html`.
 
-Trenutno stanje: **v1.0.14 / `20261108.1`** (Završene Faze 1–4 i Sprint 4):
+Trenutno stanje: **v1.0.15 / `20261110.1`** (Završene Faze 1–4, Sprint 4 i Sprint 5):
 - **Faza 1:** Globalni podaci (`Ulica 41, br. 42`, `nikola.mul@gmail.com`), `sameAs` društvene mreže, prošireni `knowsAbout` u Schema.org te usklađeni Open Graph / Twitter Card meta podaci s apsolutnim URL-om slike (`1200×630 px`).
 - **Faza 2:** Navigacija i podnožje (`Navbar.astro`, `Footer.astro`) s društvenim mrežama (Facebook, Instagram, WhatsApp), poveznicom na ribolovnu elektroniku i komponentom `BackToTop.astro` (Astro SOP, nula CLS-a).
 - **Faza 3:** Proširenje i višejezično usklađenje kartica usluga (`ServicesGrid.astro` — HR, EN, DE).
 - **Faza 4:** 3 specijalizirane SEO klaster landing stranice (`/ugradnja-minn-kota-garmin-force-korcula`, `/servis-i-dijagnostika-brodskih-motora`, `/podvodni-radovi-i-hrb-pregledi-korcula`) s `Service` JSON-LD shemama (ukupno **9 HTML ruta**).
 - **Sprint 4 (Faza 1 & Faza 2):** Prelazak na **Daylight Marine** inženjersku paletu visoke čitljivosti na suncu (uklonjeni svi tekstualni gradijenti i tamne pozadine kartica) te **100% doslovna integracija Nikolinog teksta** iz Word dokumenta u Hero sekciju, kartice usluga i SEO podstranice.
+
+## Sprint 5: AI-GEO optimizacija, Masonry raspored i stvarni profili (10.11.2026.)
+**Verzija rješenja:** v1.0.15 (Build `20261110.1`)  
+**Status:** Produkcijski spremno, testirano i verificirano.
+
+#### Ključni postignuti rezultati:
+1. **Društvene mreže & Favicon:** Povezani službeni Instagram (`suhamarinaeu`) i Facebook (`proizd`) profili u UI-ju i Schema.org sameAs zapisu. Zamijenjen favicon novim vektorskim SVG i višerezolucijskim ICO logom.
+2. **Masonry raspored (ServicesGrid):** Uklonjen kruti CSS grid i prazan prostor na desktopu uvođenjem CSS columns rasporeda (`columns-1 md:columns-2 lg:columns-3`).
+3. **HRB / CRS autoritativno povezivanje:** Sva spominjanja Hrvatskog registra brodova povezana sa službenom domenom `crs.hr`.
+4. **AI/GEO infrastruktura:** Implementiran `public/llms.txt` kao baza znanja za AI agente, proširen `public/robots.txt` za AI botove (GPTBot, PerplexityBot, ClaudeBot) te konfiguriran sitemap s BCP-47 jezičnim oznakama (`hr-HR`, `en-US`, `de-DE`).
+5. **Verifikacija:** `npm run check` (0 errors, 0 warnings, 0 hints) i `npm run build` (9 statičkih stranica, `llms.txt`, `robots.txt` i `hreflang` oznake potvrđene u `dist/`).
 

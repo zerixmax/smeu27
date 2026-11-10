@@ -1,7 +1,6 @@
 {
-  "version": "1.0.14",
-  "build": "20261108.1",
-  "stage": "production",
-  "updatedAt": "2026-11-08 21:12",
-  "changelog": "Daylight Marine redizajn, kompletna doslovna integracija Nikolinog teksta, 3 SEO klaster rute, BackToTop i kontakt usklađenje"
+  "version": "1.0.15",
+  "build": "20261110.1",
+  "date": "2026-11-10",
+  "stage": "production"
 }

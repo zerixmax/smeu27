@@ -14,8 +14,8 @@ const phoneDisplay = "+385 98 954 03 88";
 const phoneRaw = "385989540388";
 const whatsappMsg = encodeURIComponent(t('cta.whatsapp_msg'));
 const whatsappUrl = `https://wa.me/${phoneRaw}?text=${whatsappMsg}`;
-const facebookUrl = "https://www.facebook.com/suhamarina.proizd";
-const instagramUrl = "https://www.instagram.com/suhamarina.proizd";
+const facebookUrl = "https://www.facebook.com/proizd";
+const instagramUrl = "https://www.instagram.com/suhamarinaeu/";
 ---
 
 <footer id="kontakt" class="mt-auto bg-slate-900 text-slate-300 border-t border-slate-800 pt-16 pb-24 md:pb-12 text-sm">
@@ -135,7 +135,7 @@ const instagramUrl = "https://www.instagram.com/suhamarina.proizd";
         <!-- Interna razvojna verzija (Vidljiva na webu) -->
         <span 
           class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800 text-[11px] font-mono text-slate-400"
-          title={`Zadnji build: ${projectVersion.updatedAt} | ${projectVersion.changelog}`}
+          title={`Build ${projectVersion.build} • ${projectVersion.date}`}
         >
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
           v{projectVersion.version}

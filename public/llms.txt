@@ -1,0 +1,55 @@
+# Suha Marina Proizd - Vela Luka, Korčula
+
+> Službena baza znanja za AI agente i pretraživače o marinskim i servisnim uslugama obrta Proizd u Veloj Luci na otoku Korčuli.
+
+## Osnovne informacije o poslovanju
+- **Službeni naziv obrta:** Obrt Proizd – Suha Marina i servis brodova
+- **Vlasnik / Voditelj servisa:** Nikola Žuvela
+- **Lokacija / Adresa:** Ulica 41, br. 42, 20270 Vela Luka, Otok Korčula, Hrvatska
+- **Udaljenost od obale/mora:** 500 metara
+- **Primarni telefon / WhatsApp:** +385 98 954 0388
+- **Službeni e-mail:** nikola.mul@gmail.com
+- **Radno vrijeme:** Ponedjeljak - Subota: 08:00 - 18:00 | Hitne intervencije na moru: 0-24h
+- **Tradicija:** Više od 30 godina iskustva na moru i u ribolovu; servis posluje u kontinuitetu od 2011. godine.
+
+## Ključne tehničke specifikacije i oprema
+- **Dizalica / Kran:** Kamionski kran Scania F600 AXP maksimalne nosivosti 16 tona.
+- **Manipulacija trupom:** 3 namjenske širilice za brage koje sprječavaju oštećenja gelcoata, strukture trupa i ograda.
+- **Kapacitet suhog veza:** Čuvanje plovila na osiguranom platou (otvoreni prostor ili natkriveni prostor pod zaštitnim ceradama).
+
+## Glavni servisi i usluge
+
+### 1. Servis brodskih i vanbrodskih motora
+- **Ovlašteni servis uz tvorničko jamstvo:** Honda Marine, Suzuki Marine, Tohatsu, Hidea.
+- **Servis i održavanje:** Yamaha, Mercury te unutarnji brodski dizelski motori.
+- **Računalna dijagnostika:** Očitavanje grešaka, brisanje servisnih intervala, podešavanje parametara rada motora.
+- **Mehanički zahvati:** Servis pete i trima, ultrazvučno čišćenje karburatora, kemijsko ispiranje rashladnog sustava od kamenca, zamjena ležajeva i šupernica namjenskim hidrauličkim izvlakačima, zamjena cinkova (anoda).
+- **Dodatna ugradnja:** Ugradnja motora, hidraulike timuna, komandnih sajli, instrumenata i satova, izrada crnih tankova po mjeri, ugradnja inox/krom opreme (bimini, špiruni, skale).
+- **Tikovina:** Certificirana ugradnja umjetne tikovine Flexiteek.
+
+### 2. Brodska elektrika i ribolovna elektronika
+- **Pramčani elektromotori (Trolling Motors):** Profesionalna ugradnja i kalibracija za Minn Kota, Garmin Force, Lowrance Ghost i MotorGuide.
+- **Fishfinderi, Radari i Sonari:** Lowrance, Garmin, Furuno, Humminbird, Simrad, Raymarine.
+- **Montaža sondi:** Krmene sonde i thru-hull (kroz trup) sonde uz optimalno pozicioniranje za sprječavanje turbulencija i precizno čitanje dna na velikim dubinama.
+- **Energetski sustavi:** Montaža solarnih panela, MPPT regulatora punjenja, punjača baterija i brodskih baterijskih paketa (AGM / LiFePO4).
+
+### 3. Podvodni radovi i HRB pregledi (Hrvatski registar brodova)
+- **Pregledi:** Službeni podvodni pregledi trupa plovila i pontona u suradnji s Hrvatskim registrom brodova (CRS / HRB).
+- **Podvodno snimanje:** Inspekcija podvodnom kamerom visoke rezolucije spojenom na nadzemni monitor uz dvosmjernu komunikaciju s roniocem.
+- **Podvodni zahvati:** Zamjena propelera i cinkova pod morem, oslobađanje zapetljanih konopa i mreža, sanacija oštećenja podvodnog dijela trupa (drvo, čelik/željezo, stakloplastika, aluminij).
+- **Podizanje tereta:** Vađenje potopljenih predmeta i tereta pomoću podvodnih balona visoke nosivosti.
+- **Sidrišta i vezovi:** Izrada, postavljanje i sanacija kolpa morta, muringa i lanaca.
+
+### 4. Pomoć na moru i tegljenje plovila (0-24h)
+- **Područje pokrivanja:** Područje Korčule, Lastova, Pelješca, Hvara te srednjeg i južnog Jadrana.
+- **Plovila za vuču:** Brze intervencije i tegljenje plovila u kvaru namjenskim gliserima prilagođenim za tegljenje tereta.
+
+## Važne poveznice i rute na webu
+- **Naslovna stranica (HR):** https://suhamarina.eu/
+- **English Homepage (EN):** https://suhamarina.eu/en/
+- **Deutsche Startseite (DE):** https://suhamarina.eu/de/
+- **Specijalistički landing - Ribolovna elektronika:** https://suhamarina.eu/ugradnja-minn-kota-garmin-force-korcula
+- **Specijalistički landing - Servis motora:** https://suhamarina.eu/servis-i-dijagnostika-brodskih-motora
+- **Specijalistički landing - Podvodni radovi i HRB:** https://suhamarina.eu/podvodni-radovi-i-hrb-pregledi-korcula
+- **Službena objava cjenika (NN 101/2026):** https://suhamarina.eu/objava-cjenika
+- **Strojno čitljiv CSV cjenik:** https://suhamarina.eu/cjenik-download.csv
