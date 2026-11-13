@@ -18,17 +18,12 @@ const whatsappMsg = encodeURIComponent(t('cta.whatsapp_msg'));
 const spreadersText = lang === 'en' ? '3 spreaders' : lang === 'de' ? '3 Traversen' : '3 širilice';
 ---
 
-<!-- Hero sekcija s kranom i specifikacijama -->
-<section id="kran" class="relative pt-12 pb-16 lg:py-24 bg-white border-b border-slate-200 scroll-mt-20">
+<!-- Hero sekcija s kranom -->
+<section id="kran" class="relative pt-12 pb-16 lg:py-24 bg-white border-b border-slate-200 scroll-mt-24">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
       
       <div class="lg:col-span-7">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 text-sky-800 border border-sky-200 text-xs font-semibold uppercase tracking-wider mb-6">
-          <span class="w-2 h-2 rounded-full bg-sky-700"></span>
-          {t('hero.badge')}
-        </div>
-
         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-slate-900">
           {t('hero.title_pre')} <span class="text-sky-800">{t('hero.title_highlight')}</span>
         </h1>
@@ -36,44 +31,6 @@ const spreadersText = lang === 'en' ? '3 spreaders' : lang === 'de' ? '3 Travers
         <p class="mt-5 text-base sm:text-lg text-slate-700 leading-relaxed max-w-2xl">
           {t('hero.desc')}
         </p>
-
-        <!-- Specifikacije -->
-        <div class="mt-8 grid grid-cols-3 gap-4 border-y border-slate-200 py-4 max-w-xl">
-          <div>
-            <div class="text-2xl sm:text-3xl font-black font-mono text-slate-900">16 t</div>
-            <div class="text-xs text-slate-600 uppercase tracking-wider mt-1 font-medium">{t('spec.crane')}</div>
-          </div>
-          <div>
-            <div class="text-2xl sm:text-3xl font-black font-mono text-slate-900">{spreadersText}</div>
-            <div class="text-xs text-slate-600 uppercase tracking-wider mt-1 font-medium">{t('spec.spreaders')}</div>
-          </div>
-          <div>
-            <div class="text-2xl sm:text-3xl font-black font-mono text-slate-900">500 m</div>
-            <div class="text-xs text-slate-600 uppercase tracking-wider mt-1 font-medium">{t('spec.distance')}</div>
-          </div>
-        </div>
-
-        <!-- Precizne lokacijske entitete (semantički LLM markeri) -->
-        <div class="mt-6 max-w-xl rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-2.5">
-          <div class="flex items-start gap-3 text-xs sm:text-sm text-slate-700 leading-relaxed">
-            <svg class="w-4 h-4 text-sky-700 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-            </svg>
-            <span>{t('loc.ferry')}</span>
-          </div>
-          <div class="flex items-start gap-3 text-xs sm:text-sm text-slate-700 leading-relaxed">
-            <svg class="w-4 h-4 text-sky-700 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 6.5a3.5 3.5 0 01-5.27 3.08l-4.9 2.36a3.5 3.5 0 010 6.12l4.9 2.36A3.5 3.5 0 1121 23.5a3.5 3.5 0 01-1.43-6.72l-4.9-2.36a3.5 3.5 0 010-6.84l4.9-2.36A3.5 3.5 0 1121 6.5zM17 5V3m2 2h2a2 2 0 012 2M17 17v2m-2-2h-2a2 2 0 00-2 2m8.5-7.5h.01M4 20h6"/>
-            </svg>
-            <span>{t('loc.korkyra')}</span>
-          </div>
-          <div class="flex items-start gap-3 text-xs sm:text-sm text-slate-700 leading-relaxed">
-            <svg class="w-4 h-4 text-sky-700 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
-            </svg>
-            <span>{t('loc.area')}</span>
-          </div>
-        </div>
 
         <!-- CTA Gumbi -->
         <div class="mt-8 flex flex-wrap gap-4 items-center">

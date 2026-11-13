@@ -60,6 +60,7 @@ SuhaMarinaEu27/
 │   ├── favicon.ico
 │   ├── robots.txt             # SEO indeksacija i veza na sitemap
 │   ├── og-image.jpg           # Social-share slika (Open Graph, 1200x630)
+│   ├── suhamarianeu_ikone_*.webp # 5 WebP ikonica usluga u ServiceBanners sekcijama
 │   └── fonts/                 # Self-hosted Inter & JetBrains Mono (woff2 + fonts.css)
 ├── scripts/
 │   └── snapshot-cjenik.mjs    # Automatska pohrana verzija cjenika u arhivu
@@ -71,9 +72,9 @@ SuhaMarinaEu27/
 │   ├── components/
 │   │   ├── Footer.astro       # OleaD potpis, zakonski linkovi i prikaz verzije
 │   │   ├── Navbar.astro       # Navigacija, jezični preklopnik i astro:page-load eventi
-│   │   ├── Hero.astro         # Hero s kranom, specifikacijama i YouTube Lite playerom
-│   │   ├── Partners.astro     # Logotipi partnera
-│   │   ├── ServicesGrid.astro # Mreža usluga (HR/EN/DE)
+│   │   ├── Hero.astro         # Hero s kranom, lokacijom i CTA gumbima
+│   │   ├── Partners.astro     # Logotipi partnera (pri dnu, iznad Footera)
+│   │   ├── ServiceBanners.astro # 5 obojenih traka, velike ilustracije; desktop otvoreno / mobitel zatvoreno (HR/EN/DE)
 │   │   ├── Gallery.astro      # Galerija infrastrukture
 │   │   ├── PriceTable.astro   # NN 101/2026 cjenik sa sidrenim cijenama
 │   │   ├── QuickContactCTA.astro# Fiksni mobilni poziv / WhatsApp
@@ -93,6 +94,11 @@ SuhaMarinaEu27/
 │   └── pages/
 │       ├── index.astro        # Glavna stranica (HR)
 │       ├── objava-cjenika.astro # Zakonska objava + digitalna arhiva (NN 101/2026)
+│       ├── suhi-vez-i-kran-16t-korcula.astro # Detaljna stranica: suhi vez i kran 16 t
+│       ├── servis-i-dijagnostika-brodskih-motora.astro # Detaljna stranica: servis motora
+│       ├── ugradnja-minn-kota-garmin-force-korcula.astro # Detaljna stranica: brodska elektronika
+│       ├── podvodni-radovi-i-hrb-pregledi-korcula.astro # Detaljna stranica: podvodni radovi
+│       ├── pomoc-na-moru-i-tegljenje-korcula.astro # Detaljna stranica: pomoć na moru
 │       ├── cjenik.csv.ts      # Generiranje strojnog CSV-a po HOK standardu
 │       ├── cjenik-download.csv.ts # Alias ruta za /cjenik-download.csv
 │       ├── arkhiva/[datum].csv.ts  # Strojni CSV preuzimanje arhivskih verzija

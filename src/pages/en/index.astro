@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Hero from '../../components/Hero.astro';
 import Partners from '../../components/Partners.astro';
-import ServicesGrid from '../../components/ServicesGrid.astro';
+import ServiceBanners from '../../components/ServiceBanners.astro';
 import Gallery from '../../components/Gallery.astro';
 import VideoSection from '../../components/VideoSection.astro';
 import PriceTable from '../../components/PriceTable.astro';
@@ -23,13 +23,13 @@ const lang = 'en';
   <Navbar lang={lang} />
   <main>
     <Hero lang={lang} />
-    <Partners />
-    <ServicesGrid lang={lang} />
+    <ServiceBanners lang={lang} />
     <Gallery lang={lang} />
     <VideoSection videoId="mxzdmVqcefc" lang={lang} />
     <PriceTable lang={lang} />
     <LocationAndReviews lang={lang} />
     <FAQ lang={lang} />
+    <Partners />
   </main>
   <Footer lang={lang} />
   <QuickContactCTA lang={lang} />

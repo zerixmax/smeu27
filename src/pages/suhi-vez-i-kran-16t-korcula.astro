@@ -1,0 +1,279 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import QuickContactCTA from '../components/QuickContactCTA.astro';
+
+const lang = 'hr';
+
+const seoTitle = "Suhi vez i kran 16 t Korčula | Vađenje i čuvanje plovila – Vela Luka";
+const seoDescription = "Suhi vez u Veloj Luci na Korčuli, 500 m od mora. Vađenje i transport plovila kamionskim kranom Scania 16 t s 3 širilice, otvoreni i natkriveni smještaj, pranje pod visokim tlakom te popravci stakloplastike, gelcoata, gumenjaka i drvenih brodova.";
+
+const phoneDisplay = "+385 98 954 03 88";
+const phoneRaw = "385989540388";
+
+const craneFeatures = [
+  "Kamionski kran Scania F600 AXP nosivosti do 16 tona",
+  "3 namjenske širilice za brage koje čuvaju trup i ograde",
+  "Sigurno podizanje i transport plovila do parcele",
+  "Iskusna ekipa za vađenje manjih i većih plovila"
+];
+
+const storageFeatures = [
+  "Parcela udaljena 500 m od mora",
+  "Otvoreni i natkriveni suhi vez pod zaštitnim ceradama",
+  "Osigurano postolje prilagođeno trupu plovila",
+  "Pranje podvodnog dijela visokim tlakom nakon vađenja"
+];
+
+const repairWorks = [
+  "Popravci stakloplastike i gelcoata",
+  "Sanacija gumenjaka i RIB plovila",
+  "Popravci drvenih brodova",
+  "Biorazgradiva zaštita i priprema za sezonu"
+];
+
+const serviceWorks = [
+  "Kran Scania 16 tona s hidrauličnim širilicama",
+  "Siguran transport do parcele udaljene 500 m od obale",
+  "Otvoreni i natkriveni suhi vez pod zaštitnim ceradama",
+  "Visokotlačno pranje podvodnog dijela neposredno nakon vađenja",
+  "Biorazgradiva zaštita trupa i podvodnog dijela",
+  "Popravci stakloplastike, gelcoata, gumenjaka i drvenih brodova",
+  "Priprema plovila za duži boravak na kopnu ili novu sezonu"
+];
+
+const processSteps = [
+  {
+    step: "01",
+    title: "Upit i termin",
+    text: "Javite nam dimenzije i težinu plovila te željeni termin vađenja. Dogovaramo dolazak i pripremu parcele."
+  },
+  {
+    step: "02",
+    title: "Vađenje kranom",
+    text: "Plovilo podižemo kranom Scania 16 t s 3 širilice koje štite trup i ograde tijekom manipulacije."
+  },
+  {
+    step: "03",
+    title: "Pranje i pregled",
+    text: "Neposredno nakon vađenja peremo podvodni dio visokim tlakom i pregledavamo stanje trupa."
+  },
+  {
+    step: "04",
+    title: "Smještaj i radovi",
+    text: "Plovilo smještamo na osigurano postolje, otvoreno ili pod ceradom, uz mogućnost dodatnih radova."
+  }
+];
+
+const benefits = [
+  {
+    title: "Manje habanje i biofoulinga",
+    text: "Boravak na kopnu smanjuje naslage na trupu, dostupnost pregleda i lakše održavanje podvodnog dijela."
+  },
+  {
+    title: "Zaštita od vremenskih uvjeta",
+    text: "Natkriveni smještaj pod ceradama štiti plovilo od sunca, kiše i neposrednog utjecaja mora."
+  },
+  {
+    title: "Sve na jednom mjestu",
+    text: "Vađenje, pranje, smještaj i popravci trupa obavljaju se na istoj lokaciji u Veloj Luci."
+  }
+];
+
+const whatsappMessage = encodeURIComponent("Pozdrav! Zanima me termin vađenja i suhi vez za plovilo u Suhoj Marini Proizd.");
+const whatsappUrl = `https://wa.me/${phoneRaw}?text=${whatsappMessage}`;
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Suhi vez i kran 16 t",
+  "serviceType": "Dry dock storage, boat haul-out, and marine crane transport",
+  "provider": {
+    "@type": "LocalBusiness",
+    "@id": "https://suhamarina.eu/#business",
+    "name": "Suha Marina Proizd",
+    "telephone": "+385989540388"
+  },
+  "areaServed": ["Vela Luka", "Otok Korčula", "Dubrovačko-neretvanska županija", "Srednji i južni Jadran"],
+  "description": seoDescription,
+  "knowsAbout": serviceWorks
+};
+---
+
+<Layout title={seoTitle} description={seoDescription} lang={lang}>
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+
+  <Navbar lang={lang} />
+
+  <main class="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto flex-1">
+
+    <div class="mb-8">
+      <a href="/" class="inline-flex items-center gap-2 text-xs font-mono font-semibold text-sky-700 hover:text-sky-900">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Povratak na naslovnu
+      </a>
+    </div>
+
+    <header class="mb-12">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 text-sky-800 border border-sky-200 text-xs font-semibold uppercase tracking-wider mb-4">
+        <span class="w-2 h-2 rounded-full bg-sky-700"></span>
+        Kran Scania 16 t • 3 širilice • 500 m od mora
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 leading-tight">
+        SUHI VEZ I KRAN 16 T
+      </h1>
+      <p class="mt-4 text-base sm:text-lg text-slate-700 leading-relaxed">
+        Kompletna manipulacija kamionskim kranom Scania F600 AXP nosivosti do 16 tona uz 3 namjenske širilice za brage koje čuvaju trup i ograde. Smještaj na osiguranom postolju na parceli 500 m od mora, otvoreno i pod ceradom, uz visokotlačno pranje podvodnog dijela neposredno nakon vađenja.
+      </p>
+    </header>
+
+    <section class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 mb-12 shadow-sm">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mb-3">Zatražite termin vađenja ili smještaja</h2>
+      <p class="text-sm sm:text-base text-slate-700 leading-relaxed mb-6">
+        Pošaljite nam osnovne podatke o plovilu i željeni termin. Dogovorit ćemo vađenje kranom, pranje, smještaj na parceli i, prema potrebi, popravke trupa na jednom mjestu u Veloj Luci.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 pt-4 border-t border-slate-200">
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold text-sm transition-colors shadow-sm"
+        >
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/></svg>
+          Pošaljite upit putem WhatsAppa
+        </a>
+        <a
+          href={`tel:+${phoneRaw}`}
+          class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-sky-800 hover:bg-sky-900 text-white font-bold text-sm transition-colors border border-sky-900 shadow-sm"
+        >
+          Nazovite: {phoneDisplay}
+        </a>
+      </div>
+    </section>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
+        <div class="w-10 h-10 rounded-xl bg-slate-100 text-sky-800 flex items-center justify-center font-bold mb-4 border border-slate-200">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v18M5 8l7-5 7 5M5 16l7 5 7-5"/></svg>
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 mb-2">Kran Scania 16 t</h3>
+        <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+          Kamionski kran nosivosti do 16 tona s hidrauličnim širilicama:
+        </p>
+        <ul class="space-y-2 text-xs font-medium text-slate-700">
+          {craneFeatures.map((item) => (
+            <li class="flex items-start gap-2">
+              <svg class="w-3.5 h-3.5 text-sky-700 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
+        <div class="w-10 h-10 rounded-xl bg-slate-100 text-sky-800 flex items-center justify-center font-bold mb-4 border border-slate-200">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l9-9 9 9M5 10v10h14V10"/></svg>
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 mb-2">Suhi vez 500 m od mora</h3>
+        <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+          Siguran smještaj na parceli s osiguranim postoljem:
+        </p>
+        <ul class="space-y-2 text-xs font-medium text-slate-700">
+          {storageFeatures.map((item) => (
+            <li class="flex items-start gap-2">
+              <svg class="w-3.5 h-3.5 text-sky-700 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
+        <div class="w-10 h-10 rounded-xl bg-slate-100 text-sky-800 flex items-center justify-center font-bold mb-4 border border-slate-200">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.7 6.3a4 4 0 01-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 015.4-5.4l2.1-2.1-3-3-2.1 2.1z"/></svg>
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 mb-2">Popravci trupa</h3>
+        <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+          Manji i veći zahvati na trupu tijekom boravka na suhom vezu:
+        </p>
+        <ul class="space-y-2 text-xs font-medium text-slate-700">
+          {repairWorks.map((item) => (
+            <li class="flex items-start gap-2">
+              <svg class="w-3.5 h-3.5 text-sky-700 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+
+    <section class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 mb-12 shadow-sm">
+      <h2 class="text-xl font-bold text-slate-900 mb-4">Što sve obuhvaća usluga suhog veza i krana</h2>
+      <ul class="space-y-2.5 text-sm text-slate-700">
+        {serviceWorks.map((work) => (
+          <li class="flex items-start gap-3">
+            <span class="text-sky-700 font-bold">•</span>
+            <span>{work}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mb-2">Kako izgleda vađenje i smještaj plovila</h2>
+      <p class="text-sm text-slate-600 mb-6">Od prvog upita do sigurnog smještaja na parceli, u četiri koraka.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {processSteps.map((item) => (
+          <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm">
+            <span class="text-xs font-mono font-bold text-sky-800">{item.step}</span>
+            <h3 class="text-base font-bold text-slate-900 mt-1 mb-1">{item.title}</h3>
+            <p class="text-xs text-slate-700 leading-relaxed">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 mb-12 shadow-sm">
+      <h2 class="text-xl font-bold text-slate-900 mb-4">Zašto odabrati suhi vez u Veloj Luci</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {benefits.map((benefit) => (
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <h3 class="text-sm font-bold text-slate-900 mb-1">{benefit.title}</h3>
+            <p class="text-xs text-slate-700 leading-relaxed">{benefit.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
+      <a href="/servis-i-dijagnostika-brodskih-motora" class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-sky-600 transition-colors group shadow-sm">
+        <span class="text-xs font-mono font-bold text-sky-800 uppercase tracking-wider">Povezana usluga</span>
+        <h3 class="text-base font-bold text-slate-900 mt-1 group-hover:text-sky-700 transition-colors">Servis i dijagnostika brodskih motora →</h3>
+        <p class="text-xs text-slate-600 mt-1">Ovlašteni servis Suzuki, Honda, Tohatsu i Hidea te dijagnostika Yamaha i Mercury motora.</p>
+      </a>
+      <a href="/podvodni-radovi-i-hrb-pregledi-korcula" class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-sky-600 transition-colors group shadow-sm">
+        <span class="text-xs font-mono font-bold text-sky-800 uppercase tracking-wider">Povezana usluga</span>
+        <h3 class="text-base font-bold text-slate-900 mt-1 group-hover:text-sky-700 transition-colors">Podvodni radovi i HRB pregledi →</h3>
+        <p class="text-xs text-slate-600 mt-1">Podvodna kamera s monitorom, baloni, sidrišta i sanacija trupa u svim materijalima.</p>
+      </a>
+      <a href="/ugradnja-minn-kota-garmin-force-korcula" class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-sky-600 transition-colors group shadow-sm">
+        <span class="text-xs font-mono font-bold text-sky-800 uppercase tracking-wider">Povezana usluga</span>
+        <h3 class="text-base font-bold text-slate-900 mt-1 group-hover:text-sky-700 transition-colors">Brodska elektronika i solarni sustavi →</h3>
+        <p class="text-xs text-slate-600 mt-1">Minn Kota, Garmin Force, sonari, radari, solarne ploče i regulatori napona.</p>
+      </a>
+      <a href="/pomoc-na-moru-i-tegljenje-korcula" class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-sky-600 transition-colors group shadow-sm">
+        <span class="text-xs font-mono font-bold text-sky-800 uppercase tracking-wider">Povezana usluga</span>
+        <h3 class="text-base font-bold text-slate-900 mt-1 group-hover:text-sky-700 transition-colors">Pomoć na moru 0–24 i tegljenje →</h3>
+        <p class="text-xs text-slate-600 mt-1">Hitne intervencije i tegljenje plovila namjenskim gliserima na srednjem i južnom Jadranu.</p>
+      </a>
+    </section>
+
+  </main>
+
+  <QuickContactCTA lang={lang} />
+  <Footer lang={lang} />
+</Layout>

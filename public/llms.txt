@@ -48,8 +48,10 @@
 - **Naslovna stranica (HR):** https://suhamarina.eu/
 - **English Homepage (EN):** https://suhamarina.eu/en/
 - **Deutsche Startseite (DE):** https://suhamarina.eu/de/
+- **Specijalistički landing - Suhi vez i kran 16 t:** https://suhamarina.eu/suhi-vez-i-kran-16t-korcula
 - **Specijalistički landing - Ribolovna elektronika:** https://suhamarina.eu/ugradnja-minn-kota-garmin-force-korcula
 - **Specijalistički landing - Servis motora:** https://suhamarina.eu/servis-i-dijagnostika-brodskih-motora
 - **Specijalistički landing - Podvodni radovi i HRB:** https://suhamarina.eu/podvodni-radovi-i-hrb-pregledi-korcula
+- **Specijalistički landing - Pomoć na moru i tegljenje:** https://suhamarina.eu/pomoc-na-moru-i-tegljenje-korcula
 - **Službena objava cjenika (NN 101/2026):** https://suhamarina.eu/objava-cjenika
 - **Strojno čitljiv CSV cjenik:** https://suhamarina.eu/cjenik-download.csv

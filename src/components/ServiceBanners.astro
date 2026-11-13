@@ -1,0 +1,495 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+import imgKran from '../assets/images/gallery/suha-marina-vela-luka-2022.jpeg';
+import imgServis from '../assets/images/gallery/servis_motora.jpg';
+import imgElektronika from '../assets/images/gallery/suha-marina-eu-servis-motora_02.jpg';
+import imgPodvodni from '../assets/images/gallery/suha-marina-eu-servis-motora_07.jpg';
+import imgPomoc from '../assets/images/gallery/planet-nova-2018.jpg';
+
+interface Props {
+  lang?: 'hr' | 'en' | 'de';
+}
+
+interface BannerSection {
+  id: string;
+  title: string;
+  shortSummary: string;
+  fullDescription: string;
+  brands?: string[];
+  icon: string;
+  iconAlt: string;
+  bannerBg: string;
+  borderAccent: string;
+  bullets: string[];
+  image: ImageMetadata;
+  imageAlt: string;
+  link: string;
+  linkText: string;
+}
+
+interface LangData {
+  sections: BannerSection[];
+}
+
+const { lang = 'hr' } = Astro.props;
+
+const data: Record<'hr' | 'en' | 'de', LangData> = {
+  hr: {
+    sections: [
+      {
+        id: 'suhi-vez',
+        title: 'Suhi vez i kran 16 t',
+        shortSummary: 'Kran Scania 16 t, 3 širilice i siguran suhi vez 500 m od mora.',
+        fullDescription:
+          'Kompletna manipulacija kamionskim kranom Scania F600 AXP nosivosti do 16 tona uz 3 namjenske širilice za brage koje čuvaju trup i ograde. Smještaj na osiguranom postolju na parceli 500 m od mora (otvoreno i pod ceradom) uz visokotlačno pranje podvodnog dijela neposredno nakon vađenja.',
+        icon: '/suhamarianeu_ikone_dizalica.webp',
+        iconAlt: 'Ilustracija kamionskog krana 16 t i suhog veza',
+        bannerBg: 'bg-[#1d5a96] text-white',
+        borderAccent: 'border-l-8 border-l-[#1d5a96]',
+        bullets: [
+          'Kran Scania 16 tona s hidrauličnim širilicama',
+          'Siguran transport do parcele udaljene 500 m od obale',
+          'Otvoreni i natkriveni suhi vez pod zaštitnim ceradama',
+          'Pranje pod visokim tlakom i biorazgradiva zaštita',
+          'Popravci stakloplastike, gelcoata, gumenjaka i drvenih brodova',
+        ],
+        image: imgKran,
+        imageAlt: 'Vađenje i transport broda kranom Scania 16 t u Veloj Luci',
+        link: '/suhi-vez-i-kran-16t-korcula',
+        linkText: 'Detalji suhog veza i krana',
+      },
+      {
+        id: 'servis-motora',
+        title: 'Ovlašteni servis motora',
+        shortSummary: 'Ovlašteni servis s garancijom i kompjutorska dijagnostika.',
+        fullDescription:
+          'Ovlašteni servis s tvorničkim jamstvom za vanbrodske motore Suzuki, Honda, Tohatsu i Hidea. Kompjutorsko očitavanje grešaka dijagnostikom za sve vanbrodske motore (uključujući Yamaha i Mercury sustave), priprema za zimu, konzervacija i generalni popravci.',
+        brands: ['SUZUKI', 'HONDA', 'TOHATSU', 'HIDEA'],
+        icon: '/suhamarianeu_ikone_dijagnostika.webp',
+        iconAlt: 'Ilustracija servisa i dijagnostike brodskih motora',
+        bannerBg: 'bg-[#4caf50] text-slate-950',
+        borderAccent: 'border-l-8 border-l-[#4caf50]',
+        bullets: [
+          'Ovlašteni servis s garancijom: Suzuki, Honda, Tohatsu, Hidea',
+          'Kompjutorska dijagnostika i otklanjanje grešaka (uključujući Yamaha motore)',
+          'Ispiranje sustava za hlađenje od naslaga kamenca i zamjena cinkova',
+          'Servis pete i trima, čišćenje karburatora, zamjena ležajeva i šupernica',
+          'Izrada crnih tankova, ugradnja opreme od kroma i umjetne tikovine Flexiteek',
+        ],
+        image: imgServis,
+        imageAlt: 'Servis brodskih i vanbrodskih motora Proizd Vela Luka',
+        link: '/servis-i-dijagnostika-brodskih-motora',
+        linkText: 'Detalji servisa motora',
+      },
+      {
+        id: 'brodska-elektronika',
+        title: 'Brodska elektronika',
+        shortSummary: 'Više od 30 godina iskustva u ribolovu i ugradnji opreme.',
+        fullDescription:
+          'Više od 30 godina iskustva na moru i u ribolovu omogućuje nam da pravilno prilagodimo modernu elektroniku i opremu svakom brodu. Od 2011. godine imamo registriran servis za ugradnju i popravak brodskih dijelova.',
+        brands: ['MINN KOTA', 'GARMIN', 'LOWRANCE'],
+        icon: '/suhamarianeu_ikone_brodska_elektronika.webp',
+        iconAlt: 'Ilustracija brodske elektronike i pramčanog motora',
+        bannerBg: 'bg-[#fcd34d] text-slate-950',
+        borderAccent: 'border-l-8 border-l-[#fcd34d]',
+        bullets: [
+          'Profesionalna ugradnja pramčanih elektromotora (Minn Kota, MotorGuide, Garmin, Lowrance...)',
+          'Podešavanje radara, GPS-a i sonara (Lowrance, Garmin, Furuno, Humminbird, Simrad, Raymarine)',
+          'Odabir, pozicioniranje i podešavanje sondi za pronalazak ribe na različitim dubinama',
+          'Ugradnja solarnih ploča, punjača baterija i regulatora napona',
+        ],
+        image: imgElektronika,
+        imageAlt: 'Ugradnja Minn Kota pramčanih motora i brodske elektronike',
+        link: '/ugradnja-minn-kota-garmin-force-korcula',
+        linkText: 'Detalji ugradnje elektronike',
+      },
+      {
+        id: 'podvodni-radovi',
+        title: 'Podvodni radovi i HRB pregledi',
+        shortSummary: 'Službeni pregledi s podvodnom kamerom i certificirani ronioci.',
+        fullDescription:
+          'Službeni podvodni pregledi trupa, osovina, propelera i kormila u suradnji s inspektorima Hrvatskog registra brodova (CRS). Opremljeni smo podvodnom kamerom spojenom na monitor uz izravnu komunikaciju s roniocem.',
+        icon: '/suhamarianeu_ikone_podvodni_radovi.webp',
+        iconAlt: 'Ilustracija podvodnih radova i HRB pregleda',
+        bannerBg: 'bg-[#c62828] text-white',
+        borderAccent: 'border-l-8 border-l-[#c62828]',
+        bullets: [
+          'Postavljanje pontona i službeni podvodni pregledi pri Hrvatskom registru brodova',
+          'Snimanje podvodnom kamerom spojenom na monitor uz komunikaciju s roniocem',
+          'Podizanje tereta podvodnim balonima i oslobađanje/zamjena propelera i cinkova',
+          'Saniranje oštećenja podvodnog trupa broda (drvo, željezo, plastika, aluminij)',
+          'Postavljanje sidrišta, muringa, izrada kolpa morta i uređenje vezova',
+        ],
+        image: imgPodvodni,
+        imageAlt: 'Podvodni radovi ronioca i HRB pregledi trupa broda',
+        link: '/podvodni-radovi-i-hrb-pregledi-korcula',
+        linkText: 'Detalji podvodnih radova',
+      },
+      {
+        id: 'pomoc-na-moru',
+        title: 'Pomoć na moru 0–24',
+        shortSummary: 'Hitne intervencije i tegljenje na srednjem i južnom Jadranu.',
+        fullDescription:
+          'Pružamo hitnu pomoć plovilima u kvaru i tegljenje na području Vele Luke, otoka Korčule, Lastova, Hvara, Visa i poluotoka Pelješca. Brze intervencije iz Vele Luke namjenskim gliserima za vuču tereta.',
+        icon: '/suhamarianeu_ikone_pomoc_na_moru.webp',
+        iconAlt: 'Ilustracija pomoći na moru i tegljenja 0–24',
+        bannerBg: 'bg-[#f57c00] text-slate-950',
+        borderAccent: 'border-l-8 border-l-[#f57c00]',
+        bullets: [
+          'Pomoć plovilima u kvaru na području srednjeg i južnog Jadrana',
+          'Tegljenje plovila namjenskim gliserima za vuču tereta',
+          'Brze intervencije s polaskom iz Vele Luke (0–24 h)',
+        ],
+        image: imgPomoc,
+        imageAlt: 'Pomoć na moru i hitne intervencije tegljenja plovila Vela Luka',
+        link: '/pomoc-na-moru-i-tegljenje-korcula',
+        linkText: 'Detalji pomoći na moru',
+      },
+    ],
+  },
+  en: {
+    sections: [
+      {
+        id: 'suhi-vez',
+        title: 'Dry storage & 16 t crane',
+        shortSummary: 'Scania 16 t crane, 3 spreader bars and secure dry storage 500 m from the sea.',
+        fullDescription:
+          'Complete handling with a Scania F600 AXP truck crane with a lifting capacity of up to 16 tonnes and 3 dedicated spreader bars that protect the hull and railings. Storage on a secured stand on a plot 500 m from the sea (open-air and under tarpaulin), with high-pressure washing of the underwater hull immediately after haul-out.',
+        icon: '/suhamarianeu_ikone_dizalica.webp',
+        iconAlt: 'Illustration of a 16 t truck crane and dry storage',
+        bannerBg: 'bg-[#1d5a96] text-white',
+        borderAccent: 'border-l-8 border-l-[#1d5a96]',
+        bullets: [
+          '16-tonne Scania crane with hydraulic spreader bars',
+          'Safe transport to a plot 500 m from the coast',
+          'Open and covered dry storage under protective tarpaulins',
+          'High-pressure washing and biodegradable protection',
+          'Fiberglass, gelcoat, RIB and wooden boat repairs',
+        ],
+        image: imgKran,
+        imageAlt: 'Haul-out and transport of a boat with a 16 t Scania crane in Vela Luka',
+        link: '/suhi-vez-i-kran-16t-korcula',
+        linkText: 'Dry dock and crane details',
+      },
+      {
+        id: 'servis-motora',
+        title: 'Authorized engine service',
+        shortSummary: 'Authorized service with warranty and computer diagnostics.',
+        fullDescription:
+          'Authorized service with factory warranty for Suzuki, Honda, Tohatsu and Hidea outboard engines. Computer fault diagnostics for all outboard engines (including Yamaha and Mercury systems), winterization, preservation and general repairs.',
+        brands: ['SUZUKI', 'HONDA', 'TOHATSU', 'HIDEA'],
+        icon: '/suhamarianeu_ikone_dijagnostika.webp',
+        iconAlt: 'Illustration of engine service and diagnostics',
+        bannerBg: 'bg-[#4caf50] text-slate-950',
+        borderAccent: 'border-l-8 border-l-[#4caf50]',
+        bullets: [
+          'Authorized service with warranty: Suzuki, Honda, Tohatsu, Hidea',
+          'Computer diagnostics and fault resolution (including Yamaha engines)',
+          'Cooling system descaling and zinc anode replacement',
+          'Lower unit and trim service, carburetor cleaning, bearing and stuffing box replacement',
+          'Black water tank fabrication, chrome equipment and Flexiteek synthetic teak installation',
+        ],
+        image: imgServis,
+        imageAlt: 'Inboard and outboard engine service at Proizd, Vela Luka',
+        link: '/servis-i-dijagnostika-brodskih-motora',
+        linkText: 'Engine service details',
+      },
+      {
+        id: 'brodska-elektronika',
+        title: 'Marine electronics',
+        shortSummary: 'More than 30 years of fishing and equipment installation experience.',
+        fullDescription:
+          'More than 30 years of experience at sea and in fishing allows us to properly adapt modern electronics and equipment to every vessel. Since 2011, we have operated a registered service for installing and repairing marine components.',
+        brands: ['MINN KOTA', 'GARMIN', 'LOWRANCE'],
+        icon: '/suhamarianeu_ikone_brodska_elektronika.webp',
+        iconAlt: 'Illustration of marine electronics and a bow-mount motor',
+        bannerBg: 'bg-[#fcd34d] text-slate-950',
+        borderAccent: 'border-l-8 border-l-[#fcd34d]',
+        bullets: [
+          'Professional installation of bow-mount trolling motors (Minn Kota, MotorGuide, Garmin, Lowrance...)',
+          'Radar, GPS and sonar tuning (Lowrance, Garmin, Furuno, Humminbird, Simrad, Raymarine)',
+          'Selecting, positioning and tuning transducers for fish finding at different depths',
+          'Installation of solar panels, battery chargers and voltage regulators',
+        ],
+        image: imgElektronika,
+        imageAlt: 'Installation of Minn Kota bow-mount motors and marine electronics',
+        link: '/ugradnja-minn-kota-garmin-force-korcula',
+        linkText: 'Electronics installation details',
+      },
+      {
+        id: 'podvodni-radovi',
+        title: 'Underwater works & CRS/HRB inspections',
+        shortSummary: 'Official inspections with an underwater camera and certified divers.',
+        fullDescription:
+          'Official underwater inspections of hulls, shafts, propellers and rudders in cooperation with Croatian Register of Shipping (CRS) inspectors. We are equipped with an underwater camera connected to a monitor with direct communication with the diver.',
+        icon: '/suhamarianeu_ikone_podvodni_radovi.webp',
+        iconAlt: 'Illustration of underwater works and HRB inspections',
+        bannerBg: 'bg-[#c62828] text-white',
+        borderAccent: 'border-l-8 border-l-[#c62828]',
+        bullets: [
+          'Pontoon installation and official underwater inspections for the Croatian Register of Shipping',
+          'Underwater camera footage connected to a monitor with diver communication',
+          'Heavy load lifting with underwater lift bags and freeing/replacing propellers and anodes',
+          'Underwater hull damage repair (wood, steel, plastic, aluminium)',
+          'Anchorages, moorings, concrete mooring blocks (corpo morto) and berth setup',
+        ],
+        image: imgPodvodni,
+        imageAlt: 'Diver underwater works and HRB hull inspections',
+        link: '/podvodni-radovi-i-hrb-pregledi-korcula',
+        linkText: 'Underwater works details',
+      },
+      {
+        id: 'pomoc-na-moru',
+        title: 'Sea assistance 0–24',
+        shortSummary: 'Emergency assistance and towing in the central and southern Adriatic.',
+        fullDescription:
+          'We provide emergency assistance to disabled vessels and towing in the area of Vela Luka, Korčula, Lastovo, Hvar, Vis and the Pelješac peninsula. Fast interventions from Vela Luka with dedicated heavy-duty towboats.',
+        icon: '/suhamarianeu_ikone_pomoc_na_moru.webp',
+        iconAlt: 'Illustration of 0–24 sea assistance and towing',
+        bannerBg: 'bg-[#f57c00] text-slate-950',
+        borderAccent: 'border-l-8 border-l-[#f57c00]',
+        bullets: [
+          'Assistance to disabled vessels in the central and southern Adriatic',
+          'Boat towing with dedicated heavy-duty towboats',
+          'Fast interventions departing from Vela Luka (0–24 h)',
+        ],
+        image: imgPomoc,
+        imageAlt: 'Sea assistance and emergency vessel towing in Vela Luka',
+        link: '/pomoc-na-moru-i-tegljenje-korcula',
+        linkText: 'Sea assistance details',
+      },
+    ],
+  },
+  de: {
+    sections: [
+      {
+        id: 'suhi-vez',
+        title: 'Trockenlagerung & 16-t-Kran',
+        shortSummary: '16-t-Kran Scania, 3 Traversen und sichere Trockenlagerung 500 m vom Meer.',
+        fullDescription:
+          'Komplette Abwicklung mit einem LKW-Kran Scania F600 AXP mit einer Tragfähigkeit von bis zu 16 Tonnen und 3 speziellen Traversen, die Rumpf und Reling schützen. Unterbringung auf einem gesicherten Bock auf einem Grundstück 500 m vom Meer entfernt (im Freien und unter Schutzplane) inklusive Hochdruckreinigung des Unterwasserschiffs direkt nach dem Auskranen.',
+        icon: '/suhamarianeu_ikone_dizalica.webp',
+        iconAlt: 'Illustration eines 16-t-LKW-Krans und der Trockenlagerung',
+        bannerBg: 'bg-[#1d5a96] text-white',
+        borderAccent: 'border-l-8 border-l-[#1d5a96]',
+        bullets: [
+          '16-Tonnen-Kran Scania mit hydraulischen Traversen',
+          'Sicherer Transport zum 500 m von der Küste entfernten Grundstück',
+          'Offene und überdachte Trockenlagerung unter Schutzplanen',
+          'Hochdruckreinigung und biologisch abbaubarer Schutz',
+          'Reparaturen an GFK, Gelcoat, Schlauchbooten und Holzbooten',
+        ],
+        image: imgKran,
+        imageAlt: 'Auskranen und Transport eines Bootes mit 16-t-Kran Scania in Vela Luka',
+        link: '/suhi-vez-i-kran-16t-korcula',
+        linkText: 'Details zu Trockenliegeplatz und Kran',
+      },
+      {
+        id: 'servis-motora',
+        title: 'Autorisierter Motorservice',
+        shortSummary: 'Autorisierter Service mit Garantie und Computerdiagnose.',
+        fullDescription:
+          'Autorisierter Service mit Werksgarantie für Suzuki-, Honda-, Tohatsu- und Hidea-Außenbordmotoren. Computergestützte Fehlerdiagnose für alle Außenbordmotoren (einschließlich Yamaha- und Mercury-Systeme), Winterfestmachung, Konservierung und Generalreparaturen.',
+        brands: ['SUZUKI', 'HONDA', 'TOHATSU', 'HIDEA'],
+        icon: '/suhamarianeu_ikone_dijagnostika.webp',
+        iconAlt: 'Illustration von Motorservice und Diagnose',
+        bannerBg: 'bg-[#4caf50] text-slate-950',
+        borderAccent: 'border-l-8 border-l-[#4caf50]',
+        bullets: [
+          'Autorisierter Service mit Garantie: Suzuki, Honda, Tohatsu, Hidea',
+          'Computerdiagnose und Fehlerbehebung (auch Yamaha-Motoren)',
+          'Entkalkung des Kühlsystems und Austausch der Zinkanoden',
+          'Service für Unterwasserteil und Trimm, Vergaserreinigung, Austausch von Lagern und Stopfbuchsen',
+          'Anfertigung von Schwarzwassertanks, Chromausrüstung und Verlegung von Flexiteek-Kunstteak',
+        ],
+        image: imgServis,
+        imageAlt: 'Service für Innen- und Außenbordmotoren bei Proizd in Vela Luka',
+        link: '/servis-i-dijagnostika-brodskih-motora',
+        linkText: 'Servicedetails Motoren',
+      },
+      {
+        id: 'brodska-elektronika',
+        title: 'Bordelektronik',
+        shortSummary: 'Mehr als 30 Jahre Erfahrung in Fischerei und Geräteinstallation.',
+        fullDescription:
+          'Mehr als 30 Jahre Erfahrung auf See und beim Fischen ermöglichen es uns, moderne Elektronik und Ausrüstung optimal an jedes Boot anzupassen. Seit 2011 betreiben wir einen registrierten Service für den Einbau und die Reparatur von Schiffsteilen.',
+        brands: ['MINN KOTA', 'GARMIN', 'LOWRANCE'],
+        icon: '/suhamarianeu_ikone_brodska_elektronika.webp',
+        iconAlt: 'Illustration von Bordelektronik und Bugmotor',
+        bannerBg: 'bg-[#fcd34d] text-slate-950',
+        borderAccent: 'border-l-8 border-l-[#fcd34d]',
+        bullets: [
+          'Professionelle Montage von Bug-Elektromotoren (Minn Kota, MotorGuide, Garmin, Lowrance...)',
+          'Einstellung von Radar, GPS und Echoloten (Lowrance, Garmin, Furuno, Humminbird, Simrad, Raymarine)',
+          'Auswahl, Positionierung und Einstellung von Gebern zur Fischortung in unterschiedlichen Tiefen',
+          'Installation von Solarmodulen, Batterieladegeräten und Spannungsreglern',
+        ],
+        image: imgElektronika,
+        imageAlt: 'Montage von Minn Kota Bugmotoren und Bordelektronik',
+        link: '/ugradnja-minn-kota-garmin-force-korcula',
+        linkText: 'Einbaudetails Elektronik',
+      },
+      {
+        id: 'podvodni-radovi',
+        title: 'Unterwasserarbeiten & HRB-Prüfungen',
+        shortSummary: 'Offizielle Prüfungen mit Unterwasserkamera und zertifizierten Tauchern.',
+        fullDescription:
+          'Offizielle Unterwasserprüfungen von Rumpf, Wellen, Propellern und Rudern in Zusammenarbeit mit Inspektoren des Kroatischen Schiffsregisters (CRS). Wir sind mit einer Unterwasserkamera ausgestattet, die an einen Monitor angeschlossen ist und eine direkte Kommunikation mit dem Taucher ermöglicht.',
+        icon: '/suhamarianeu_ikone_podvodni_radovi.webp',
+        iconAlt: 'Illustration von Unterwasserarbeiten und HRB-Prüfungen',
+        bannerBg: 'bg-[#c62828] text-white',
+        borderAccent: 'border-l-8 border-l-[#c62828]',
+        bullets: [
+          'Pontonmontage und offizielle Unterwasserprüfungen beim Kroatischen Schiffsregister',
+          'Unterwasserkamera-Aufnahmen am Monitor mit Taucherkommunikation',
+          'Heben von Lasten mit Unterwasser-Hebesäcken sowie Befreien/Wechseln von Propellern und Anoden',
+          'Instandsetzung von Schäden am Unterwasserschiff (Holz, Stahl, Kunststoff, Aluminium)',
+          'Ankerplätze, Moorings, Betonblöcke (Corpo Morto) und Einrichtung von Liegeplätzen',
+        ],
+        image: imgPodvodni,
+        imageAlt: 'Taucher bei Unterwasserarbeiten und HRB-Rumpfprüfungen',
+        link: '/podvodni-radovi-i-hrb-pregledi-korcula',
+        linkText: 'Tauchdetails',
+      },
+      {
+        id: 'pomoc-na-moru',
+        title: 'Seehilfe 0–24',
+        shortSummary: 'Notfalleinsätze und Schleppen im mittleren und südlichen Adriaraum.',
+        fullDescription:
+          'Wir leisten Nothilfe für manövrierunfähige Boote und Schleppdienste im Gebiet Vela Luka, Korčula, Lastovo, Hvar, Vis und der Halbinsel Pelješac. Schnelle Einsätze ab Vela Luka mit speziellen Zugbooten.',
+        icon: '/suhamarianeu_ikone_pomoc_na_moru.webp',
+        iconAlt: 'Illustration von 0–24 Seehilfe und Schleppdienst',
+        bannerBg: 'bg-[#f57c00] text-slate-950',
+        borderAccent: 'border-l-8 border-l-[#f57c00]',
+        bullets: [
+          'Hilfe für manövrierunfähige Boote im mittleren und südlichen Adriaraum',
+          'Schleppen von Booten mit speziellen Zugbooten',
+          'Schnelle Einsätze ab Vela Luka (0–24 h)',
+        ],
+        image: imgPomoc,
+        imageAlt: 'Seehilfe und Notfall-Schleppdienst für Boote in Vela Luka',
+        link: '/pomoc-na-moru-i-tegljenje-korcula',
+        linkText: 'Details zur Hilfe auf See',
+      },
+    ],
+  },
+};
+
+const current = data[lang] ?? data.hr;
+---
+
+<section id="usluge" class="scroll-mt-24 bg-slate-100 py-10 sm:py-14">
+  <div class="mx-auto max-w-7xl space-y-8 px-4 sm:space-y-10 sm:px-6 lg:px-8">
+    {current.sections.map((sec, idx) => (
+      <details
+        id={sec.id}
+        class={`group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-md transition-all duration-300 ${sec.borderAccent}`}
+      >
+        <summary class="list-none cursor-pointer select-none [&::-webkit-details-marker]:hidden focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300/70">
+          <div class="flex items-center justify-center bg-white px-6 pb-4 pt-6">
+            <img
+              src={sec.icon}
+              alt={sec.iconAlt}
+              width="320"
+              height="320"
+              loading="lazy"
+              decoding="async"
+              class="h-36 w-auto object-contain transition-transform duration-300 group-hover:scale-105 sm:h-44 md:h-48"
+            />
+          </div>
+
+          <div class={`px-6 py-5 transition-colors ${sec.bannerBg}`}>
+            <div class="flex items-start justify-between gap-4">
+              <div class="space-y-1.5">
+                <h2 class="text-xl font-black leading-snug tracking-tight sm:text-2xl">
+                  {idx + 1}. {sec.title}
+                </h2>
+                <p class="max-w-2xl text-sm font-medium leading-relaxed opacity-95 sm:text-base">
+                  {sec.shortSummary}
+                </p>
+                {sec.brands && (
+                  <div class="flex flex-wrap gap-2 pt-2 text-xs font-black uppercase tracking-wider opacity-90">
+                    {sec.brands.map((brand) => (
+                      <span class="rounded bg-black/10 px-2 py-0.5">{brand}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <span class="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-black/15 transition-transform duration-300 group-open:rotate-180">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </summary>
+
+        <div class="grid grid-cols-1 items-center gap-8 border-t border-slate-200 bg-white p-6 sm:p-8 lg:grid-cols-12">
+          <div class="space-y-4 lg:col-span-7">
+            <p class="text-base font-medium leading-relaxed text-slate-700">
+              {sec.fullDescription}
+            </p>
+
+            <ul class="space-y-2.5 pt-2 text-sm text-slate-700 sm:text-base">
+              {sec.bullets.map((bullet) => (
+                <li class="flex items-start gap-2.5">
+                  <span class="mt-0.5 font-black text-sky-700">✓</span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div class="pt-4">
+              <a
+                href={sec.link}
+                class="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-sky-800"
+              >
+                <span>{sec.linkText}</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5">
+            <div class="aspect-[4/3] overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-sm">
+              <Image
+                src={sec.image}
+                alt={sec.imageAlt}
+                widths={[420, 640, 840]}
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                class="h-full w-full object-cover"
+                format="webp"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </div>
+        </div>
+      </details>
+    ))}
+  </div>
+</section>
+
+<script>
+  const desktopQuery = window.matchMedia('(min-width: 768px)');
+
+  function syncServiceBannersState() {
+    const banners = document.querySelectorAll<HTMLDetailsElement>('#usluge details');
+
+    banners.forEach((detail) => {
+      if (desktopQuery.matches) {
+        detail.setAttribute('open', '');
+      } else {
+        detail.removeAttribute('open');
+      }
+    });
+  }
+
+  syncServiceBannersState();
+  // Ponovno pokreni nakon Astro ClientRouter navigacije i promjene breakpointa
+  document.addEventListener('astro:page-load', syncServiceBannersState);
+  desktopQuery.addEventListener('change', syncServiceBannersState);
+</script>

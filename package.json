@@ -1,7 +1,7 @@
 {
   "name": "suhamarinaeu27",
   "type": "module",
-  "version": "1.0.15",
+  "version": "1.0.18",
   "engines": {
     "node": ">=22.12.0"
   },

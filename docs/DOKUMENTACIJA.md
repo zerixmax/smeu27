@@ -1,7 +1,7 @@
 # Tehnička dokumentacija projekta: Suha Marina PROIZD (suhamarina.eu)
 
-**Verzija dokumentacije:** 1.2.0 (`v1.0.15` / build `20261110.1`)  
-**Datum ažuriranja:** 10. studenoga 2026.  
+**Verzija dokumentacije:** 1.5.0 (`v1.0.18` / build `20261113.3`)  
+**Datum ažuriranja:** 13. studenoga 2026.  
 **Autor:** OleaD  
 **Klijent:** Obrt Proizd – Suha Marina, Vela Luka, Otok Korčula  
 
@@ -12,7 +12,7 @@
 Cilj projekta je kompletna modernizacija i migracija web stranice s naslijeđenog Joomla 3.10.12 CMS-a na suvremeni statički generiran web stog (Jamstack) pogonjen **Astro** razvojnim okvirom.
 
 Nova web stranica donosi:
-- **Maksimalne performanse i brzinu učitavanja** (9 statičkih HTML ruta + CSV rute bez serverskog opterećenja).
+- **Maksimalne performanse i brzinu učitavanja** (11 statičkih HTML ruta + CSV rute bez serverskog opterećenja).
 - **Inženjersku "Daylight Marine" estetiku** optimiziranu za maksimalnu čitljivost na izravnom suncu i na moru (čiste svijetle površine `bg-white` / `bg-slate-50`, oštar tamnoplavi i antracitni tekst `text-slate-900` / `text-sky-800`, bez AI tekstualnih gradijenata, s kontrastnim marinskim podnožjem `bg-slate-900`).
 - **Doslovno usklađen stručni sadržaj i SEO klaster arhitekturu** (3 namjenske SEO landing podstranice za servis motora, ribolovnu elektroniku i podvodne radove / HRB preglede).
 - **Zakonito isticanje cijena (NN 101/2026)** s referentnim/sidrenim cijenama i strojnim CSV izvozom usklađenim s HOK predloškom.
@@ -26,7 +26,7 @@ Nova web stranica donosi:
 
 | Tehnologija | Uloga / Opis |
 |---|---|
-| **Astro** | Glavni web framework (Static Site Generation - SSG, 9 HTML stranica) |
+| **Astro** | Glavni web framework (Static Site Generation - SSG, 11 HTML stranica) |
 | **TypeScript** | Statička tipizacija (`strict` način rada) |
 | **Tailwind CSS v4** | Suvremeno stiliziranje u svijetloj inženjerskoj **Daylight Marine** temi (`@tailwindcss/vite`) |
 | **Self-hosted fontovi** | Inter & JetBrains Mono, **4 variable WOFF2 datoteke** (`public/fonts/`, `font-display: swap`) |
@@ -47,7 +47,8 @@ suhamarinaeu27/
 │   │   ├── 2026-10-01.md       # Optimizacija LCP/fontova/usluga, landing, nginx
 │   │   ├── 2026-10-09.md       # Galerija (25 unikatnih fotografija), 404/500, OG tagovi
 │   │   ├── 08-11-2026.md       # Faze 1–4 + Sprint 4 (Daylight Marine redizajn & Nikolin tekst)
-│   │   └── 10-11-2026.md       # Sprint 5 (masonry, društvene mreže, crs.hr, AI/GEO llms.txt)
+│   │   ├── 10-11-2026.md       # Sprint 5 (masonry, društvene mreže, crs.hr, AI/GEO llms.txt)
+│   │   └── 13-11-2026.md       # Sprint 6–8 (ServiceBanners, responsive kartice, 5 detaljnih stranica)
 │   └── DOKUMENTACIJA.md        # Glavni tehnički dokument projekta
 ├── scripts/
 │   └── snapshot-cjenik.mjs     # Automatska pohrana verzija cjenika u arhivu (pre-build)
@@ -64,7 +65,7 @@ suhamarinaeu27/
 │   │   ├── images/
 │   │   │   └── gallery/        # Galerija visoke rezolucije (25 unikatnih fotografija)
 │   │   └── logos/              # Vektorski i rasterski logotipi brendova i obrta
-│   ├── components/             # Modularne Astro komponente (Navbar, Hero, ServicesGrid, BackToTop...)
+│   ├── components/             # Modularne Astro komponente (Navbar, Hero, ServiceBanners, BackToTop...)
 │   ├── data/
 │   │   ├── cjenik.json         # Središnji izvor podataka o cijenama i uslugama (Ulica 41, br. 42)
 │   │   ├── version.json        # Verzija/build prikazana u podnožju
@@ -74,16 +75,18 @@ suhamarinaeu27/
 │   ├── layouts/
 │   │   └── Layout.astro        # Glavni HTML kostur sa SEO, meta, fontovima, Schema.org i BackToTop
 │   ├── lib/                    # Dijeljeni moduli (CSV builder, arhiva)
-│   └── pages/                  # 9 HTML stranica + 3 CSV endpointa:
+│   └── pages/                  # 11 HTML stranica + 3 CSV endpointa:
 │       ├── index.astro         # 1. Glavna stranica (HR)
 │       ├── en/index.astro      # 2. Engleska verzija naslovnice (EN)
 │       ├── de/index.astro      # 3. Njemačka verzija naslovnice (DE)
 │       ├── objava-cjenika.astro# 4. Javna objava + digitalna arhiva cjenika (NN 101/2026)
-│       ├── ugradnja-minn-kota-garmin-force-korcula.astro    # 5. SEO klaster: Brodska elektrika i elektronika
+│       ├── suhi-vez-i-kran-16t-korcula.astro                # 5. SEO klaster: Suhi vez i kran 16 t
 │       ├── servis-i-dijagnostika-brodskih-motora.astro      # 6. SEO klaster: Servis i dijagnostika motora
-│       ├── podvodni-radovi-i-hrb-pregledi-korcula.astro     # 7. SEO klaster: Podvodni radovi i HRB pregledi
-│       ├── 404.astro           # 8. Prilagođena 404 stranica
-│       ├── 500.astro           # 9. Prilagođena 500 stranica
+│       ├── ugradnja-minn-kota-garmin-force-korcula.astro    # 7. SEO klaster: Brodska elektrika i elektronika
+│       ├── podvodni-radovi-i-hrb-pregledi-korcula.astro     # 8. SEO klaster: Podvodni radovi i HRB pregledi
+│       ├── pomoc-na-moru-i-tegljenje-korcula.astro          # 9. SEO klaster: Pomoć na moru i tegljenje
+│       ├── 404.astro           # 10. Prilagođena 404 stranica
+│       ├── 500.astro           # 11. Prilagođena 500 stranica
 │       ├── cjenik.csv.ts       # Dinamički generator CSV datoteke prema NN 101/2026
 │       ├── cjenik-download.csv.ts # Alias ruta za /cjenik-download.csv
 │       └── arkhiva/[datum].csv.ts # Strojno CSV preuzimanje arhiviranih verzija
@@ -210,16 +213,17 @@ docker stop shm-nginx-test
 
 ---
 
-## 8. Verzioniranje i povijest faza (v1.0.15)
+## 8. Verzioniranje i povijest faza (v1.0.18)
 
-Verzija je zapisana u **tri** datoteke koje moraju ostati sinkronizirane:
-- `package.json` (`"version": "1.0.15"`)
+Verzija je zapisana u **četiri** datoteke koje moraju ostati sinkronizirane:
+- `package.json` (`"version": "1.0.18"`)
+- `package-lock.json` (generirani lockfile; `npm version` ga ažurira automatski)
 - `src/data/version.json` — izvor verzije za footer (`Footer.astro`)
 - `public/version.json` — javno dostupna kopija iste verzije
 
 Format build ID-a je `YYYYMMDD.N`; footer prikazuje `vX.Y.Z#YYYYMMDD.N`. Nakon svake sesije provjeriti da se ispravna verzija pojavljuje u `dist/index.html`.
 
-Trenutno stanje: **v1.0.15 / `20261110.1`** (Završene Faze 1–4, Sprint 4 i Sprint 5):
+Trenutno stanje: **v1.0.18 / `20261113.3`** (Završene Faze 1–4, Sprint 4, Sprint 5, Sprint 6, Sprint 7 i Sprint 8):
 - **Faza 1:** Globalni podaci (`Ulica 41, br. 42`, `nikola.mul@gmail.com`), `sameAs` društvene mreže, prošireni `knowsAbout` u Schema.org te usklađeni Open Graph / Twitter Card meta podaci s apsolutnim URL-om slike (`1200×630 px`).
 - **Faza 2:** Navigacija i podnožje (`Navbar.astro`, `Footer.astro`) s društvenim mrežama (Facebook, Instagram, WhatsApp), poveznicom na ribolovnu elektroniku i komponentom `BackToTop.astro` (Astro SOP, nula CLS-a).
 - **Faza 3:** Proširenje i višejezično usklađenje kartica usluga (`ServicesGrid.astro` — HR, EN, DE).
@@ -236,4 +240,39 @@ Trenutno stanje: **v1.0.15 / `20261110.1`** (Završene Faze 1–4, Sprint 4 i Sp
 3. **HRB / CRS autoritativno povezivanje:** Sva spominjanja Hrvatskog registra brodova povezana sa službenom domenom `crs.hr`.
 4. **AI/GEO infrastruktura:** Implementiran `public/llms.txt` kao baza znanja za AI agente, proširen `public/robots.txt` za AI botove (GPTBot, PerplexityBot, ClaudeBot) te konfiguriran sitemap s BCP-47 jezičnim oznakama (`hr-HR`, `en-US`, `de-DE`).
 5. **Verifikacija:** `npm run check` (0 errors, 0 warnings, 0 hints) i `npm run build` (9 statičkih stranica, `llms.txt`, `robots.txt` i `hreflang` oznake potvrđene u `dist/`).
+
+## Sprint 6: ServiceBanners, veći logo i pročišćena Hero sekcija (13.11.2026.)
+**Verzija rješenja:** v1.0.16 (Build `20261113.1`)  
+**Status:** Produkcijski spremno, testirano i verificirano.
+
+#### Ključni postignuti rezultati:
+1. **Veći logo u navigaciji:** Logo u `Navbar.astro` povećan s `h-11 sm:h-12` na `h-14 md:h-16` (zadržan header `h-20`), uz skrivanje društvenih ikona na `lg` (vidljive od `xl`) kako bi navigacija ostala bez prelijevanja.
+2. **Pročišćena Hero sekcija:** Uklonjen blok sa statistikama (16 t / 3 širilice / 500 m); zadržani naslov, opis, lokacijski entiteti i CTA gumbi. Uklonjeni nekorišteni `spec.*` prijevodi.
+3. **Nova komponenta `ServiceBanners.astro`:** 5 vertikalnih obojenih traka (stone / sky / stone / sky / red) s WebP ikonom u bijeloj kutijici, bijelim sadržajem u 12-stupčanom rasporedu (7/5), fotografijom 4:3 i poveznicom. Zamjenjuje `ServicesGrid.astro` na sve tri naslovnice (HR/EN/DE).
+4. **Harmonika i WebP ikone:** Detaljne točke omotane su u semantički `<details>/<summary>` („Prikaži sve stavke i zahvate“) vidljiv na svim širinama, bez JavaScripta. Integrirano je 5 WebP ikonica iz `public/` (dizalica, dijagnostika, brodska elektronika, podvodni radovi, pomoć na moru), a datoteka s razmakom u nazivu je preimenovana.
+5. **Dokumentacija i čišćenje:** `README.md` usklađen sa `ServiceBanners.astro` i novim Hero opisom. Provjeren i dokumentiran zaostali TS language-server dijalog nakon brisanja `ServicesGrid.astro` (nije greška builda).
+6. **Verifikacija:** `npm run check` (0 errors, 0 warnings, 0 hints, 33 datoteke), `npx tsc --noEmit` (exit 0), `npx astro sync` i `npm run build` (9 statičkih stranica). U `dist/` potvrđeno 5 kartica i 5 ikonica (HTTP 200).
+
+## Sprint 7: 5 boja, velike ilustracije i dvostupanjski ServiceBanners (13.11.2026.)
+**Verzija rješenja:** v1.0.17 (Build `20261113.2`)  
+**Status:** Produkcijski spremno, testirano i verificirano.
+
+#### Ključni postignuti rezultati:
+1. **Navbar:** header povećan na `h-24`, logo na `h-16 md:h-20` radi veće uočljivosti.
+2. **Hero:** uklonjen plavi bedž i 3 lokacijske točke; zadržani H1, uvodni opis i CTA gumbi. Uklonjeni su i nekorišteni `hero.badge` te `loc.*` prijevodi.
+3. **Dvostupanjski `ServiceBanners`:** svaka sekcija je `<details>` kartica. `<summary>` prikazuje veliku WebP ilustraciju i obojeni pojas s naslovom, kratkim uvodom, bedževima brendova i strelicom. 1. klik otvara puni opis, popis zahvata, CTA i fotografiju s terena; 2. klik na CTA vodi na podstranicu ili `tel:` broj.
+4. **Paleta od 5 boja:** plava `#1d5a96`, zelena `#4caf50`, žuta `#fcd34d`, crvena `#c62828` i narančasta `#f57c00`, uz lijevi akcent `border-l-8 border-l-[boja]`.
+5. **Bedževi brendova:** `SUZUKI • HONDA • TOHATSU • HIDEA` i `MINN KOTA • GARMIN • LOWRANCE`.
+6. **Verifikacija:** `npm run check` (0 errors, 0 warnings, 0 hints, 33 datoteke) i `npm run build` (9 statičkih stranica). U `dist/` potvrđeno 5 `<details>` kartica i 5 ilustracija (HTTP 200), verzija **v1.0.17 / `20261113.2`**.
+
+## Sprint 8: Finalizacija v1.0.18 — Partners, responsive kartice i 5 detaljnih stranica (13.11.2026.)
+**Verzija rješenja:** v1.0.18 (Build `20261113.3`)  
+**Status:** Produkcijski spremno, testirano i verificirano.
+
+#### Ključni postignuti rezultati:
+1. **Partners iznad Footera:** traka logotipa premještena je s vrha stranice (ispod Navbara) na dno `<main>`, neposredno iznad Footera, na sve tri naslovnice. Stranica sada počinje izravno s 1. kartom usluge.
+2. **Desktop otvoreno / mobitel zatvoreno:** inline skripta u `ServiceBanners.astro` na `md` širinama (`>= 768px`) postavlja `open` na svih 5 kartica, a na mobitelu ih drži zatvorenima. Skripta se veže na `astro:page-load`, sluša promjenu breakpointa (`matchMedia`) i ispravlja stanje tijekom resizea.
+3. **Pet zasebnih detaljnih stranica:** svih 5 CTA gumba vodi na vlastitu rutu — `/suhi-vez-i-kran-16t-korcula`, `/servis-i-dijagnostika-brodskih-motora`, `/ugradnja-minn-kota-garmin-force-korcula`, `/podvodni-radovi-i-hrb-pregledi-korcula` i `/pomoc-na-moru-i-tegljenje-korcula`. Uklonjena su sidra `#kontakt` i `tel:` iz kartica.
+4. **Nove stranice:** dodane su detaljne stranice za suhi vez/kran 16 t i pomoć na moru/tegljenje, s `Service` JSON-LD, WhatsApp i telefonskim CTA-ovima, međusobnim poveznicama te unosima u Footer i `llms.txt`.
+5. **Verifikacija:** `npm run check` (0 errors, 0 warnings, 0 hints, 35 datoteka), `npx tsc --noEmit` (exit 0) i `npm run build` (11 statičkih stranica). U `dist/` potvrđeno 5 `<details>` kartica s 5 različitih CTA ruta, 5 ilustracija (HTTP 200), ispravan redoslijed `#usluge → #faq → Partners → Footer`, nove stranice u sitemapu te verzija **v1.0.18 / `20261113.3`**. Headless Chromium: 1280 px → svih 5 otvoreno, 390 px → sve zatvoreno; klik na 1. i 5. karticu vodi na ispravne nove stranice.
 
