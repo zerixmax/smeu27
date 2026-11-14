@@ -1,7 +1,7 @@
 # Tehnička dokumentacija projekta: Suha Marina PROIZD (suhamarina.eu)
 
-**Verzija dokumentacije:** 1.5.0 (`v1.0.18` / build `20261113.3`)  
-**Datum ažuriranja:** 13. studenoga 2026.  
+**Verzija dokumentacije:** 1.6.0 (`v1.0.19` / build `20261113.4`)  
+**Datum ažuriranja:** 14. studenoga 2026.  
 **Autor:** OleaD  
 **Klijent:** Obrt Proizd – Suha Marina, Vela Luka, Otok Korčula  
 
@@ -48,7 +48,8 @@ suhamarinaeu27/
 │   │   ├── 2026-10-09.md       # Galerija (25 unikatnih fotografija), 404/500, OG tagovi
 │   │   ├── 08-11-2026.md       # Faze 1–4 + Sprint 4 (Daylight Marine redizajn & Nikolin tekst)
 │   │   ├── 10-11-2026.md       # Sprint 5 (masonry, društvene mreže, crs.hr, AI/GEO llms.txt)
-│   │   └── 13-11-2026.md       # Sprint 6–8 (ServiceBanners, responsive kartice, 5 detaljnih stranica)
+│   │   ├── 13-11-2026.md       # Sprint 6–8 (ServiceBanners, responsive kartice, 5 detaljnih stranica)
+│   │   └── 14-11-2026.md       # Sprint 9 (Unifikacija palete boja u Liburnija-smeđi ton)
 │   └── DOKUMENTACIJA.md        # Glavni tehnički dokument projekta
 ├── scripts/
 │   └── snapshot-cjenik.mjs     # Automatska pohrana verzija cjenika u arhivu (pre-build)
@@ -213,17 +214,17 @@ docker stop shm-nginx-test
 
 ---
 
-## 8. Verzioniranje i povijest faza (v1.0.18)
+## 8. Verzioniranje i povijest faza (v1.0.19)
 
 Verzija je zapisana u **četiri** datoteke koje moraju ostati sinkronizirane:
-- `package.json` (`"version": "1.0.18"`)
+- `package.json` (`"version": "1.0.19"`)
 - `package-lock.json` (generirani lockfile; `npm version` ga ažurira automatski)
 - `src/data/version.json` — izvor verzije za footer (`Footer.astro`)
 - `public/version.json` — javno dostupna kopija iste verzije
 
 Format build ID-a je `YYYYMMDD.N`; footer prikazuje `vX.Y.Z#YYYYMMDD.N`. Nakon svake sesije provjeriti da se ispravna verzija pojavljuje u `dist/index.html`.
 
-Trenutno stanje: **v1.0.18 / `20261113.3`** (Završene Faze 1–4, Sprint 4, Sprint 5, Sprint 6, Sprint 7 i Sprint 8):
+Trenutno stanje: **v1.0.19 / `20261113.4`** (Završene Faze 1–4, Sprint 4, Sprint 5, Sprint 6, Sprint 7, Sprint 8 i Sprint 9):
 - **Faza 1:** Globalni podaci (`Ulica 41, br. 42`, `nikola.mul@gmail.com`), `sameAs` društvene mreže, prošireni `knowsAbout` u Schema.org te usklađeni Open Graph / Twitter Card meta podaci s apsolutnim URL-om slike (`1200×630 px`).
 - **Faza 2:** Navigacija i podnožje (`Navbar.astro`, `Footer.astro`) s društvenim mrežama (Facebook, Instagram, WhatsApp), poveznicom na ribolovnu elektroniku i komponentom `BackToTop.astro` (Astro SOP, nula CLS-a).
 - **Faza 3:** Proširenje i višejezično usklađenje kartica usluga (`ServicesGrid.astro` — HR, EN, DE).
@@ -275,4 +276,14 @@ Trenutno stanje: **v1.0.18 / `20261113.3`** (Završene Faze 1–4, Sprint 4, Spr
 3. **Pet zasebnih detaljnih stranica:** svih 5 CTA gumba vodi na vlastitu rutu — `/suhi-vez-i-kran-16t-korcula`, `/servis-i-dijagnostika-brodskih-motora`, `/ugradnja-minn-kota-garmin-force-korcula`, `/podvodni-radovi-i-hrb-pregledi-korcula` i `/pomoc-na-moru-i-tegljenje-korcula`. Uklonjena su sidra `#kontakt` i `tel:` iz kartica.
 4. **Nove stranice:** dodane su detaljne stranice za suhi vez/kran 16 t i pomoć na moru/tegljenje, s `Service` JSON-LD, WhatsApp i telefonskim CTA-ovima, međusobnim poveznicama te unosima u Footer i `llms.txt`.
 5. **Verifikacija:** `npm run check` (0 errors, 0 warnings, 0 hints, 35 datoteka), `npx tsc --noEmit` (exit 0) i `npm run build` (11 statičkih stranica). U `dist/` potvrđeno 5 `<details>` kartica s 5 različitih CTA ruta, 5 ilustracija (HTTP 200), ispravan redoslijed `#usluge → #faq → Partners → Footer`, nove stranice u sitemapu te verzija **v1.0.18 / `20261113.3`**. Headless Chromium: 1280 px → svih 5 otvoreno, 390 px → sve zatvoreno; klik na 1. i 5. karticu vodi na ispravne nove stranice.
+
+## Sprint 9: Unifikacija palete boja u Liburnija-smeđi ton (14.11.2026.)
+**Verzija rješenja:** v1.0.19 (Build `20261113.4`)  
+**Status:** Produkcijski spremno, testirano i verificirano.
+
+#### Ključni postignuti rezultati:
+1. **Unificirana paleta (`ServiceBanners.astro`):** Prema Nikolinoj povratnoj informaciji s WhatsAppa, uklonjeno je šarenilo od 5 različitih boja. Svih 5 naslovnih traka i lijevi akcenti sada koriste jedinstvenu, toplu brončano-smeđu boju (`#8C7355`) uz bijeli tekst i `amber-100/90` opise, čime je postignut čist i ozbiljan "Clean Marine" izgled po uzoru na *Nautički centar Liburnija*.
+2. **Bedževi i čitljivost:** Bedževi brendova unutar servisnih traka prilagođeni su s poluprozirnom bijelom pozadinom (`bg-white/25`) za optimalan kontrast na smeđoj podlozi.
+3. **Verifikacija i build:** Provjereni tipovi (`npx tsc --noEmit`, `npm run check` s 0 grešaka) i uspješno izrađen produkcijski build (**v1.0.19 / `20261113.4`**).
+
 
